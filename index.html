@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remedy Tracker</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f0;color:#1a1a1a;padding:1rem}
+.app{max-width:680px;margin:0 auto;padding:1rem 0}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:0.5px solid #ddd}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:#d4edda;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:20px;height:20px;stroke:#2e7d50;fill:none;stroke-width:1.8}
+.app-title{font-size:17px;font-weight:500;color:#1a1a1a}
+.app-sub{font-size:12px;color:#666;margin-top:1px}
+.add-btn{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.add-btn:hover{background:#1e5c39}
+.due-banner{background:#fff8e7;border:0.5px solid #f0c040;border-radius:12px;padding:12px 16px;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:10px}
+.due-banner i{color:#b8860b;font-size:18px;margin-top:1px}
+.due-title{font-size:13px;font-weight:500;color:#7a5a00;margin-bottom:4px}
+.due-list{font-size:12px;color:#7a5a00;line-height:1.7}
+.member-card{background:#fff;border:0.5px solid #ddd;border-radius:12px;margin-bottom:1rem;overflow:hidden}
+.member-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;flex-shrink:0}
+.member-meta{flex:1}
+.member-name{font-size:15px;font-weight:500;color:#1a1a1a}
+.member-tags{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
+.tag{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.tag-red{background:#fdecea;color:#c62828}
+.tag-blue{background:#e3f2fd;color:#1565c0}
+.chevron{font-size:18px;color:#888;transition:transform 0.2s}
+.chevron.open{transform:rotate(180deg)}
+.member-body{padding:0 16px 16px;border-top:0.5px solid #eee}
+.section-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin:14px 0 8px}
+.issue-card{background:#f8f8f6;border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.issue-title{font-size:14px;font-weight:500;color:#1a1a1a;display:flex;align-items:center;justify-content:space-between}
+.issue-actions{display:flex;gap:6px}
+.icon-btn{background:none;border:none;cursor:pointer;color:#888;font-size:16px;padding:2px;border-radius:4px}
+.icon-btn:hover{color:#1a1a1a}
+.remedy-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.remedy-field{font-size:12px;color:#666;line-height:1.5}
+.remedy-val{font-size:13px;color:#1a1a1a;font-weight:500}
+.next-dose{display:flex;align-items:center;gap:6px;margin-top:8px;padding:6px 10px;border-radius:8px;font-size:12px}
+.next-dose.due-now{background:#fdecea;color:#c62828}
+.next-dose.due-soon{background:#fff8e7;color:#b8860b}
+.next-dose.ok{background:#e8f5e9;color:#2e7d32}
+.notes-section{margin-top:8px}
+.notes-label{font-size:11px;color:#888;margin-bottom:4px}
+.notes-text{font-size:12px;color:#1a1a1a;background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;line-height:1.6;white-space:pre-wrap}
+.add-issue-btn{background:none;border:0.5px dashed #bbb;border-radius:8px;padding:8px;width:100%;font-size:13px;color:#888;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px}
+.add-issue-btn:hover{background:#f0f0ec}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center}
+.modal-backdrop.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:20px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto}
+.modal-title{font-size:16px;font-weight:500;margin-bottom:16px;color:#1a1a1a}
+.form-group{margin-bottom:12px}
+.form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:4px;display:block}
+.form-input{width:100%;padding:8px 10px;border:0.5px solid #ccc;border-radius:8px;font-size:14px;color:#1a1a1a;background:#fff}
+.form-input:focus{outline:2px solid #2e7d50;outline-offset:1px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.btn-cancel{background:none;border:0.5px solid #ccc;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;color:#1a1a1a}
+.btn-save{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer}
+.btn-save:hover{background:#1e5c39}
+.empty-state{text-align:center;padding:2rem;color:#888;font-size:14px}
+.notes-edit{width:100%;padding:8px 10px;border:0.5px solid #ccc;border-radius:8px;font-size:12px;resize:vertical;min-height:70px;font-family:inherit;color:#1a1a1a;background:#fff}
+.tabs{display:flex;margin-bottom:14px;border-bottom:0.5px solid #eee}
+.tab{font-size:13px;padding:6px 12px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-0.5px}
+.tab.active{color:#2e7d50;border-bottom-color:#2e7d50;font-weight:500}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}.remedy-row{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6v6M9 9c0 0 1.5-2 3-2s3 2 3 2"/><path d="M8 14c1 2 2.5 3 4 3s3-1 4-3"/></svg>
+      </div>
+      <div>
+        <div class="app-title">Remedy Tracker</div>
+        <div class="app-sub">Homeopathic care for your family</div>
+      </div>
+    </div>
+    <button class="add-btn" onclick="openAddMember()"><i class="ti ti-plus"></i> Add person</button>
+  </div>
+
+  <div id="due-banner" class="due-banner" style="display:none">
+    <i class="ti ti-bell"></i>
+    <div>
+      <div class="due-title">Remedies due now</div>
+      <div class="due-list" id="due-list"></div>
+    </div>
+  </div>
+
+  <div id="members-list"></div>
+  <div id="empty-state" class="empty-state">
+    <i class="ti ti-leaf" style="font-size:32px;display:block;margin-bottom:8px"></i>
+    Add a family member to start tracking their remedies
+  </div>
+</div>
+
+<div class="modal-backdrop" id="member-modal">
+  <div class="modal">
+    <div class="modal-title" id="member-modal-title">Add family member</div>
+    <div class="form-group">
+      <label class="form-label">Name</label>
+      <input class="form-input" id="m-name" placeholder="e.g. Sarah" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Relationship</label>
+      <input class="form-input" id="m-rel" placeholder="e.g. Daughter, Husband, Self" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('member-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveMember()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="issue-modal">
+  <div class="modal">
+    <div class="modal-title" id="issue-modal-title">Add health issue</div>
+    <div class="form-group">
+      <label class="form-label">Health issue / condition</label>
+      <input class="form-input" id="i-condition" placeholder="e.g. Recurring headaches, Anxiety, Eczema" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Remedy name</label>
+        <input class="form-input" id="i-remedy" placeholder="e.g. Belladonna 30C" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dosage</label>
+        <input class="form-input" id="i-dosage" placeholder="e.g. 3 pellets" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Frequency</label>
+        <select class="form-input" id="i-freq">
+          <option value="6">Every 6 hours</option>
+          <option value="8">Every 8 hours</option>
+          <option value="12" selected>Every 12 hours</option>
+          <option value="24">Once daily</option>
+          <option value="48">Every 2 days</option>
+          <option value="168">Once a week</option>
+          <option value="720">Once a month</option>
+          <option value="custom">Custom…</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Custom interval (hours)</label>
+        <input class="form-input" id="i-custom-freq" placeholder="e.g. 4" type="number" min="1" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Start date & time</label>
+      <input class="form-input" id="i-start" type="datetime-local" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Progress notes</label>
+      <textarea class="notes-edit" id="i-progress" placeholder="Observations, improvements, side effects…"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Reassessment notes</label>
+      <textarea class="notes-edit" id="i-reassess" placeholder="Practitioner notes, remedy changes, follow-up plan…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('issue-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveIssue()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="notes-modal">
+  <div class="modal">
+    <div class="modal-title" id="notes-modal-title">Notes</div>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('progress')">Progress</div>
+      <div class="tab" onclick="switchTab('reassess')">Reassessment</div>
+    </div>
+    <div id="notes-tab-progress">
+      <textarea class="notes-edit" id="n-progress" style="min-height:140px" placeholder="Observations, improvements, side effects…"></textarea>
+    </div>
+    <div id="notes-tab-reassess" style="display:none">
+      <textarea class="notes-edit" id="n-reassess" style="min-height:140px" placeholder="Practitioner notes, remedy changes, follow-up plan…"></textarea>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+      <span style="font-size:11px;color:#888">Last updated: <span id="notes-last-updated">—</span></span>
+      <div style="display:flex;gap:8px">
+        <button class="btn-cancel" onclick="closeModal('notes-modal')">Cancel</button>
+        <button class="btn-save" onclick="saveNotes()">Save notes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLORS=['#d4edda','#d4e4f7','#fde8d8','#f3d4f7','#d4f0f7','#f7ead4'];
+const TEXT_COLORS=['#2e7d50','#1565c0','#b35000','#6a1b9a','#00697a','#8a6500'];
+let members=JSON.parse(localStorage.getItem('rm_members')||'[]');
+let editMemberId=null,editIssueId=null,notesMemberId=null,notesIssueId=null,activeTab='progress';
+function uid(){return Math.random().toString(36).slice(2,9)}
+function save(){localStorage.setItem('rm_members',JSON.stringify(members))}
+function initials(name){return name.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join('')}
+function freqLabel(h){if(h===720)return'Monthly';if(h===168)return'Weekly';if(h===48)return'Every 2 days';if(h===24)return'Daily';return`Every ${h}h`}
+function nextDoseMs(iss){
+  if(!iss.startTime)return null;
+  const iv=(iss.freqHours||12)*3600000,start=new Date(iss.startTime).getTime(),now=Date.now(),el=now-start;
+  if(el<0)return start;
+  return start+(Math.floor(el/iv)+1)*iv;
+}
+function doseStatus(iss){
+  const n=nextDoseMs(iss);if(!n)return null;
+  const diff=n-Date.now(),warn=iss.freqHours>=720?86400000:3600000;
+  return diff<=0?'due-now':diff<warn?'due-soon':'ok';
+}
+function formatTime(ms){
+  const diff=ms-Date.now();if(diff<=0)return'Due now';
+  const d=new Date(ms),days=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
+  if(days>=1)return`Next: ${d.toLocaleDateString([],{month:'short',day:'numeric'})} at ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
+  if(h<1)return`Due in ${m}m`;
+  return`Due in ${h}h ${m}m — ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
+}
+function renderDueBanner(){
+  const due=[];
+  members.forEach(m=>(m.issues||[]).forEach(i=>{const s=doseStatus(i);if(s==='due-now'||s==='due-soon')due.push(`${m.name} — ${i.condition} (${i.remedy})`)}));
+  const b=document.getElementById('due-banner');
+  if(due.length){b.style.display='flex';document.getElementById('due-list').innerHTML=due.map(d=>`• ${d}`).join('<br>');}
+  else b.style.display='none';
+}
+function render(){
+  renderDueBanner();
+  const el=document.getElementById('members-list'),es=document.getElementById('empty-state');
+  if(!members.length){es.style.display='block';el.innerHTML='';return;}
+  es.style.display='none';
+  el.innerHTML=members.map((m,mi)=>{
+    const ci=mi%COLORS.length,ic=(m.issues||[]).length,dc=(m.issues||[]).filter(i=>doseStatus(i)==='due-now').length;
+    const tags=[ic?`<span class="tag tag-blue">${ic} issue${ic!==1?'s':''}</span>`:'',dc?`<span class="tag tag-red">${dc} due now</span>`:''].filter(Boolean).join('');
+    const iss=(m.issues||[]).map(i=>{
+      const st=doseStatus(i),nm=nextDoseMs(i),dc2=st||'ok',di=st==='due-now'?'ti-alarm':'ti-clock';
+      return`<div class="issue-card">
+        <div class="issue-title"><span>${i.condition}</span>
+          <div class="issue-actions">
+            <button class="icon-btn" onclick="openNotes('${m.id}','${i.id}')" title="Notes"><i class="ti ti-notes"></i></button>
+            <button class="icon-btn" onclick="markDose('${m.id}','${i.id}')" title="Mark dose given"><i class="ti ti-circle-check"></i></button>
+            <button class="icon-btn" onclick="openEditIssue('${m.id}','${i.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+            <button class="icon-btn" onclick="deleteIssue('${m.id}','${i.id}')" title="Delete"><i class="ti ti-trash"></i></button>
+          </div></div>
+        <div class="remedy-row">
+          <div class="remedy-field">Remedy<br><span class="remedy-val">${i.remedy||'—'}</span></div>
+          <div class="remedy-field">Dosage<br><span class="remedy-val">${i.dosage||'—'}</span></div>
+          <div class="remedy-field">Frequency<br><span class="remedy-val">${freqLabel(i.freqHours)}</span></div>
+          <div class="remedy-field">Started<br><span class="remedy-val">${i.startTime?new Date(i.startTime).toLocaleDateString([],{month:'short',day:'numeric'}):'—'}</span></div>
+        </div>
+        ${nm?`<div class="next-dose ${dc2}"><i class="ti ${di}"></i>${formatTime(nm)}</div>`:''}
+        ${i.progress||i.reassess?`<div class="notes-section">${i.progress?`<div class="notes-label">Progress notes</div><div class="notes-text">${i.progress}</div>`:''
+        }${i.reassess?`<div class="notes-label" style="margin-top:6px">Reassessment</div><div class="notes-text">${i.reassess}</div>`:''}</div>`:''}
+      </div>`;
+    }).join('');
+    return`<div class="member-card" id="card-${m.id}">
+      <div class="member-header" onclick="toggleMember('${m.id}')">
+        <div class="avatar" style="background:${COLORS[ci]};color:${TEXT_COLORS[ci]}">${initials(m.name)}</div>
+        <div class="member-meta"><div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
+          <div class="member-tags">${tags}</div></div>
+        <div class="icon-btn" onclick="event.stopPropagation();deleteMember('${m.id}')" title="Remove person" style="margin-right:4px"><i class="ti ti-trash"></i></div>
+        <i class="ti ti-chevron-down chevron ${m.open?'open':''}"></i>
+      </div>
+      ${m.open?`<div class="member-body"><div class="section-label">Health issues & remedies</div>${iss}
+        <button class="add-issue-btn" onclick="openAddIssue('${m.id}')"><i class="ti ti-plus"></i> Add health issue</button>
+      </div>`:''}
+    </div>`;
+  }).join('');
+}
+function toggleMember(id){const m=members.find(x=>x.id===id);if(m)m.open=!m.open;save();render();}
+function openAddMember(){editMemberId=null;document.getElementById('m-name').value='';document.getElementById('m-rel').value='';document.getElementById('member-modal-title').textContent='Add family member';document.getElementById('member-modal').classList.add('show');}
+function saveMember(){
+  const name=document.getElementById('m-name').value.trim();if(!name)return;
+  const rel=document.getElementById('m-rel').value.trim();
+  if(editMemberId){const m=members.find(x=>x.id===editMemberId);if(m){m.name=name;m.relationship=rel;}}
+  else members.push({id:uid(),name,relationship:rel,issues:[],open:true});
+  save();render();closeModal('member-modal');
+}
+function deleteMember(id){if(!confirm('Remove this person and all their remedies?'))return;members=members.filter(m=>m.id!==id);save();render();}
+function openAddIssue(mid){
+  editIssueId=null;notesMemberId=mid;
+  document.getElementById('issue-modal-title').textContent='Add health issue';
+  ['i-condition','i-remedy','i-dosage','i-progress','i-reassess','i-custom-freq'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('i-freq').value='12';
+  const now=new Date();now.setMinutes(0,0,0);document.getElementById('i-start').value=now.toISOString().slice(0,16);
+  document.getElementById('issue-modal').classList.add('show');
+}
+function openEditIssue(mid,iid){
+  const m=members.find(x=>x.id===mid),i=(m.issues||[]).find(x=>x.id===iid);if(!i)return;
+  editIssueId=iid;notesMemberId=mid;
+  document.getElementById('issue-modal-title').textContent='Edit health issue';
+  document.getElementById('i-condition').value=i.condition||'';
+  document.getElementById('i-remedy').value=i.remedy||'';
+  document.getElementById('i-dosage').value=i.dosage||'';
+  const known=['6','8','12','24','48','168','720'];
+  if(known.includes(String(i.freqHours))){document.getElementById('i-freq').value=String(i.freqHours);document.getElementById('i-custom-freq').value='';}
+  else{document.getElementById('i-freq').value='custom';document.getElementById('i-custom-freq').value=i.freqHours||'';}
+  document.getElementById('i-start').value=i.startTime?i.startTime.slice(0,16):'';
+  document.getElementById('i-progress').value=i.progress||'';
+  document.getElementById('i-reassess').value=i.reassess||'';
+  document.getElementById('issue-modal').classList.add('show');
+}
+function saveIssue(){
+  const condition=document.getElementById('i-condition').value.trim();if(!condition)return;
+  const remedy=document.getElementById('i-remedy').value.trim(),dosage=document.getElementById('i-dosage').value.trim();
+  const fs=document.getElementById('i-freq').value,freqHours=fs==='custom'?parseFloat(document.getElementById('i-custom-freq').value)||12:parseFloat(fs);
+  const startTime=document.getElementById('i-start').value?new Date(document.getElementById('i-start').value).toISOString():null;
+  const progress=document.getElementById('i-progress').value.trim(),reassess=document.getElementById('i-reassess').value.trim();
+  const m=members.find(x=>x.id===notesMemberId);if(!m)return;if(!m.issues)m.issues=[];
+  if(editIssueId){const i=m.issues.find(x=>x.id===editIssueId);if(i)Object.assign(i,{condition,remedy,dosage,freqHours,startTime,progress,reassess,notesUpdated:new Date().toISOString()});}
+  else m.issues.push({id:uid(),condition,remedy,dosage,freqHours,startTime,progress,reassess,notesUpdated:null});
+  save();render();closeModal('issue-modal');
+}
+function deleteIssue(mid,iid){const m=members.find(x=>x.id===mid);if(m)m.issues=(m.issues||[]).filter(i=>i.id!==iid);save();render();}
+function markDose(mid,iid){const m=members.find(x=>x.id===mid),i=(m&&m.issues||[]).find(i=>i.id===iid);if(!i)return;i.startTime=new Date().toISOString();save();render();}
+function openNotes(mid,iid){
+  notesMemberId=mid;notesIssueId=iid;
+  const m=members.find(x=>x.id===mid),i=(m&&m.issues||[]).find(i=>i.id===iid);if(!i)return;
+  document.getElementById('notes-modal-title').textContent=`Notes — ${i.condition}`;
+  document.getElementById('n-progress').value=i.progress||'';
+  document.getElementById('n-reassess').value=i.reassess||'';
+  document.getElementById('notes-last-updated').textContent=i.notesUpdated?new Date(i.notesUpdated).toLocaleString():'Never';
+  switchTab('progress');document.getElementById('notes-modal').classList.add('show');
+}
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tabs .tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='progress'?0:1)));
+  document.getElementById('notes-tab-progress').style.display=tab==='progress'?'':'none';
+  document.getElementById('notes-tab-reassess').style.display=tab==='reassess'?'':'none';
+}
+function saveNotes(){
+  const m=members.find(x=>x.id===notesMemberId),i=(m&&m.issues||[]).find(i=>i.id===notesIssueId);if(!i)return;
+  i.progress=document.getElementById('n-progress').value.trim();
+  i.reassess=document.getElementById('n-reassess').value.trim();
+  i.notesUpdated=new Date().toISOString();
+  save();render();closeModal('notes-modal');
+}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-backdrop').forEach(b=>b.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');}));
+render();
+setInterval(render,60000);
+</script>
+</body>
+</html>
