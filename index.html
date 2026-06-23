@@ -17,11 +17,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .app-sub{font-size:12px;color:#666;margin-top:1px}
 .add-btn{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
 .add-btn:hover{background:#1e5c39}
-.due-banner{background:#fff8e7;border:0.5px solid #f0c040;border-radius:12px;padding:12px 16px;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:10px}
+.due-banner{background:#fff8e7;border:0.5px solid #f0c040;border-radius:12px;padding:12px 16px;margin-bottom:1rem;display:flex;align-items:flex-start;gap:10px}
 .due-banner i{color:#b8860b;font-size:18px;margin-top:1px}
 .due-title{font-size:13px;font-weight:500;color:#7a5a00;margin-bottom:4px}
-.due-list{font-size:12px;color:#7a5a00;line-height:1.7}
+.due-list{font-size:12px;color:#7a5a00;line-height:1.9}
+.reassess-banner{background:#f0eaff;border:0.5px solid #b39ddb;border-radius:12px;padding:12px 16px;margin-bottom:1rem;display:flex;align-items:flex-start;gap:10px}
+.reassess-banner i{color:#6a1b9a;font-size:18px;margin-top:1px}
+.reassess-title{font-size:13px;font-weight:500;color:#4a148c;margin-bottom:4px}
+.reassess-list{font-size:12px;color:#4a148c;line-height:1.9}
 .member-card{background:#fff;border:0.5px solid #ddd;border-radius:12px;margin-bottom:1rem;overflow:hidden}
+.member-card.closed{opacity:0.6}
 .member-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
 .avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;flex-shrink:0}
 .member-meta{flex:1}
@@ -30,30 +35,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .tag{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
 .tag-red{background:#fdecea;color:#c62828}
 .tag-blue{background:#e3f2fd;color:#1565c0}
+.tag-grey{background:#eee;color:#555}
+.tag-purple{background:#f0eaff;color:#6a1b9a}
 .chevron{font-size:18px;color:#888;transition:transform 0.2s}
 .chevron.open{transform:rotate(180deg)}
 .member-body{padding:0 16px 16px;border-top:0.5px solid #eee}
 .section-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin:14px 0 8px}
-.issue-card{background:#f8f8f6;border-radius:8px;padding:12px 14px;margin-bottom:10px}
-.issue-title{font-size:14px;font-weight:500;color:#1a1a1a;display:flex;align-items:center;justify-content:space-between}
-.issue-actions{display:flex;gap:6px}
-.icon-btn{background:none;border:none;cursor:pointer;color:#888;font-size:16px;padding:2px;border-radius:4px}
+.issue-card{background:#f8f8f6;border-radius:8px;padding:12px 14px;margin-bottom:10px;position:relative}
+.issue-card.closed-case{opacity:0.55;border:0.5px dashed #bbb}
+.issue-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.issue-condition{font-size:14px;font-weight:500;color:#1a1a1a;flex:1}
+.issue-actions{display:flex;gap:4px;flex-shrink:0}
+.icon-btn{background:none;border:none;cursor:pointer;color:#888;font-size:16px;padding:3px;border-radius:4px}
 .icon-btn:hover{color:#1a1a1a}
-.remedy-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-.remedy-field{font-size:12px;color:#666;line-height:1.5}
-.remedy-val{font-size:13px;color:#1a1a1a;font-weight:500}
-.next-dose{display:flex;align-items:center;gap:6px;margin-top:8px;padding:6px 10px;border-radius:8px;font-size:12px}
+.icon-btn.danger:hover{color:#c62828}
+.closed-badge{font-size:10px;font-weight:600;background:#eee;color:#888;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
+/* Remedies */
+.remedies-list{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.remedy-block{background:#fff;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 12px}
+.remedy-block-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.remedy-name-badge{font-size:13px;font-weight:500;color:#2e7d50}
+.remedy-block-actions{display:flex;gap:4px}
+.remedy-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.remedy-field{font-size:11px;color:#888;line-height:1.5}
+.remedy-val{font-size:12px;color:#1a1a1a;font-weight:500}
+.next-dose{display:flex;align-items:center;gap:6px;margin-top:7px;padding:5px 9px;border-radius:7px;font-size:12px}
 .next-dose.due-now{background:#fdecea;color:#c62828}
 .next-dose.due-soon{background:#fff8e7;color:#b8860b}
 .next-dose.ok{background:#e8f5e9;color:#2e7d32}
-.notes-section{margin-top:8px}
+.dose-actions{display:flex;gap:6px;margin-top:7px;align-items:center}
+.dose-btn{font-size:12px;padding:5px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:4px}
+.dose-btn.tick{background:#e8f5e9;color:#2e7d32}
+.dose-btn.tick:hover{background:#c8e6c9}
+.dose-btn.untick{background:#f5f5f5;color:#666}
+.dose-btn.untick:hover{background:#eeeeee}
+.dose-btn.missed{background:#fdecea;color:#c62828}
+.missed-label{font-size:11px;color:#c62828;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#fdecea;border-radius:7px}
+.taken-label{font-size:11px;color:#2e7d32;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#e8f5e9;border-radius:7px}
+.remedy-notes{font-size:12px;color:#555;margin-top:6px;padding:6px 8px;background:#f8f8f6;border-radius:6px;line-height:1.5;white-space:pre-wrap}
+/* Reassessment date */
+.reassess-date-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding:6px 10px;background:#f0eaff;border-radius:7px;font-size:12px;color:#6a1b9a}
+.reassess-date-row.overdue{background:#fdecea;color:#c62828}
+/* Notes */
+.issue-notes-section{margin-top:8px}
 .notes-label{font-size:11px;color:#888;margin-bottom:4px}
 .notes-text{font-size:12px;color:#1a1a1a;background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;line-height:1.6;white-space:pre-wrap}
+.add-remedy-btn{background:none;border:0.5px dashed #b0d8be;border-radius:7px;padding:6px 10px;font-size:12px;color:#2e7d50;cursor:pointer;display:flex;align-items:center;gap:5px;margin-top:4px;width:100%}
+.add-remedy-btn:hover{background:#f0faf4}
 .add-issue-btn{background:none;border:0.5px dashed #bbb;border-radius:8px;padding:8px;width:100%;font-size:13px;color:#888;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px}
 .add-issue-btn:hover{background:#f0f0ec}
+/* Modals */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center}
 .modal-backdrop.show{display:flex}
-.modal{background:#fff;border-radius:12px;padding:20px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto}
+.modal{background:#fff;border-radius:12px;padding:20px;width:90%;max-width:520px;max-height:88vh;overflow-y:auto}
 .modal-title{font-size:16px;font-weight:500;margin-bottom:16px;color:#1a1a1a}
 .form-group{margin-bottom:12px}
 .form-label{font-size:12px;font-weight:500;color:#666;margin-bottom:4px;display:block}
@@ -64,12 +98,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-cancel{background:none;border:0.5px solid #ccc;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;color:#1a1a1a}
 .btn-save{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer}
 .btn-save:hover{background:#1e5c39}
+.btn-danger{background:#c62828;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer}
 .empty-state{text-align:center;padding:2rem;color:#888;font-size:14px}
 .notes-edit{width:100%;padding:8px 10px;border:0.5px solid #ccc;border-radius:8px;font-size:12px;resize:vertical;min-height:70px;font-family:inherit;color:#1a1a1a;background:#fff}
 .tabs{display:flex;margin-bottom:14px;border-bottom:0.5px solid #eee}
 .tab{font-size:13px;padding:6px 12px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-0.5px}
 .tab.active{color:#2e7d50;border-bottom-color:#2e7d50;font-weight:500}
-@media(max-width:480px){.form-row{grid-template-columns:1fr}.remedy-row{grid-template-columns:1fr 1fr}}
+.divider{height:0.5px;background:#eee;margin:12px 0}
+.remedy-modal-block{background:#f8f8f6;border-radius:8px;padding:12px;margin-bottom:10px;position:relative}
+.remedy-modal-block-title{font-size:13px;font-weight:500;color:#2e7d50;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}.remedy-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -90,8 +128,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div id="due-banner" class="due-banner" style="display:none">
     <i class="ti ti-bell"></i>
     <div>
-      <div class="due-title">Remedies due now</div>
+      <div class="due-title">Remedies due</div>
       <div class="due-list" id="due-list"></div>
+    </div>
+  </div>
+
+  <div id="reassess-banner" class="reassess-banner" style="display:none">
+    <i class="ti ti-calendar-event"></i>
+    <div>
+      <div class="reassess-title">Reassessment due</div>
+      <div class="reassess-list" id="reassess-list"></div>
     </div>
   </div>
 
@@ -102,12 +148,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- Member modal -->
 <div class="modal-backdrop" id="member-modal">
   <div class="modal">
     <div class="modal-title" id="member-modal-title">Add family member</div>
     <div class="form-group">
       <label class="form-label">Name</label>
-      <input class="form-input" id="m-name" placeholder="e.g. Sarah" />
+      <div style="display:flex;gap:8px;align-items:center">
+        <select class="form-input" id="m-name-select" onchange="handleNameSelect()" style="flex:1">
+          <option value="">— select existing or type new —</option>
+        </select>
+      </div>
+      <input class="form-input" id="m-name" placeholder="Or type a new name…" style="margin-top:6px" />
     </div>
     <div class="form-group">
       <label class="form-label">Relationship</label>
@@ -120,53 +172,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- Issue modal -->
 <div class="modal-backdrop" id="issue-modal">
   <div class="modal">
     <div class="modal-title" id="issue-modal-title">Add health issue</div>
+
+    <!-- Person selector -->
+    <div class="form-group">
+      <label class="form-label">Family member</label>
+      <select class="form-input" id="i-member">
+        <option value="">— select person —</option>
+      </select>
+    </div>
+
     <div class="form-group">
       <label class="form-label">Health issue / condition</label>
       <input class="form-input" id="i-condition" placeholder="e.g. Recurring headaches, Anxiety, Eczema" />
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Remedy name</label>
-        <input class="form-input" id="i-remedy" placeholder="e.g. Belladonna 30C" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Dosage</label>
-        <input class="form-input" id="i-dosage" placeholder="e.g. 3 pellets" />
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Frequency</label>
-        <select class="form-input" id="i-freq">
-          <option value="6">Every 6 hours</option>
-          <option value="8">Every 8 hours</option>
-          <option value="12" selected>Every 12 hours</option>
-          <option value="24">Once daily</option>
-          <option value="48">Every 2 days</option>
-          <option value="168">Once a week</option>
-          <option value="720">Once a month</option>
-          <option value="custom">Custom…</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Custom interval (hours)</label>
-        <input class="form-input" id="i-custom-freq" placeholder="e.g. 4" type="number" min="1" />
-      </div>
-    </div>
+
     <div class="form-group">
-      <label class="form-label">Start date & time</label>
-      <input class="form-input" id="i-start" type="datetime-local" />
+      <label class="form-label">Reassessment date</label>
+      <input class="form-input" id="i-reassess-date" type="date" />
     </div>
+
+    <!-- Remedies -->
+    <div class="section-label" style="margin-top:4px">Remedies</div>
+    <div id="remedy-blocks"></div>
+    <button class="add-remedy-btn" onclick="addRemedyBlock()"><i class="ti ti-plus"></i> Add remedy</button>
+
+    <div class="divider"></div>
     <div class="form-group">
       <label class="form-label">Progress notes</label>
       <textarea class="notes-edit" id="i-progress" placeholder="Observations, improvements, side effects…"></textarea>
     </div>
     <div class="form-group">
       <label class="form-label">Reassessment notes</label>
-      <textarea class="notes-edit" id="i-reassess" placeholder="Practitioner notes, remedy changes, follow-up plan…"></textarea>
+      <textarea class="notes-edit" id="i-reassess-notes" placeholder="Practitioner notes, remedy changes, follow-up plan…"></textarea>
     </div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('issue-modal')">Cancel</button>
@@ -175,6 +216,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- Notes modal -->
 <div class="modal-backdrop" id="notes-modal">
   <div class="modal">
     <div class="modal-title" id="notes-modal-title">Notes</div>
@@ -202,22 +244,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 const COLORS=['#d4edda','#d4e4f7','#fde8d8','#f3d4f7','#d4f0f7','#f7ead4'];
 const TEXT_COLORS=['#2e7d50','#1565c0','#b35000','#6a1b9a','#00697a','#8a6500'];
 let members=JSON.parse(localStorage.getItem('rm_members')||'[]');
-let editMemberId=null,editIssueId=null,notesMemberId=null,notesIssueId=null,activeTab='progress';
+let editMemberId=null,editIssueId=null,currentMemberId=null,notesMemberId=null,notesIssueId=null,activeTab='progress';
+let remedyBlocks=[];
+
 function uid(){return Math.random().toString(36).slice(2,9)}
 function save(){localStorage.setItem('rm_members',JSON.stringify(members))}
 function initials(name){return name.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join('')}
-function freqLabel(h){if(h===720)return'Monthly';if(h===168)return'Weekly';if(h===48)return'Every 2 days';if(h===24)return'Daily';return`Every ${h}h`}
-function nextDoseMs(iss){
-  if(!iss.startTime)return null;
-  const iv=(iss.freqHours||12)*3600000,start=new Date(iss.startTime).getTime(),now=Date.now(),el=now-start;
+
+function freqLabel(h){
+  if(h===720)return'Monthly';if(h===168)return'Weekly';if(h===48)return'Every 2 days';
+  if(h===24)return'Daily';return`Every ${h}h`;
+}
+
+function defaultStart(){
+  const d=new Date();d.setHours(8,0,0,0);return d.toISOString().slice(0,16);
+}
+
+function nextDoseMs(r){
+  if(!r.startTime)return null;
+  const iv=(r.freqHours||12)*3600000,start=new Date(r.startTime).getTime(),now=Date.now(),el=now-start;
   if(el<0)return start;
   return start+(Math.floor(el/iv)+1)*iv;
 }
-function doseStatus(iss){
-  const n=nextDoseMs(iss);if(!n)return null;
-  const diff=n-Date.now(),warn=iss.freqHours>=720?86400000:3600000;
+
+function doseStatus(r){
+  if(r.takenAt){
+    // check if taken applies to current dose window
+    const n=nextDoseMs(r);
+    if(n && new Date(r.takenAt).getTime() > (n - (r.freqHours||12)*3600000)){
+      return'taken';
+    }
+  }
+  if(r.missedAt){
+    const n=nextDoseMs(r);
+    if(n && new Date(r.missedAt).getTime() > (n - (r.freqHours||12)*3600000)){
+      return'missed';
+    }
+  }
+  const n=nextDoseMs(r);if(!n)return null;
+  const diff=n-Date.now(),warn=r.freqHours>=720?86400000:3600000;
   return diff<=0?'due-now':diff<warn?'due-soon':'ok';
 }
+
 function formatTime(ms){
   const diff=ms-Date.now();if(diff<=0)return'Due now';
   const d=new Date(ms),days=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
@@ -225,58 +293,174 @@ function formatTime(ms){
   if(h<1)return`Due in ${m}m`;
   return`Due in ${h}h ${m}m — ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
 }
-function renderDueBanner(){
-  const due=[];
-  members.forEach(m=>(m.issues||[]).forEach(i=>{const s=doseStatus(i);if(s==='due-now'||s==='due-soon')due.push(`${m.name} — ${i.condition} (${i.remedy})`)}));
-  const b=document.getElementById('due-banner');
-  if(due.length){b.style.display='flex';document.getElementById('due-list').innerHTML=due.map(d=>`• ${d}`).join('<br>');}
-  else b.style.display='none';
+
+function reassessStatus(dateStr){
+  if(!dateStr)return null;
+  const d=new Date(dateStr);d.setHours(23,59,59,999);
+  const diff=d.getTime()-Date.now();
+  if(diff<0)return'overdue';
+  if(diff<86400000*3)return'soon';
+  return'ok';
 }
+
+function renderBanners(){
+  // Dose due banner
+  const due=[];
+  members.forEach(m=>{
+    if(m.closed)return;
+    (m.issues||[]).forEach(iss=>{
+      if(iss.closed)return;
+      (iss.remedies||[]).forEach(r=>{
+        const s=doseStatus(r);
+        if(s==='due-now'||s==='due-soon') due.push(`<strong>${m.name}</strong> — ${r.name||'Remedy'} for ${iss.condition}`);
+      });
+    });
+  });
+  const db=document.getElementById('due-banner');
+  if(due.length){db.style.display='flex';document.getElementById('due-list').innerHTML=due.map(d=>`• ${d}`).join('<br>');}
+  else db.style.display='none';
+
+  // Reassessment banner
+  const rdue=[];
+  members.forEach(m=>{
+    if(m.closed)return;
+    (m.issues||[]).forEach(iss=>{
+      if(iss.closed||!iss.reassessDate)return;
+      const s=reassessStatus(iss.reassessDate);
+      if(s==='overdue'||s==='soon'){
+        const d=new Date(iss.reassessDate).toLocaleDateString([],{day:'numeric',month:'short'});
+        rdue.push(`<strong>${m.name}</strong> — ${iss.condition} (${s==='overdue'?'overdue':'due '+d})`);
+      }
+    });
+  });
+  const rb=document.getElementById('reassess-banner');
+  if(rdue.length){rb.style.display='flex';document.getElementById('reassess-list').innerHTML=rdue.map(d=>`• ${d}`).join('<br>');}
+  else rb.style.display='none';
+}
+
 function render(){
-  renderDueBanner();
+  renderBanners();
   const el=document.getElementById('members-list'),es=document.getElementById('empty-state');
+  const active=members.filter(m=>!m.closed),closed=members.filter(m=>m.closed);
+  const ordered=[...active,...closed];
   if(!members.length){es.style.display='block';el.innerHTML='';return;}
   es.style.display='none';
-  el.innerHTML=members.map((m,mi)=>{
-    const ci=mi%COLORS.length,ic=(m.issues||[]).length,dc=(m.issues||[]).filter(i=>doseStatus(i)==='due-now').length;
-    const tags=[ic?`<span class="tag tag-blue">${ic} issue${ic!==1?'s':''}</span>`:'',dc?`<span class="tag tag-red">${dc} due now</span>`:''].filter(Boolean).join('');
-    const iss=(m.issues||[]).map(i=>{
-      const st=doseStatus(i),nm=nextDoseMs(i),dc2=st||'ok',di=st==='due-now'?'ti-alarm':'ti-clock';
-      return`<div class="issue-card">
-        <div class="issue-title"><span>${i.condition}</span>
+
+  el.innerHTML=ordered.map((m,mi)=>{
+    const ci=mi%COLORS.length;
+    const openIssues=(m.issues||[]).filter(i=>!i.closed);
+    const dueCount=openIssues.reduce((a,i)=>{
+      return a+(i.remedies||[]).filter(r=>doseStatus(r)==='due-now').length;
+    },0);
+    const tags=[
+      openIssues.length?`<span class="tag tag-blue">${openIssues.length} issue${openIssues.length!==1?'s':''}</span>`:'',
+      dueCount?`<span class="tag tag-red">${dueCount} due now</span>`:'',
+      m.closed?`<span class="tag tag-grey">Closed</span>`:''
+    ].filter(Boolean).join('');
+
+    const issuesHtml=(m.issues||[]).map(iss=>{
+      const rdStatus=reassessStatus(iss.reassessDate);
+      const rdRow=iss.reassessDate?`<div class="reassess-date-row${rdStatus==='overdue'?' overdue':''}">
+        <i class="ti ti-calendar-event"></i>
+        Reassess: ${new Date(iss.reassessDate).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}
+        ${rdStatus==='overdue'?' — overdue':rdStatus==='soon'?' — coming up':''}
+      </div>`:'';
+
+      const remediesHtml=(iss.remedies||[]).map(r=>{
+        const st=doseStatus(r),nm=nextDoseMs(r);
+        let doseRow='',actionRow='';
+        if(st==='taken'){
+          doseRow=`<div class="taken-label"><i class="ti ti-circle-check"></i> Taken at ${new Date(r.takenAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>`;
+          actionRow=`<div class="dose-actions"><button class="dose-btn untick" onclick="undoDose('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button></div>`;
+        } else if(st==='missed'){
+          doseRow=`<div class="missed-label"><i class="ti ti-alert-circle"></i> Missed dose</div>`;
+          actionRow=`<div class="dose-actions"><button class="dose-btn untick" onclick="undoDose('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button></div>`;
+        } else {
+          if(nm) doseRow=`<div class="next-dose ${st||'ok'}"><i class="ti ${st==='due-now'?'ti-alarm':'ti-clock'}"></i>${formatTime(nm)}</div>`;
+          if(!iss.closed){
+            actionRow=`<div class="dose-actions">
+              <button class="dose-btn tick" onclick="markTaken('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-check"></i> Taken</button>
+              <button class="dose-btn missed" onclick="markMissed('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-x"></i> Missed</button>
+            </div>`;
+          }
+        }
+        return`<div class="remedy-block">
+          <div class="remedy-block-header">
+            <span class="remedy-name-badge"><i class="ti ti-pill"></i> ${r.name||'Remedy'}</span>
+            ${!iss.closed?`<div class="remedy-block-actions">
+              <button class="icon-btn" onclick="deleteRemedy('${m.id}','${iss.id}','${r.id}')" title="Remove remedy"><i class="ti ti-trash"></i></button>
+            </div>`:''}
+          </div>
+          <div class="remedy-grid">
+            <div class="remedy-field">Dosage<br><span class="remedy-val">${r.dosage||'—'}</span></div>
+            <div class="remedy-field">Frequency<br><span class="remedy-val">${freqLabel(r.freqHours)}</span></div>
+            <div class="remedy-field">Started<br><span class="remedy-val">${r.startTime?new Date(r.startTime).toLocaleDateString([],{month:'short',day:'numeric'}):'—'}</span></div>
+          </div>
+          ${r.notes?`<div class="remedy-notes">${r.notes}</div>`:''}
+          ${doseRow}
+          ${actionRow}
+        </div>`;
+      }).join('');
+
+      return`<div class="issue-card${iss.closed?' closed-case':''}">
+        <div class="issue-top">
+          <span class="issue-condition">${iss.condition}${iss.closed?'<span class="closed-badge">Closed</span>':''}</span>
           <div class="issue-actions">
-            <button class="icon-btn" onclick="openNotes('${m.id}','${i.id}')" title="Notes"><i class="ti ti-notes"></i></button>
-            <button class="icon-btn" onclick="markDose('${m.id}','${i.id}')" title="Mark dose given"><i class="ti ti-circle-check"></i></button>
-            <button class="icon-btn" onclick="openEditIssue('${m.id}','${i.id}')" title="Edit"><i class="ti ti-edit"></i></button>
-            <button class="icon-btn" onclick="deleteIssue('${m.id}','${i.id}')" title="Delete"><i class="ti ti-trash"></i></button>
-          </div></div>
-        <div class="remedy-row">
-          <div class="remedy-field">Remedy<br><span class="remedy-val">${i.remedy||'—'}</span></div>
-          <div class="remedy-field">Dosage<br><span class="remedy-val">${i.dosage||'—'}</span></div>
-          <div class="remedy-field">Frequency<br><span class="remedy-val">${freqLabel(i.freqHours)}</span></div>
-          <div class="remedy-field">Started<br><span class="remedy-val">${i.startTime?new Date(i.startTime).toLocaleDateString([],{month:'short',day:'numeric'}):'—'}</span></div>
+            <button class="icon-btn" onclick="openNotes('${m.id}','${iss.id}')" title="Notes"><i class="ti ti-notes"></i></button>
+            <button class="icon-btn" onclick="openEditIssue('${m.id}','${iss.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+            ${!iss.closed
+              ?`<button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Close case"><i class="ti ti-archive"></i></button>`
+              :`<button class="icon-btn" onclick="reopenCase('${m.id}','${iss.id}')" title="Reopen case"><i class="ti ti-archive-off"></i></button>`
+            }
+            <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete"><i class="ti ti-trash"></i></button>
+          </div>
         </div>
-        ${nm?`<div class="next-dose ${dc2}"><i class="ti ${di}"></i>${formatTime(nm)}</div>`:''}
-        ${i.progress||i.reassess?`<div class="notes-section">${i.progress?`<div class="notes-label">Progress notes</div><div class="notes-text">${i.progress}</div>`:''
-        }${i.reassess?`<div class="notes-label" style="margin-top:6px">Reassessment</div><div class="notes-text">${i.reassess}</div>`:''}</div>`:''}
+        ${rdRow}
+        <div class="remedies-list">${remediesHtml}</div>
+        ${iss.progress||iss.reassessNotes?`<div class="issue-notes-section">
+          ${iss.progress?`<div class="notes-label" style="margin-top:8px">Progress notes</div><div class="notes-text">${iss.progress}</div>`:''}
+          ${iss.reassessNotes?`<div class="notes-label" style="margin-top:6px">Reassessment notes</div><div class="notes-text">${iss.reassessNotes}</div>`:''}
+        </div>`:''}
       </div>`;
     }).join('');
-    return`<div class="member-card" id="card-${m.id}">
+
+    return`<div class="member-card${m.closed?' closed':''}" id="card-${m.id}">
       <div class="member-header" onclick="toggleMember('${m.id}')">
         <div class="avatar" style="background:${COLORS[ci]};color:${TEXT_COLORS[ci]}">${initials(m.name)}</div>
-        <div class="member-meta"><div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
-          <div class="member-tags">${tags}</div></div>
+        <div class="member-meta">
+          <div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
+          <div class="member-tags">${tags}</div>
+        </div>
         <div class="icon-btn" onclick="event.stopPropagation();deleteMember('${m.id}')" title="Remove person" style="margin-right:4px"><i class="ti ti-trash"></i></div>
         <i class="ti ti-chevron-down chevron ${m.open?'open':''}"></i>
       </div>
-      ${m.open?`<div class="member-body"><div class="section-label">Health issues & remedies</div>${iss}
-        <button class="add-issue-btn" onclick="openAddIssue('${m.id}')"><i class="ti ti-plus"></i> Add health issue</button>
+      ${m.open?`<div class="member-body">
+        <div class="section-label">Health issues & remedies</div>
+        ${issuesHtml}
+        ${!m.closed?`<button class="add-issue-btn" onclick="openAddIssue('${m.id}')"><i class="ti ti-plus"></i> Add health issue</button>`:''}
       </div>`:''}
     </div>`;
   }).join('');
 }
+
 function toggleMember(id){const m=members.find(x=>x.id===id);if(m)m.open=!m.open;save();render();}
-function openAddMember(){editMemberId=null;document.getElementById('m-name').value='';document.getElementById('m-rel').value='';document.getElementById('member-modal-title').textContent='Add family member';document.getElementById('member-modal').classList.add('show');}
+
+// ---- Member ----
+function openAddMember(){
+  editMemberId=null;
+  document.getElementById('m-name').value='';
+  document.getElementById('m-rel').value='';
+  document.getElementById('member-modal-title').textContent='Add family member';
+  // populate dropdown with existing names as suggestions
+  const sel=document.getElementById('m-name-select');
+  sel.innerHTML='<option value="">— select existing or type new —</option>';
+  members.forEach(m=>sel.innerHTML+=`<option value="${m.name}">${m.name}</option>`);
+  document.getElementById('member-modal').classList.add('show');
+}
+function handleNameSelect(){
+  const v=document.getElementById('m-name-select').value;
+  if(v) document.getElementById('m-name').value=v;
+}
 function saveMember(){
   const name=document.getElementById('m-name').value.trim();if(!name)return;
   const rel=document.getElementById('m-rel').value.trim();
@@ -284,51 +468,203 @@ function saveMember(){
   else members.push({id:uid(),name,relationship:rel,issues:[],open:true});
   save();render();closeModal('member-modal');
 }
-function deleteMember(id){if(!confirm('Remove this person and all their remedies?'))return;members=members.filter(m=>m.id!==id);save();render();}
-function openAddIssue(mid){
-  editIssueId=null;notesMemberId=mid;
+function deleteMember(id){if(!confirm('Remove this person and all their data?'))return;members=members.filter(m=>m.id!==id);save();render();}
+
+// ---- Remedy blocks in modal ----
+function buildRemedyBlockHTML(rb,idx){
+  return`<div class="remedy-modal-block" id="rb-${rb.id}">
+    <div class="remedy-modal-block-title">
+      <span>Remedy ${idx+1}</span>
+      <button class="icon-btn danger" onclick="removeRemedyBlock('${rb.id}')" title="Remove"><i class="ti ti-trash"></i></button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Remedy name</label>
+      <input class="form-input" id="rb-name-${rb.id}" placeholder="e.g. Belladonna 30C" value="${rb.name||''}" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Dosage</label>
+        <input class="form-input" id="rb-dosage-${rb.id}" placeholder="e.g. 3 pellets" value="${rb.dosage||''}" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Frequency</label>
+        <select class="form-input" id="rb-freq-${rb.id}">
+          <option value="6" ${rb.freqHours==6?'selected':''}>Every 6 hours</option>
+          <option value="8" ${rb.freqHours==8?'selected':''}>Every 8 hours</option>
+          <option value="12" ${!rb.freqHours||rb.freqHours==12?'selected':''}>Every 12 hours</option>
+          <option value="24" ${rb.freqHours==24?'selected':''}>Once daily</option>
+          <option value="48" ${rb.freqHours==48?'selected':''}>Every 2 days</option>
+          <option value="168" ${rb.freqHours==168?'selected':''}>Once a week</option>
+          <option value="720" ${rb.freqHours==720?'selected':''}>Once a month</option>
+          <option value="custom" ${rb.freqHours&&![6,8,12,24,48,168,720].includes(rb.freqHours)?'selected':''}>Custom…</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Custom interval (hours)</label>
+        <input class="form-input" id="rb-custom-${rb.id}" type="number" min="1" placeholder="e.g. 4" value="${rb.customFreq||''}" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Start date & time</label>
+        <input class="form-input" id="rb-start-${rb.id}" type="datetime-local" value="${rb.startTime||defaultStart()}" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes for this remedy</label>
+      <input class="form-input" id="rb-notes-${rb.id}" placeholder="e.g. take away from food, store in cool place…" value="${rb.notes||''}" />
+    </div>
+  </div>`;
+}
+
+function refreshRemedyBlocks(){
+  document.getElementById('remedy-blocks').innerHTML=remedyBlocks.map((rb,i)=>buildRemedyBlockHTML(rb,i)).join('');
+}
+
+function addRemedyBlock(){
+  remedyBlocks.push({id:uid(),name:'',dosage:'',freqHours:12,startTime:defaultStart(),notes:''});
+  refreshRemedyBlocks();
+}
+
+function removeRemedyBlock(id){
+  remedyBlocks=remedyBlocks.filter(rb=>rb.id!==id);
+  refreshRemedyBlocks();
+}
+
+function collectRemedyBlocks(){
+  return remedyBlocks.map(rb=>{
+    const freqSel=document.getElementById(`rb-freq-${rb.id}`).value;
+    const freqHours=freqSel==='custom'?parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||12:parseFloat(freqSel);
+    const startVal=document.getElementById(`rb-start-${rb.id}`).value;
+    return{
+      id:rb.id,
+      name:document.getElementById(`rb-name-${rb.id}`).value.trim(),
+      dosage:document.getElementById(`rb-dosage-${rb.id}`).value.trim(),
+      freqHours,
+      startTime:startVal?new Date(startVal).toISOString():null,
+      notes:document.getElementById(`rb-notes-${rb.id}`).value.trim(),
+      takenAt:rb.takenAt||null,
+      missedAt:rb.missedAt||null
+    };
+  });
+}
+
+// ---- Issue ----
+function populateMemberDropdown(selectedId){
+  const sel=document.getElementById('i-member');
+  sel.innerHTML='<option value="">— select person —</option>';
+  members.filter(m=>!m.closed).forEach(m=>{
+    sel.innerHTML+=`<option value="${m.id}" ${m.id===selectedId?'selected':''}>${m.name}</option>`;
+  });
+}
+
+function openAddIssue(memberId){
+  editIssueId=null;currentMemberId=memberId;
   document.getElementById('issue-modal-title').textContent='Add health issue';
-  ['i-condition','i-remedy','i-dosage','i-progress','i-reassess','i-custom-freq'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('i-freq').value='12';
-  const now=new Date();now.setMinutes(0,0,0);document.getElementById('i-start').value=now.toISOString().slice(0,16);
+  populateMemberDropdown(memberId);
+  document.getElementById('i-condition').value='';
+  document.getElementById('i-reassess-date').value='';
+  document.getElementById('i-progress').value='';
+  document.getElementById('i-reassess-notes').value='';
+  remedyBlocks=[{id:uid(),name:'',dosage:'',freqHours:12,startTime:defaultStart(),notes:''}];
+  refreshRemedyBlocks();
   document.getElementById('issue-modal').classList.add('show');
 }
-function openEditIssue(mid,iid){
-  const m=members.find(x=>x.id===mid),i=(m.issues||[]).find(x=>x.id===iid);if(!i)return;
-  editIssueId=iid;notesMemberId=mid;
+
+function openEditIssue(memberId,issueId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m.issues||[]).find(x=>x.id===issueId);if(!iss)return;
+  editIssueId=issueId;currentMemberId=memberId;
   document.getElementById('issue-modal-title').textContent='Edit health issue';
-  document.getElementById('i-condition').value=i.condition||'';
-  document.getElementById('i-remedy').value=i.remedy||'';
-  document.getElementById('i-dosage').value=i.dosage||'';
-  const known=['6','8','12','24','48','168','720'];
-  if(known.includes(String(i.freqHours))){document.getElementById('i-freq').value=String(i.freqHours);document.getElementById('i-custom-freq').value='';}
-  else{document.getElementById('i-freq').value='custom';document.getElementById('i-custom-freq').value=i.freqHours||'';}
-  document.getElementById('i-start').value=i.startTime?i.startTime.slice(0,16):'';
-  document.getElementById('i-progress').value=i.progress||'';
-  document.getElementById('i-reassess').value=i.reassess||'';
+  populateMemberDropdown(memberId);
+  document.getElementById('i-condition').value=iss.condition||'';
+  document.getElementById('i-reassess-date').value=iss.reassessDate||'';
+  document.getElementById('i-progress').value=iss.progress||'';
+  document.getElementById('i-reassess-notes').value=iss.reassessNotes||'';
+  remedyBlocks=(iss.remedies||[]).map(r=>({...r}));
+  refreshRemedyBlocks();
   document.getElementById('issue-modal').classList.add('show');
 }
+
 function saveIssue(){
   const condition=document.getElementById('i-condition').value.trim();if(!condition)return;
-  const remedy=document.getElementById('i-remedy').value.trim(),dosage=document.getElementById('i-dosage').value.trim();
-  const fs=document.getElementById('i-freq').value,freqHours=fs==='custom'?parseFloat(document.getElementById('i-custom-freq').value)||12:parseFloat(fs);
-  const startTime=document.getElementById('i-start').value?new Date(document.getElementById('i-start').value).toISOString():null;
-  const progress=document.getElementById('i-progress').value.trim(),reassess=document.getElementById('i-reassess').value.trim();
-  const m=members.find(x=>x.id===notesMemberId);if(!m)return;if(!m.issues)m.issues=[];
-  if(editIssueId){const i=m.issues.find(x=>x.id===editIssueId);if(i)Object.assign(i,{condition,remedy,dosage,freqHours,startTime,progress,reassess,notesUpdated:new Date().toISOString()});}
-  else m.issues.push({id:uid(),condition,remedy,dosage,freqHours,startTime,progress,reassess,notesUpdated:null});
+  const selMemberId=document.getElementById('i-member').value||currentMemberId;
+  const m=members.find(x=>x.id===selMemberId);if(!m)return;
+  if(!m.issues)m.issues=[];
+  const reassessDate=document.getElementById('i-reassess-date').value||null;
+  const progress=document.getElementById('i-progress').value.trim();
+  const reassessNotes=document.getElementById('i-reassess-notes').value.trim();
+  const remedies=collectRemedyBlocks();
+  if(editIssueId){
+    const iss=m.issues.find(x=>x.id===editIssueId);
+    if(iss)Object.assign(iss,{condition,reassessDate,progress,reassessNotes,remedies,notesUpdated:new Date().toISOString()});
+  } else {
+    m.issues.push({id:uid(),condition,reassessDate,progress,reassessNotes,remedies,closed:false,notesUpdated:null});
+  }
   save();render();closeModal('issue-modal');
 }
-function deleteIssue(mid,iid){const m=members.find(x=>x.id===mid);if(m)m.issues=(m.issues||[]).filter(i=>i.id!==iid);save();render();}
-function markDose(mid,iid){const m=members.find(x=>x.id===mid),i=(m&&m.issues||[]).find(i=>i.id===iid);if(!i)return;i.startTime=new Date().toISOString();save();render();}
-function openNotes(mid,iid){
-  notesMemberId=mid;notesIssueId=iid;
-  const m=members.find(x=>x.id===mid),i=(m&&m.issues||[]).find(i=>i.id===iid);if(!i)return;
-  document.getElementById('notes-modal-title').textContent=`Notes — ${i.condition}`;
-  document.getElementById('n-progress').value=i.progress||'';
-  document.getElementById('n-reassess').value=i.reassess||'';
-  document.getElementById('notes-last-updated').textContent=i.notesUpdated?new Date(i.notesUpdated).toLocaleString():'Never';
-  switchTab('progress');document.getElementById('notes-modal').classList.add('show');
+
+function deleteIssue(memberId,issueId){
+  if(!confirm('Delete this health issue?'))return;
+  const m=members.find(x=>x.id===memberId);
+  if(m)m.issues=(m.issues||[]).filter(i=>i.id!==issueId);
+  save();render();
+}
+
+function closeCase(memberId,issueId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  if(iss){iss.closed=true;}
+  save();render();
+}
+function reopenCase(memberId,issueId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  if(iss){iss.closed=false;}
+  save();render();
+}
+
+function deleteRemedy(memberId,issueId,remedyId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  if(iss)iss.remedies=(iss.remedies||[]).filter(r=>r.id!==remedyId);
+  save();render();
+}
+
+// ---- Dose tracking ----
+function markTaken(memberId,issueId,remedyId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  const r=(iss&&iss.remedies||[]).find(r=>r.id===remedyId);
+  if(r){r.takenAt=new Date().toISOString();r.missedAt=null;}
+  save();render();
+}
+function markMissed(memberId,issueId,remedyId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  const r=(iss&&iss.remedies||[]).find(r=>r.id===remedyId);
+  if(r){r.missedAt=new Date().toISOString();r.takenAt=null;}
+  save();render();
+}
+function undoDose(memberId,issueId,remedyId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  const r=(iss&&iss.remedies||[]).find(r=>r.id===remedyId);
+  if(r){r.takenAt=null;r.missedAt=null;}
+  save();render();
+}
+
+// ---- Notes ----
+function openNotes(memberId,issueId){
+  notesMemberId=memberId;notesIssueId=issueId;
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);if(!iss)return;
+  document.getElementById('notes-modal-title').textContent=`Notes — ${iss.condition}`;
+  document.getElementById('n-progress').value=iss.progress||'';
+  document.getElementById('n-reassess').value=iss.reassessNotes||'';
+  document.getElementById('notes-last-updated').textContent=iss.notesUpdated?new Date(iss.notesUpdated).toLocaleString():'Never';
+  switchTab('progress');
+  document.getElementById('notes-modal').classList.add('show');
 }
 function switchTab(tab){
   activeTab=tab;
@@ -337,14 +673,17 @@ function switchTab(tab){
   document.getElementById('notes-tab-reassess').style.display=tab==='reassess'?'':'none';
 }
 function saveNotes(){
-  const m=members.find(x=>x.id===notesMemberId),i=(m&&m.issues||[]).find(i=>i.id===notesIssueId);if(!i)return;
-  i.progress=document.getElementById('n-progress').value.trim();
-  i.reassess=document.getElementById('n-reassess').value.trim();
-  i.notesUpdated=new Date().toISOString();
+  const m=members.find(x=>x.id===notesMemberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===notesIssueId);if(!iss)return;
+  iss.progress=document.getElementById('n-progress').value.trim();
+  iss.reassessNotes=document.getElementById('n-reassess').value.trim();
+  iss.notesUpdated=new Date().toISOString();
   save();render();closeModal('notes-modal');
 }
+
 function closeModal(id){document.getElementById(id).classList.remove('show');}
 document.querySelectorAll('.modal-backdrop').forEach(b=>b.addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');}));
+
 render();
 setInterval(render,60000);
 </script>
