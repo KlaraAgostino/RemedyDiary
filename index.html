@@ -17,8 +17,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .app-sub{font-size:12px;color:#666;margin-top:1px}
 .add-btn{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
 .add-btn:hover{background:#1e5c39}
-
-/* Banners */
 .due-banner{background:#fff8e7;border:0.5px solid #f0c040;border-radius:12px;padding:12px 16px;margin-bottom:0.75rem;display:flex;align-items:flex-start;gap:10px}
 .due-banner i{color:#b8860b;font-size:18px;margin-top:1px}
 .due-title{font-size:13px;font-weight:500;color:#7a5a00;margin-bottom:4px}
@@ -27,36 +25,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .reassess-banner i{color:#6a1b9a;font-size:18px;margin-top:1px}
 .reassess-title{font-size:13px;font-weight:500;color:#4a148c;margin-bottom:4px}
 .reassess-list{font-size:12px;color:#4a148c;line-height:1.9}
-
-/* View toggle */
 .view-toggle{display:flex;gap:6px;margin-bottom:1rem}
 .view-btn{flex:1;padding:7px;border:0.5px solid #ddd;border-radius:8px;background:#fff;font-size:13px;color:#666;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
 .view-btn.active{background:#2e7d50;color:#fff;border-color:#2e7d50}
-
-/* Today calendar view */
+/* Today view */
 .today-date-header{font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
-.today-member-section{margin-bottom:1rem}
+.today-member-section{margin-bottom:1.25rem}
 .today-member-name{font-size:13px;font-weight:600;color:#2e7d50;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.today-card{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
-.today-card.due-now{border-color:#f0c040;background:#fffdf0}
-.today-card.taken{border-color:#a5d6a7;background:#f1f8f1;opacity:0.7}
-.today-card.missed{border-color:#ef9a9a;background:#fff5f5}
-.today-card-info{flex:1}
+.today-card{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:11px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.today-card.all-done{border-color:#a5d6a7;background:#f1f8f1}
+.today-card.all-missed{border-color:#ef9a9a;background:#fff5f5}
+.today-card-info{flex:1;min-width:0}
 .today-remedy-name{font-size:13px;font-weight:500;color:#1a1a1a}
-.today-condition{font-size:11px;color:#888;margin-top:1px}
-.today-time{font-size:11px;color:#b8860b;margin-top:3px}
-.today-dose-btns{display:flex;gap:5px}
-.today-btn{font-size:11px;padding:4px 9px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.today-condition{font-size:11px;color:#888;margin-top:2px}
+.today-counter{font-size:12px;color:#555;margin-top:4px;display:flex;align-items:center;gap:6px}
+.counter-pip{width:18px;height:18px;border-radius:50%;border:1.5px solid #ccc;display:inline-flex;align-items:center;justify-content:center;font-size:9px;color:#ccc;flex-shrink:0}
+.counter-pip.done{background:#2e7d50;border-color:#2e7d50;color:#fff}
+.counter-pip.missed-pip{background:#fdecea;border-color:#ef9a9a;color:#c62828}
+.today-dose-btns{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.today-btn{font-size:11px;padding:5px 10px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;gap:3px;white-space:nowrap;font-weight:500}
 .today-btn.tick{background:#e8f5e9;color:#2e7d32}
+.today-btn.tick:active{background:#c8e6c9}
 .today-btn.miss{background:#fdecea;color:#c62828}
-.today-btn.undo{background:#f0f0f0;color:#555}
+.today-btn.undo{background:#f0f0f0;color:#555;font-size:10px}
+.today-btn:disabled{opacity:0.4;cursor:default}
 .today-empty{text-align:center;padding:2rem 1rem;color:#888;font-size:13px;background:#fff;border-radius:12px;border:0.5px solid #eee}
-
 /* Member cards */
 .member-card{background:#fff;border:0.5px solid #ddd;border-radius:12px;margin-bottom:1rem;overflow:hidden}
 .member-card.closed{opacity:0.6}
-.member-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
-.avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;flex-shrink:0}
+.member-header{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;user-select:none}
+.avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex-shrink:0}
 .member-meta{flex:1}
 .member-name{font-size:15px;font-weight:500;color:#1a1a1a}
 .member-tags{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
@@ -69,15 +67,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .chevron.open{transform:rotate(180deg)}
 .member-body{padding:0 16px 16px;border-top:0.5px solid #eee}
 .section-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin:14px 0 8px}
-
-/* Drag to reorder */
-.drag-handle{cursor:grab;color:#ccc;font-size:18px;padding:3px;margin-right:2px}
-.drag-handle:active{cursor:grabbing}
-.member-card.dragging{opacity:0.4;border:2px dashed #2e7d50}
-.member-card.drag-over{border-top:3px solid #2e7d50}
-
-/* Issue cards */
-.issue-card{background:#f8f8f6;border-radius:8px;padding:12px 14px;margin-bottom:10px;position:relative}
+.issue-card{background:#f8f8f6;border-radius:8px;padding:12px 14px;margin-bottom:10px}
 .issue-card.closed-case{opacity:0.55;border:0.5px dashed #bbb}
 .issue-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .issue-condition{font-size:14px;font-weight:500;color:#1a1a1a;flex:1}
@@ -86,8 +76,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .icon-btn:hover{color:#1a1a1a}
 .icon-btn.danger:hover{color:#c62828}
 .closed-badge{font-size:10px;font-weight:600;background:#eee;color:#888;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
-
-/* Remedies */
 .remedies-list{margin-top:10px;display:flex;flex-direction:column;gap:8px}
 .remedy-block{background:#fff;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 12px}
 .remedy-block-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
@@ -95,35 +83,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .remedy-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .remedy-field{font-size:11px;color:#888;line-height:1.5}
 .remedy-val{font-size:12px;color:#1a1a1a;font-weight:500}
-.next-dose{display:flex;align-items:center;gap:6px;margin-top:7px;padding:5px 9px;border-radius:7px;font-size:12px}
-.next-dose.due-now{background:#fdecea;color:#c62828}
-.next-dose.due-soon{background:#fff8e7;color:#b8860b}
-.next-dose.ok{background:#e8f5e9;color:#2e7d32}
+.remedy-notes{font-size:12px;color:#555;margin-top:6px;padding:6px 8px;background:#f8f8f6;border-radius:6px;line-height:1.5;white-space:pre-wrap}
 .dose-actions{display:flex;gap:6px;margin-top:7px;align-items:center;flex-wrap:wrap}
 .dose-btn{font-size:12px;padding:5px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:4px}
 .dose-btn.tick{background:#e8f5e9;color:#2e7d32}
-.dose-btn.tick:hover{background:#c8e6c9}
 .dose-btn.untick{background:#f5f5f5;color:#666}
-.dose-btn.untick:hover{background:#eee}
 .dose-btn.missed-btn{background:#fdecea;color:#c62828}
-.missed-label{font-size:11px;color:#c62828;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#fdecea;border-radius:7px}
 .taken-label{font-size:11px;color:#2e7d32;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#e8f5e9;border-radius:7px}
-.remedy-notes{font-size:12px;color:#555;margin-top:6px;padding:6px 8px;background:#f8f8f6;border-radius:6px;line-height:1.5;white-space:pre-wrap}
-
-/* Reassessment date */
+.missed-label{font-size:11px;color:#c62828;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#fdecea;border-radius:7px}
 .reassess-date-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding:6px 10px;background:#f0eaff;border-radius:7px;font-size:12px;color:#6a1b9a}
 .reassess-date-row.overdue{background:#fdecea;color:#c62828}
-
-/* Notes */
 .issue-notes-section{margin-top:8px}
 .notes-label{font-size:11px;color:#888;margin-bottom:4px}
 .notes-text{font-size:12px;color:#1a1a1a;background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;line-height:1.6;white-space:pre-wrap;max-height:120px;overflow-y:auto}
-
 .add-remedy-btn{background:none;border:0.5px dashed #b0d8be;border-radius:7px;padding:6px 10px;font-size:12px;color:#2e7d50;cursor:pointer;display:flex;align-items:center;gap:5px;margin-top:4px;width:100%}
 .add-remedy-btn:hover{background:#f0faf4}
 .add-issue-btn{background:none;border:0.5px dashed #bbb;border-radius:8px;padding:8px;width:100%;font-size:13px;color:#888;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px}
 .add-issue-btn:hover{background:#f0f0ec}
-
+/* Report view */
+.report-member-select{margin-bottom:1rem}
+.report-issue-card{background:#fff;border:0.5px solid #ddd;border-radius:12px;margin-bottom:1rem;overflow:hidden}
+.report-issue-header{padding:12px 16px;background:#f8f8f6;border-bottom:0.5px solid #eee}
+.report-issue-title{font-size:14px;font-weight:600;color:#1a1a1a}
+.report-issue-meta{font-size:12px;color:#888;margin-top:3px}
+.report-remedy-section{padding:12px 16px;border-bottom:0.5px solid #f0f0f0}
+.report-remedy-title{font-size:13px;font-weight:500;color:#2e7d50;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.report-stats{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.report-stat{background:#f5f5f5;border-radius:8px;padding:6px 12px;text-align:center}
+.report-stat-num{font-size:18px;font-weight:600;color:#1a1a1a}
+.report-stat-label{font-size:10px;color:#888;margin-top:1px}
+.report-stat.green .report-stat-num{color:#2e7d32}
+.report-stat.red .report-stat-num{color:#c62828}
+.dose-log-list{display:flex;flex-direction:column;gap:4px;max-height:180px;overflow-y:auto}
+.dose-log-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5}
+.dose-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dose-dot.taken{background:#2e7d32}
+.dose-dot.missed{background:#c62828}
+.report-notes-section{padding:12px 16px}
+.report-note-entry{margin-bottom:10px;padding-bottom:10px;border-bottom:0.5px solid #f0f0f0}
+.report-note-date{font-size:11px;color:#888;margin-bottom:4px}
+.report-note-text{font-size:13px;color:#1a1a1a;line-height:1.6;white-space:pre-wrap}
+.report-empty{font-size:12px;color:#aaa;font-style:italic;padding:8px 0}
 /* Modals */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center}
 .modal-backdrop.show{display:flex}
@@ -141,7 +141,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-save{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer}
 .btn-save:hover{background:#1e5c39}
 .empty-state{text-align:center;padding:2rem;color:#888;font-size:14px}
-.notes-edit{width:100%;padding:8px 10px;border:0.5px solid #ccc;border-radius:8px;font-size:13px;resize:vertical;min-height:100px;font-family:inherit;color:#1a1a1a;background:#fff;line-height:1.5}
+.notes-edit{width:100%;padding:8px 10px;border:0.5px solid #ccc;border-radius:8px;font-size:13px;resize:vertical;min-height:120px;font-family:inherit;color:#1a1a1a;background:#fff;line-height:1.5}
 .tabs{display:flex;margin-bottom:14px;border-bottom:0.5px solid #eee}
 .tab{font-size:13px;padding:6px 12px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-0.5px}
 .tab.active{color:#2e7d50;border-bottom-color:#2e7d50;font-weight:500}
@@ -169,11 +169,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="view-toggle">
     <button class="view-btn active" id="btn-today" onclick="switchView('today')"><i class="ti ti-calendar-day"></i> Today</button>
     <button class="view-btn" id="btn-all" onclick="switchView('all')"><i class="ti ti-users"></i> All records</button>
+    <button class="view-btn" id="btn-report" onclick="switchView('report')"><i class="ti ti-chart-line"></i> Reports</button>
   </div>
 
   <div id="due-banner" class="due-banner" style="display:none">
     <i class="ti ti-bell"></i>
-    <div><div class="due-title">Remedies due</div><div class="due-list" id="due-list"></div></div>
+    <div><div class="due-title">Remedies due today</div><div class="due-list" id="due-list"></div></div>
   </div>
   <div id="reassess-banner" class="reassess-banner" style="display:none">
     <i class="ti ti-calendar-event"></i>
@@ -182,6 +183,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <div id="today-view"></div>
   <div id="members-list" style="display:none"></div>
+  <div id="report-view" style="display:none"></div>
   <div id="empty-state" class="empty-state" style="display:none">
     <i class="ti ti-leaf" style="font-size:32px;display:block;margin-bottom:8px"></i>
     Add a family member to start tracking their remedies
@@ -247,8 +249,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="modal">
     <div class="modal-title" id="notes-modal-title">Notes</div>
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('progress')">Progress</div>
-      <div class="tab" onclick="switchTab('reassess')">Reassessment</div>
+      <div class="tab active" onclick="switchNotesTab('progress')">Progress</div>
+      <div class="tab" onclick="switchNotesTab('reassess')">Reassessment</div>
     </div>
     <div id="notes-tab-progress">
       <textarea class="notes-edit" id="n-progress" style="min-height:160px" placeholder="Observations, improvements, side effects…"></textarea>
@@ -270,70 +272,75 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 const COLORS=['#d4edda','#d4e4f7','#fde8d8','#f3d4f7','#d4f0f7','#f7ead4'];
 const TEXT_COLORS=['#2e7d50','#1565c0','#b35000','#6a1b9a','#00697a','#8a6500'];
 let members=JSON.parse(localStorage.getItem('rm_members')||'[]');
-let editMemberId=null,editIssueId=null,currentMemberId=null,notesMemberId=null,notesIssueId=null,activeTab='progress';
+let editMemberId=null,editIssueId=null,currentMemberId=null,notesMemberId=null,notesIssueId=null;
 let remedyBlocks=[];
 let currentView='today';
-let dragSrcIdx=null;
+let reportMemberId=null;
 
 function uid(){return Math.random().toString(36).slice(2,9)}
 function save(){localStorage.setItem('rm_members',JSON.stringify(members))}
 function initials(name){return name.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join('')}
-function freqLabel(h){if(h===720)return'Monthly';if(h===168)return'Weekly';if(h===48)return'Every 2 days';if(h===24)return'Daily';return`Every ${h}h`}
+
+// Frequency helpers — daily doses per day
+function dosesPerDay(freqHours){
+  if(freqHours<=0)return 1;
+  return Math.round(24/freqHours);
+}
+function isMultiDose(freqHours){return freqHours<24;}
+
+function freqLabel(h){
+  if(h===0.5)return'Every 30 min';
+  if(h<1)return`Every ${Math.round(h*60)}min`;
+  if(h===8)return'3x daily';
+  if(h===12)return'2x daily';
+  if(h===24)return'Once daily';
+  if(h===48)return'Every 2 days';
+  if(h===168)return'Weekly';
+  if(h===720)return'Monthly';
+  if(h<24)return`${Math.round(24/h)}x daily`;
+  return`Every ${h}h`;
+}
 
 function defaultStart(){
   const d=new Date();d.setHours(8,0,0,0);return d.toISOString().slice(0,16);
 }
 
-function nextDoseMs(r){
-  if(!r.startTime)return null;
-  const iv=(r.freqHours||12)*3600000,start=new Date(r.startTime).getTime(),now=Date.now(),el=now-start;
-  if(el<0)return start;
-  return start+(Math.floor(el/iv)+1)*iv;
+// ---- Today logic: day-based tracking ----
+function todayKey(){
+  const d=new Date();
+  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-function doseStatus(r){
-  // check taken
-  if(r.takenAt){
-    const n=nextDoseMs(r);
-    const windowStart=n?(n-(r.freqHours||12)*3600000):0;
-    if(new Date(r.takenAt).getTime()>=windowStart) return'taken';
+// Get today's record for a remedy (doses taken/missed count for today)
+function getTodayRecord(r){
+  const key=todayKey();
+  if(!r.dailyLog)r.dailyLog={};
+  if(!r.dailyLog[key])r.dailyLog[key]={taken:0,missed:0};
+  return r.dailyLog[key];
+}
+
+function getDosesNeededToday(r){
+  // For frequencies >= 24h: check if today is a dose day
+  if(r.freqHours>=24){
+    if(!r.startTime)return 0;
+    const start=new Date(r.startTime);
+    start.setHours(0,0,0,0);
+    const today=new Date();today.setHours(0,0,0,0);
+    const daysDiff=Math.round((today-start)/(86400000));
+    const intervalDays=r.freqHours/24;
+    return daysDiff>=0 && daysDiff%intervalDays===0 ? 1 : 0;
   }
-  // check missed
-  if(r.missedAt){
-    const n=nextDoseMs(r);
-    const windowStart=n?(n-(r.freqHours||12)*3600000):0;
-    if(new Date(r.missedAt).getTime()>=windowStart) return'missed';
-  }
-  const n=nextDoseMs(r);if(!n)return null;
-  const diff=n-Date.now(),warn=r.freqHours>=720?86400000:3600000;
-  return diff<=0?'due-now':diff<warn?'due-soon':'ok';
+  // For intraday: doses per day
+  return dosesPerDay(r.freqHours);
 }
 
-function formatTime(ms){
-  const diff=ms-Date.now();if(diff<=0)return'Due now';
-  const d=new Date(ms),days=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
-  if(days>=1)return`Next: ${d.toLocaleDateString([],{month:'short',day:'numeric'})} at ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
-  if(h<1)return`Due in ${m}m`;
-  return`Due in ${h}h ${m}m — ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`;
-}
-
-function reassessStatus(dateStr){
-  if(!dateStr)return null;
-  const d=new Date(dateStr);d.setHours(23,59,59,999);
-  const diff=d.getTime()-Date.now();
-  if(diff<0)return'overdue';
-  if(diff<86400000*3)return'soon';
-  return'ok';
-}
-
-// ---- View switching ----
-function switchView(v){
-  currentView=v;
-  document.getElementById('btn-today').classList.toggle('active',v==='today');
-  document.getElementById('btn-all').classList.toggle('active',v==='all');
-  document.getElementById('today-view').style.display=v==='today'?'':'none';
-  document.getElementById('members-list').style.display=v==='all'?'':'none';
-  render();
+function todayStatus(r){
+  const needed=getDosesNeededToday(r);
+  if(needed===0)return'not-today';
+  const rec=getTodayRecord(r);
+  if(rec.taken>=needed)return'all-done';
+  if(rec.missed>0 && rec.taken+rec.missed>=needed)return'all-missed';
+  return'pending';
 }
 
 // ---- Banners ----
@@ -344,8 +351,8 @@ function renderBanners(){
     (m.issues||[]).forEach(iss=>{
       if(iss.closed)return;
       (iss.remedies||[]).forEach(r=>{
-        const s=doseStatus(r);
-        if(s==='due-now'||s==='due-soon') due.push(`<strong>${m.name}</strong> — ${r.name||'Remedy'} for ${iss.condition}`);
+        const st=todayStatus(r);
+        if(st==='pending') due.push(`<strong>${m.name}</strong> — ${r.name||'Remedy'} for ${iss.condition}`);
       });
     });
   });
@@ -370,16 +377,36 @@ function renderBanners(){
   else rb.style.display='none';
 }
 
+function reassessStatus(dateStr){
+  if(!dateStr)return null;
+  const d=new Date(dateStr);d.setHours(23,59,59,999);
+  const diff=d.getTime()-Date.now();
+  if(diff<0)return'overdue';
+  if(diff<86400000*3)return'soon';
+  return'ok';
+}
+
+// ---- View switching ----
+function switchView(v){
+  currentView=v;
+  ['today','all','report'].forEach(n=>{
+    document.getElementById(`btn-${n}`).classList.toggle('active',v===n);
+  });
+  document.getElementById('today-view').style.display=v==='today'?'':'none';
+  document.getElementById('members-list').style.display=v==='all'?'':'none';
+  document.getElementById('report-view').style.display=v==='report'?'':'none';
+  render();
+}
+
 // ---- Today view ----
 function renderToday(){
   const el=document.getElementById('today-view');
   const today=new Date();
   const dateStr=today.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
   let html=`<div class="today-date-header"><i class="ti ti-calendar-day" style="color:#2e7d50"></i>${dateStr}</div>`;
 
   const activeMembers=members.filter(m=>!m.closed);
-  if(!activeMembers.length){
+  if(!members.length){
     el.innerHTML=html+`<div class="today-empty"><i class="ti ti-leaf" style="font-size:28px;display:block;margin-bottom:8px;color:#ccc"></i>Add a family member to get started</div>`;
     return;
   }
@@ -393,48 +420,61 @@ function renderToday(){
     const remedyItems=[];
     openIssues.forEach(iss=>{
       (iss.remedies||[]).forEach(r=>{
-        const st=doseStatus(r);
-        const nm=nextDoseMs(r);
-        remedyItems.push({iss,r,st,nm});
+        const st=todayStatus(r);
+        if(st==='not-today')return; // only show if due today
+        remedyItems.push({iss,r,st});
       });
     });
     if(!remedyItems.length)return;
     anyItems=true;
 
-    // sort: due-now first, then due-soon, then ok, then taken/missed
-    const order={['due-now']:0,['due-soon']:1,ok:2,taken:3,missed:4};
-    remedyItems.sort((a,b)=>(order[a.st]||2)-(order[b.st]||2));
+    // Sort: pending first, then done, then missed
+    const order={pending:0,'all-done':1,'all-missed':2};
+    remedyItems.sort((a,b)=>(order[a.st]||0)-(order[b.st]||0));
 
     html+=`<div class="today-member-section">
       <div class="today-member-name">
-        <span style="width:26px;height:26px;border-radius:50%;background:${COLORS[ci]};color:${TEXT_COLORS[ci]};display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600">${initials(m.name)}</span>
+        <span style="width:26px;height:26px;border-radius:50%;background:${COLORS[ci]};color:${TEXT_COLORS[ci]};display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0">${initials(m.name)}</span>
         ${m.name}
       </div>`;
 
-    remedyItems.forEach(({iss,r,st,nm})=>{
-      let cardClass='today-card';
-      if(st==='due-now'||st==='due-soon') cardClass+=' due-now';
-      else if(st==='taken') cardClass+=' taken';
-      else if(st==='missed') cardClass+=' missed';
+    remedyItems.forEach(({iss,r,st})=>{
+      const needed=getDosesNeededToday(r);
+      const rec=getTodayRecord(r);
+      const taken=rec.taken||0;
+      const missed=rec.missed||0;
 
-      let timeStr='';
-      if(st==='taken') timeStr=`<div class="today-time" style="color:#2e7d32">✓ Taken at ${new Date(r.takenAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>`;
-      else if(st==='missed') timeStr=`<div class="today-time" style="color:#c62828">✗ Missed</div>`;
-      else if(nm) timeStr=`<div class="today-time">${formatTime(nm)}</div>`;
+      let cardClass='today-card';
+      if(st==='all-done') cardClass+=' all-done';
+      else if(st==='all-missed') cardClass+=' all-missed';
+
+      // Pips showing taken/missed/remaining
+      let pipsHtml='';
+      for(let i=0;i<needed;i++){
+        if(i<taken) pipsHtml+=`<span class="counter-pip done" title="Taken"><i class="ti ti-check" style="font-size:8px"></i></span>`;
+        else if(i<taken+missed) pipsHtml+=`<span class="counter-pip missed-pip" title="Missed">✕</span>`;
+        else pipsHtml+=`<span class="counter-pip" title="Pending"></span>`;
+      }
+
+      const remaining=needed-taken-missed;
+      let statusText='';
+      if(st==='all-done') statusText=`<span style="color:#2e7d32;font-size:11px">✓ All done for today</span>`;
+      else if(st==='all-missed') statusText=`<span style="color:#c62828;font-size:11px">✕ Marked missed</span>`;
+      else if(needed>1) statusText=`<span style="color:#555;font-size:11px">${taken}/${needed} taken today</span>`;
 
       let btns='';
-      if(st==='taken'||st==='missed'){
-        btns=`<button class="today-btn undo" onclick="undoDose('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button>`;
+      if(st==='pending'){
+        btns=`<button class="today-btn tick" onclick="todayTaken('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-check"></i> Taken</button>
+              <button class="today-btn miss" onclick="todayMissed('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-x"></i> Missed</button>`;
       } else {
-        btns=`<button class="today-btn tick" onclick="markTaken('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-check"></i> Taken</button>
-              <button class="today-btn miss" onclick="markMissed('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-x"></i> Missed</button>`;
+        btns=`<button class="today-btn undo" onclick="todayUndo('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button>`;
       }
 
       html+=`<div class="${cardClass}">
         <div class="today-card-info">
-          <div class="today-remedy-name">${r.name||'Remedy'} <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''}</span></div>
+          <div class="today-remedy-name">${r.name||'Remedy'} <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r.freqHours)}</span></div>
           <div class="today-condition">${iss.condition}</div>
-          ${timeStr}
+          ${needed>1?`<div class="today-counter" style="margin-top:5px">${pipsHtml} ${statusText}</div>`:`<div style="margin-top:3px">${statusText}</div>`}
         </div>
         <div class="today-dose-btns">${btns}</div>
       </div>`;
@@ -444,10 +484,63 @@ function renderToday(){
   });
 
   if(!anyItems){
-    html+=`<div class="today-empty"><i class="ti ti-circle-check" style="font-size:28px;display:block;margin-bottom:8px;color:#a5d6a7"></i>No active remedies today.<br>Add a health issue to get started.</div>`;
+    html+=`<div class="today-empty"><i class="ti ti-circle-check" style="font-size:28px;display:block;margin-bottom:8px;color:#a5d6a7"></i>No remedies scheduled for today.</div>`;
   }
-
   el.innerHTML=html;
+}
+
+// Today dose actions — increment/decrement counters
+function todayTaken(mid,iid,rid){
+  const m=members.find(x=>x.id===mid);
+  const iss=(m&&m.issues||[]).find(i=>i.id===iid);
+  const r=(iss&&iss.remedies||[]).find(r=>r.id===rid);
+  if(!r)return;
+  if(!r.dailyLog)r.dailyLog={};
+  const key=todayKey();
+  if(!r.dailyLog[key])r.dailyLog[key]={taken:0,missed:0};
+  const needed=getDosesNeededToday(r);
+  if(r.dailyLog[key].taken+r.dailyLog[key].missed<needed){
+    r.dailyLog[key].taken++;
+    // log event for reports
+    logDoseEvent(r,'taken');
+  }
+  save();render();
+}
+function todayMissed(mid,iid,rid){
+  const m=members.find(x=>x.id===mid);
+  const iss=(m&&m.issues||[]).find(i=>i.id===iid);
+  const r=(iss&&iss.remedies||[]).find(r=>r.id===rid);
+  if(!r)return;
+  if(!r.dailyLog)r.dailyLog={};
+  const key=todayKey();
+  if(!r.dailyLog[key])r.dailyLog[key]={taken:0,missed:0};
+  const needed=getDosesNeededToday(r);
+  if(r.dailyLog[key].taken+r.dailyLog[key].missed<needed){
+    r.dailyLog[key].missed++;
+    logDoseEvent(r,'missed');
+  }
+  save();render();
+}
+function todayUndo(mid,iid,rid){
+  const m=members.find(x=>x.id===mid);
+  const iss=(m&&m.issues||[]).find(i=>i.id===iid);
+  const r=(iss&&iss.remedies||[]).find(r=>r.id===rid);
+  if(!r||!r.dailyLog)return;
+  const key=todayKey();
+  if(!r.dailyLog[key])return;
+  // remove last event of today
+  if(r.dailyLog[key].missed>0) r.dailyLog[key].missed--;
+  else if(r.dailyLog[key].taken>0) r.dailyLog[key].taken--;
+  // undo last log event
+  if(r.doseLog&&r.doseLog.length){
+    const last=r.doseLog[r.doseLog.length-1];
+    if(last&&last.date===todayKey()) r.doseLog.pop();
+  }
+  save();render();
+}
+function logDoseEvent(r,type){
+  if(!r.doseLog)r.doseLog=[];
+  r.doseLog.push({date:todayKey(),type,ts:new Date().toISOString()});
 }
 
 // ---- All records view ----
@@ -458,15 +551,13 @@ function renderAll(){
   es.style.display='none';
 
   const active=members.filter(m=>!m.closed),closed=members.filter(m=>m.closed);
-  const ordered=[...active,...closed];
-
-  el.innerHTML=ordered.map((m,mi)=>{
+  el.innerHTML=[...active,...closed].map((m,mi)=>{
     const ci=mi%COLORS.length;
     const openIssues=(m.issues||[]).filter(i=>!i.closed);
-    const dueCount=openIssues.reduce((a,i)=>a+(i.remedies||[]).filter(r=>doseStatus(r)==='due-now').length,0);
+    const pendingCount=openIssues.reduce((a,i)=>a+(i.remedies||[]).filter(r=>todayStatus(r)==='pending').length,0);
     const tags=[
       openIssues.length?`<span class="tag tag-blue">${openIssues.length} issue${openIssues.length!==1?'s':''}</span>`:'',
-      dueCount?`<span class="tag tag-red">${dueCount} due now</span>`:'',
+      pendingCount?`<span class="tag tag-red">${pendingCount} due today</span>`:'',
       m.closed?`<span class="tag tag-grey">Closed</span>`:''
     ].filter(Boolean).join('');
 
@@ -479,22 +570,14 @@ function renderAll(){
       </div>`:'';
 
       const remediesHtml=(iss.remedies||[]).map(r=>{
-        const st=doseStatus(r),nm=nextDoseMs(r);
-        let doseRow='',actionRow='';
-        if(st==='taken'){
-          doseRow=`<div class="taken-label"><i class="ti ti-circle-check"></i> Taken at ${new Date(r.takenAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>`;
-          actionRow=`<div class="dose-actions"><button class="dose-btn untick" onclick="undoDose('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button></div>`;
-        } else if(st==='missed'){
-          doseRow=`<div class="missed-label"><i class="ti ti-alert-circle"></i> Missed dose</div>`;
-          actionRow=`<div class="dose-actions"><button class="dose-btn untick" onclick="undoDose('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button></div>`;
-        } else {
-          if(nm) doseRow=`<div class="next-dose ${st||'ok'}"><i class="ti ${st==='due-now'?'ti-alarm':'ti-clock'}"></i>${formatTime(nm)}</div>`;
-          if(!iss.closed){
-            actionRow=`<div class="dose-actions">
-              <button class="dose-btn tick" onclick="markTaken('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-check"></i> Taken</button>
-              <button class="dose-btn missed-btn" onclick="markMissed('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-x"></i> Missed</button>
-            </div>`;
-          }
+        const st=todayStatus(r);
+        const rec=getTodayRecord(r);
+        const needed=getDosesNeededToday(r);
+        let statusRow='';
+        if(needed>0){
+          if(st==='all-done') statusRow=`<div class="taken-label"><i class="ti ti-circle-check"></i> All done today (${rec.taken}/${needed})</div>`;
+          else if(st==='all-missed') statusRow=`<div class="missed-label"><i class="ti ti-alert-circle"></i> Missed today</div>`;
+          else if(st==='pending') statusRow=`<div style="font-size:11px;color:#b8860b;margin-top:4px"><i class="ti ti-clock"></i> ${needed>1?`${rec.taken}/${needed} taken today`:'Due today'}</div>`;
         }
         return`<div class="remedy-block">
           <div class="remedy-block-header">
@@ -507,7 +590,7 @@ function renderAll(){
             <div class="remedy-field">Started<br><span class="remedy-val">${r.startTime?new Date(r.startTime).toLocaleDateString([],{month:'short',day:'numeric'}):'—'}</span></div>
           </div>
           ${r.notes?`<div class="remedy-notes">${r.notes}</div>`:''}
-          ${doseRow}${actionRow}
+          ${statusRow}
         </div>`;
       }).join('');
 
@@ -533,10 +616,8 @@ function renderAll(){
     }).join('');
 
     const mIdx=members.indexOf(m);
-    return`<div class="member-card${m.closed?' closed':''}" id="card-${m.id}" draggable="true"
-        ondragstart="dragStart(event,${mIdx})" ondragover="dragOver(event,${mIdx})" ondrop="dragDrop(event,${mIdx})" ondragleave="dragLeave(event)" ondragend="dragEnd(event)">
+    return`<div class="member-card${m.closed?' closed':''}" id="card-${m.id}">
       <div class="member-header" onclick="toggleMember('${m.id}')">
-        <i class="ti ti-grip-vertical drag-handle" onclick="event.stopPropagation()" title="Drag to reorder"></i>
         <div class="avatar" style="background:${COLORS[ci]};color:${TEXT_COLORS[ci]}">${initials(m.name)}</div>
         <div class="member-meta">
           <div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
@@ -554,24 +635,121 @@ function renderAll(){
   }).join('');
 }
 
+// ---- Reports view ----
+function renderReport(){
+  const el=document.getElementById('report-view');
+  if(!members.length){el.innerHTML=`<div class="today-empty">No family members yet. Add someone to get started.</div>`;return;}
+
+  // Member selector
+  const mOpts=members.map(m=>`<option value="${m.id}" ${m.id===reportMemberId?'selected':''}>${m.name}</option>`).join('');
+  let html=`<div class="report-member-select">
+    <select class="form-input" onchange="selectReportMember(this.value)">
+      <option value="">— select a family member —</option>${mOpts}
+    </select>
+  </div>`;
+
+  if(!reportMemberId){el.innerHTML=html;return;}
+  const m=members.find(x=>x.id===reportMemberId);
+  if(!m){el.innerHTML=html;return;}
+
+  const issues=m.issues||[];
+  if(!issues.length){el.innerHTML=html+`<div class="today-empty">No health issues recorded for ${m.name} yet.</div>`;return;}
+
+  issues.forEach(iss=>{
+    html+=`<div class="report-issue-card">
+      <div class="report-issue-header">
+        <div class="report-issue-title">${iss.condition}${iss.closed?'<span class="closed-badge">Closed</span>':''}</div>
+        ${iss.reassessDate?`<div class="report-issue-meta">Reassessment: ${new Date(iss.reassessDate).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}</div>`:''}
+      </div>`;
+
+    // Per remedy stats
+    (iss.remedies||[]).forEach(r=>{
+      const log=r.doseLog||[];
+      const totalTaken=log.filter(e=>e.type==='taken').length;
+      const totalMissed=log.filter(e=>e.type==='missed').length;
+      const total=totalTaken+totalMissed;
+      const pct=total>0?Math.round(totalTaken/total*100):null;
+
+      // Recent 14 days of log
+      const recentDays=14;
+      const dayKeys=[];
+      for(let i=recentDays-1;i>=0;i--){
+        const d=new Date();d.setDate(d.getDate()-i);
+        dayKeys.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`);
+      }
+
+      let doseLogHtml='';
+      if(log.length){
+        // Group by date
+        const byDate={};
+        log.forEach(e=>{
+          if(!byDate[e.date])byDate[e.date]={taken:0,missed:0};
+          byDate[e.date][e.type]++;
+        });
+        const sortedDates=Object.keys(byDate).sort().reverse().slice(0,30);
+        doseLogHtml=sortedDates.map(dk=>{
+          const rec=byDate[dk];
+          const d=new Date(dk+'T12:00:00');
+          const dateStr=d.toLocaleDateString([],{weekday:'short',day:'numeric',month:'short'});
+          const parts=[];
+          if(rec.taken>0) parts.push(`<span class="dose-dot taken" style="display:inline-block;margin-right:2px"></span>${rec.taken} taken`);
+          if(rec.missed>0) parts.push(`<span class="dose-dot missed" style="display:inline-block;margin-right:2px"></span>${rec.missed} missed`);
+          return`<div class="dose-log-item"><span style="min-width:90px;color:#555">${dateStr}</span>${parts.join(' &nbsp; ')}</div>`;
+        }).join('');
+      } else {
+        doseLogHtml=`<div class="report-empty">No doses recorded yet.</div>`;
+      }
+
+      html+=`<div class="report-remedy-section">
+        <div class="report-remedy-title"><i class="ti ti-pill"></i>${r.name||'Remedy'} <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r.freqHours)}</span></div>
+        <div class="report-stats">
+          <div class="report-stat green"><div class="report-stat-num">${totalTaken}</div><div class="report-stat-label">Taken</div></div>
+          <div class="report-stat red"><div class="report-stat-num">${totalMissed}</div><div class="report-stat-label">Missed</div></div>
+          ${pct!==null?`<div class="report-stat"><div class="report-stat-num">${pct}%</div><div class="report-stat-label">Adherence</div></div>`:''}
+          ${r.startTime?`<div class="report-stat"><div class="report-stat-num">${Math.round((Date.now()-new Date(r.startTime).getTime())/86400000)}</div><div class="report-stat-label">Days on</div></div>`:''}
+        </div>
+        <div style="font-size:11px;color:#888;margin-bottom:4px">Dose history (most recent first)</div>
+        <div class="dose-log-list">${doseLogHtml}</div>
+      </div>`;
+    });
+
+    // Notes history
+    html+=`<div class="report-notes-section">
+      <div style="font-size:12px;font-weight:500;color:#555;margin-bottom:8px">Progress & reassessment notes</div>`;
+
+    if(iss.progress||iss.reassessNotes){
+      if(iss.progress){
+        html+=`<div class="report-note-entry">
+          <div class="report-note-date">Progress notes${iss.notesUpdated?' · Updated '+new Date(iss.notesUpdated).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'}):''}</div>
+          <div class="report-note-text">${iss.progress}</div>
+        </div>`;
+      }
+      if(iss.reassessNotes){
+        html+=`<div class="report-note-entry">
+          <div class="report-note-date">Reassessment notes</div>
+          <div class="report-note-text">${iss.reassessNotes}</div>
+        </div>`;
+      }
+    } else {
+      html+=`<div class="report-empty">No notes recorded yet. Use the notes button in All Records to add observations.</div>`;
+    }
+
+    html+=`</div></div>`;
+  });
+
+  el.innerHTML=html;
+}
+
+function selectReportMember(id){
+  reportMemberId=id;
+  renderReport();
+}
+
 function render(){
   renderBanners();
   if(currentView==='today') renderToday();
-  else renderAll();
-}
-
-// ---- Drag to reorder ----
-function dragStart(e,idx){dragSrcIdx=idx;e.currentTarget.classList.add('dragging');}
-function dragOver(e,idx){e.preventDefault();if(idx!==dragSrcIdx)e.currentTarget.classList.add('drag-over');}
-function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
-function dragEnd(e){e.currentTarget.classList.remove('dragging');document.querySelectorAll('.member-card').forEach(c=>c.classList.remove('drag-over'));}
-function dragDrop(e,toIdx){
-  e.preventDefault();
-  if(dragSrcIdx===null||dragSrcIdx===toIdx)return;
-  const moved=members.splice(dragSrcIdx,1)[0];
-  members.splice(toIdx,0,moved);
-  dragSrcIdx=null;
-  save();render();
+  else if(currentView==='all') renderAll();
+  else renderReport();
 }
 
 function toggleMember(id){const m=members.find(x=>x.id===id);if(m)m.open=!m.open;save();render();}
@@ -615,12 +793,12 @@ function buildRemedyBlockHTML(rb,idx){
         <label class="form-label">Frequency</label>
         <select class="form-input" id="rb-freq-${rb.id}">
           <option value="6" ${rb.freqHours==6?'selected':''}>Every 6 hours</option>
-          <option value="8" ${rb.freqHours==8?'selected':''}>Every 8 hours</option>
-          <option value="12" ${!rb.freqHours||rb.freqHours==12?'selected':''}>Every 12 hours</option>
+          <option value="8" ${rb.freqHours==8?'selected':''}>3x daily</option>
+          <option value="12" ${!rb.freqHours||rb.freqHours==12?'selected':''}>2x daily</option>
           <option value="24" ${rb.freqHours==24?'selected':''}>Once daily</option>
           <option value="48" ${rb.freqHours==48?'selected':''}>Every 2 days</option>
-          <option value="168" ${rb.freqHours==168?'selected':''}>Once a week</option>
-          <option value="720" ${rb.freqHours==720?'selected':''}>Once a month</option>
+          <option value="168" ${rb.freqHours==168?'selected':''}>Weekly</option>
+          <option value="720" ${rb.freqHours==720?'selected':''}>Monthly</option>
           <option value="custom" ${isCustom?'selected':''}>Custom…</option>
         </select>
       </div>
@@ -628,7 +806,7 @@ function buildRemedyBlockHTML(rb,idx){
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Custom interval (hours)</label>
-        <input class="form-input" id="rb-custom-${rb.id}" type="number" min="1" placeholder="e.g. 4" value="${isCustom?rb.freqHours:''}" />
+        <input class="form-input" id="rb-custom-${rb.id}" type="number" min="1" step="0.5" placeholder="e.g. 4" value="${isCustom?rb.freqHours:''}" />
       </div>
       <div class="form-group">
         <label class="form-label">Start date & time</label>
@@ -646,18 +824,18 @@ function refreshRemedyBlocks(){
   document.getElementById('remedy-blocks').innerHTML=remedyBlocks.map((rb,i)=>buildRemedyBlockHTML(rb,i)).join('');
 }
 function addRemedyBlock(){
-  remedyBlocks.push({id:uid(),name:'',dosage:'',freqHours:12,startTime:defaultStart(),notes:''});
+  remedyBlocks.push({id:uid(),name:'',dosage:'',freqHours:24,startTime:defaultStart(),notes:''});
   refreshRemedyBlocks();
 }
 function removeRemedyBlock(id){
-  remedyBlocks=remedyBlocks.filter(rb=>rb.id!==id);
-  refreshRemedyBlocks();
+  remedyBlocks=remedyBlocks.filter(rb=>rb.id!==id);refreshRemedyBlocks();
 }
 function collectRemedyBlocks(){
   return remedyBlocks.map(rb=>{
     const freqSel=document.getElementById(`rb-freq-${rb.id}`).value;
-    const freqHours=freqSel==='custom'?parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||12:parseFloat(freqSel);
+    const freqHours=freqSel==='custom'?parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||24:parseFloat(freqSel);
     const startVal=document.getElementById(`rb-start-${rb.id}`).value;
+    const existing=members.flatMap(m=>m.issues||[]).flatMap(i=>i.remedies||[]).find(r=>r.id===rb.id);
     return{
       id:rb.id,
       name:document.getElementById(`rb-name-${rb.id}`).value.trim(),
@@ -665,8 +843,8 @@ function collectRemedyBlocks(){
       freqHours,
       startTime:startVal?new Date(startVal).toISOString():null,
       notes:document.getElementById(`rb-notes-${rb.id}`).value.trim(),
-      takenAt:rb.takenAt||null,
-      missedAt:rb.missedAt||null
+      dailyLog:existing?existing.dailyLog||{}:{},
+      doseLog:existing?existing.doseLog||[]:[]
     };
   });
 }
@@ -687,7 +865,7 @@ function openAddIssue(memberId){
   document.getElementById('i-reassess-date').value='';
   document.getElementById('i-progress').value='';
   document.getElementById('i-reassess-notes').value='';
-  remedyBlocks=[{id:uid(),name:'',dosage:'',freqHours:12,startTime:defaultStart(),notes:''}];
+  remedyBlocks=[{id:uid(),name:'',dosage:'',freqHours:24,startTime:defaultStart(),notes:'',dailyLog:{},doseLog:[]}];
   refreshRemedyBlocks();
   document.getElementById('issue-modal').classList.add('show');
 }
@@ -723,8 +901,7 @@ function saveIssue(){
   save();render();closeModal('issue-modal');
 }
 function deleteIssue(memberId,issueId){
-  const m=members.find(x=>x.id===memberId);
-  if(!m)return;
+  const m=members.find(x=>x.id===memberId);if(!m)return;
   if(!confirm('Delete this health issue and all its remedies?'))return;
   m.issues=(m.issues||[]).filter(i=>i.id!==issueId);
   save();render();
@@ -732,42 +909,17 @@ function deleteIssue(memberId,issueId){
 function closeCase(memberId,issueId){
   const m=members.find(x=>x.id===memberId);
   const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
-  if(iss)iss.closed=true;
-  save();render();
+  if(iss)iss.closed=true;save();render();
 }
 function reopenCase(memberId,issueId){
   const m=members.find(x=>x.id===memberId);
   const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
-  if(iss)iss.closed=false;
-  save();render();
+  if(iss)iss.closed=false;save();render();
 }
 function deleteRemedy(memberId,issueId,remedyId){
   const m=members.find(x=>x.id===memberId);
   const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
   if(iss)iss.remedies=(iss.remedies||[]).filter(r=>r.id!==remedyId);
-  save();render();
-}
-
-// ---- Dose tracking ----
-function markTaken(memberId,issueId,remedyId){
-  const m=members.find(x=>x.id===memberId);
-  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
-  const r=(iss&&iss.remedies||[]).find(r=>r.id===remedyId);
-  if(r){r.takenAt=new Date().toISOString();r.missedAt=null;}
-  save();render();
-}
-function markMissed(memberId,issueId,remedyId){
-  const m=members.find(x=>x.id===memberId);
-  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
-  const r=(iss&&iss.remedies||[]).find(r=>r.id===remedyId);
-  if(r){r.missedAt=new Date().toISOString();r.takenAt=null;}
-  save();render();
-}
-function undoDose(memberId,issueId,remedyId){
-  const m=members.find(x=>x.id===memberId);
-  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
-  const r=(iss&&iss.remedies||[]).find(r=>r.id===remedyId);
-  if(r){r.takenAt=null;r.missedAt=null;}
   save();render();
 }
 
@@ -780,11 +932,10 @@ function openNotes(memberId,issueId){
   document.getElementById('n-progress').value=iss.progress||'';
   document.getElementById('n-reassess').value=iss.reassessNotes||'';
   document.getElementById('notes-last-updated').textContent=iss.notesUpdated?new Date(iss.notesUpdated).toLocaleString():'Never';
-  switchTab('progress');
+  switchNotesTab('progress');
   document.getElementById('notes-modal').classList.add('show');
 }
-function switchTab(tab){
-  activeTab=tab;
+function switchNotesTab(tab){
   document.querySelectorAll('.tabs .tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='progress'?0:1)));
   document.getElementById('notes-tab-progress').style.display=tab==='progress'?'':'none';
   document.getElementById('notes-tab-reassess').style.display=tab==='reassess'?'':'none';
