@@ -24,8 +24,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .view-toggle{display:flex;gap:6px;margin-bottom:1rem}
 .view-btn{flex:1;padding:7px;border:0.5px solid #ddd;border-radius:8px;background:#fff;font-size:13px;color:#666;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
 .view-btn.active{background:#2e7d50;color:#fff;border-color:#2e7d50}
+/* Day nav */
+.day-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:8px}
+.day-nav-btn{background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px;color:#555}
+.day-nav-btn:hover{background:#f0f0ec}
+.day-nav-btn:disabled{opacity:0.35;cursor:default}
+.day-nav-label{font-size:14px;font-weight:500;flex:1;text-align:center}
 /* Today */
-.today-date-header{font-size:15px;font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
 .today-member-section{margin-bottom:1.25rem}
 .today-member-name{font-size:13px;font-weight:600;color:#2e7d50;margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .today-card{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:11px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px}
@@ -58,16 +63,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .chevron.open{transform:rotate(180deg)}
 .member-body{padding:0 16px 16px;border-top:0.5px solid #eee}
 .section-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin:14px 0 8px}
-.issue-card{background:#f8f8f6;border-radius:8px;padding:12px 14px;margin-bottom:10px}
-.issue-card.closed-case{opacity:0.55;border:0.5px dashed #bbb}
-.issue-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.issue-condition{font-size:14px;font-weight:500;flex:1}
-.issue-actions{display:flex;gap:4px;flex-shrink:0}
-.icon-btn{background:none;border:none;cursor:pointer;color:#888;font-size:16px;padding:3px;border-radius:4px}
-.icon-btn:hover{color:#1a1a1a}
-.icon-btn.danger:hover{color:#c62828}
-.closed-badge{font-size:10px;font-weight:600;background:#eee;color:#888;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
-.remedies-list{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+/* Issue list — collapsed by default */
+.issue-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;background:#f8f8f6;margin-bottom:6px;cursor:pointer;user-select:none;gap:8px}
+.issue-row:hover{background:#f0f0ec}
+.issue-row-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.issue-row-name{font-size:13px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.issue-row-tags{display:flex;gap:4px;flex-shrink:0}
+.issue-row-actions{display:flex;gap:2px;flex-shrink:0}
+.issue-expanded{background:#f8f8f6;border-radius:8px;margin-bottom:6px;overflow:hidden}
+.issue-expanded-header{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;border-bottom:0.5px solid #eee;background:#f0ede8}
+.issue-expanded-title{font-size:13px;font-weight:500}
+.issue-expanded-body{padding:12px}
+/* Archived section */
+.archived-toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:#888;cursor:pointer;padding:6px 0;margin-top:6px;user-select:none}
+.archived-toggle:hover{color:#555}
+.archived-section{margin-top:8px;padding:10px 12px;background:#f5f5f5;border-radius:8px;border:0.5px dashed #ccc}
+.archived-issue-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid #eee;font-size:13px;color:#888}
+.archived-issue-row:last-child{border-bottom:none}
+/* Remedy blocks in records */
+.remedies-list{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
 .remedy-block{background:#fff;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 12px}
 .remedy-block.stopped{opacity:0.45;border-style:dashed}
 .remedy-block-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
@@ -82,12 +96,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .missed-label{font-size:11px;color:#c62828;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#fdecea;border-radius:7px}
 .reassess-date-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding:6px 10px;background:#f0eaff;border-radius:7px;font-size:12px;color:#6a1b9a}
 .reassess-date-row.overdue{background:#fdecea;color:#c62828}
-.issue-notes-section{margin-top:8px}
-.notes-label{font-size:11px;color:#888;margin-bottom:4px}
 .notes-text{font-size:12px;background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;line-height:1.6;white-space:pre-wrap;max-height:120px;overflow-y:auto}
 .add-remedy-btn{background:none;border:0.5px dashed #b0d8be;border-radius:7px;padding:6px 10px;font-size:12px;color:#2e7d50;cursor:pointer;display:flex;align-items:center;gap:5px;margin-top:4px;width:100%}
 .add-remedy-btn:hover{background:#f0faf4}
-.add-issue-btn{background:none;border:0.5px dashed #bbb;border-radius:8px;padding:8px;width:100%;font-size:13px;color:#888;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px}
+.add-issue-btn{background:none;border:0.5px dashed #bbb;border-radius:8px;padding:8px;width:100%;font-size:13px;color:#888;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
 .add-issue-btn:hover{background:#f0f0ec}
 /* Reports */
 .report-member-select{margin-bottom:0.75rem}
@@ -96,7 +108,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .report-issue-title{font-size:14px;font-weight:600}
 .report-issue-meta{font-size:12px;color:#888;margin-top:3px}
 .report-remedy-section{padding:12px 16px;border-bottom:0.5px solid #f0f0f0}
-.report-remedy-title{font-size:13px;font-weight:500;color:#2e7d50;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.report-remedy-title{font-size:13px;font-weight:500;color:#2e7d50;margin-bottom:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .report-stats{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .report-stat{background:#f5f5f5;border-radius:8px;padding:6px 12px;text-align:center}
 .report-stat-num{font-size:18px;font-weight:600}
@@ -105,13 +117,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .report-stat.red .report-stat-num{color:#c62828}
 .dose-log-list{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto}
 .dose-log-item{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f5f5f5}
-.dose-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dose-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
 .dose-dot.taken{background:#2e7d32}
 .dose-dot.missed{background:#c62828}
 .report-notes-section{padding:12px 16px}
-.report-note-entry{margin-bottom:10px;padding-bottom:10px;border-bottom:0.5px solid #f0f0f0}
-.report-note-date{font-size:11px;color:#888;margin-bottom:4px}
-.report-note-text{font-size:13px;line-height:1.6;white-space:pre-wrap}
+.report-note-entry{margin-bottom:12px;padding-bottom:12px;border-bottom:0.5px solid #f0f0f0}
+.report-note-entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.report-note-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:5px}
+.report-note-text{font-size:13px;line-height:1.6;white-space:pre-wrap;color:#1a1a1a}
 .report-empty{font-size:12px;color:#aaa;font-style:italic;padding:8px 0}
 /* Modals */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center}
@@ -138,8 +151,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .remedy-modal-block{background:#f8f8f6;border-radius:8px;padding:12px;margin-bottom:10px}
 .remedy-modal-block-title{font-size:13px;font-weight:500;color:#2e7d50;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .day-picker{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.day-chip{padding:5px 10px;border-radius:20px;border:1.5px solid #ccc;font-size:12px;cursor:pointer;user-select:none;background:#fff;color:#555;transition:all 0.1s}
+.day-chip{padding:5px 10px;border-radius:20px;border:1.5px solid #ccc;font-size:12px;cursor:pointer;user-select:none;background:#fff;color:#555}
 .day-chip.selected{background:#2e7d50;border-color:#2e7d50;color:#fff;font-weight:500}
+.icon-btn{background:none;border:none;cursor:pointer;color:#888;font-size:16px;padding:3px;border-radius:4px}
+.icon-btn:hover{color:#1a1a1a}
+.icon-btn.danger:hover{color:#c62828}
 @media(max-width:480px){.form-row{grid-template-columns:1fr}}
 </style>
 </head>
@@ -150,10 +166,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="logo-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6v6M9 9c0 0 1.5-2 3-2s3 2 3 2"/><path d="M8 14c1 2 2.5 3 4 3s3-1 4-3"/></svg>
       </div>
-      <div>
-        <div class="app-title">Remedy Tracker</div>
-        <div class="app-sub">Homeopathic care for your family</div>
-      </div>
+      <div><div class="app-title">Remedy Tracker</div><div class="app-sub">Homeopathic care for your family</div></div>
     </div>
     <button class="add-btn" onclick="openAddMember()"><i class="ti ti-plus"></i> Add person</button>
   </div>
@@ -173,8 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div id="members-list" style="display:none"></div>
   <div id="report-view" style="display:none"></div>
   <div id="empty-state" class="empty-state" style="display:none">
-    <i class="ti ti-leaf" style="font-size:32px;display:block;margin-bottom:8px"></i>
-    Add a family member to start tracking
+    <i class="ti ti-leaf" style="font-size:32px;display:block;margin-bottom:8px"></i>Add a family member to start tracking
   </div>
 </div>
 
@@ -241,100 +253,89 @@ let editMemberId=null,editIssueId=null,currentMemberId=null,notesMemberId=null,n
 let remedyBlocks=[];
 let currentView='today';
 let reportMemberId=null,reportIssueId=null;
+// Track which issues are expanded per member
+let expandedIssues={};
+// Track which archived sections are open
+let archivedOpen={};
+// Current date offset for Today view (0=today, -1=yesterday, etc.)
+let dayOffset=0;
 
 function uid(){return Math.random().toString(36).slice(2,9)}
 function save(){localStorage.setItem('rm_members',JSON.stringify(members))}
 function initials(name){return name.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join('')}
 
-// ---- Date helpers (Sydney-safe) ----
-// Always work in local date strings to avoid UTC offset issues
+// ---- Date helpers ----
 function localDateStr(date){
   const d=date||new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function viewDateStr(){
+  const d=new Date();d.setDate(d.getDate()+dayOffset);return localDateStr(d);
 }
 function todayKey(){return localDateStr();}
-
 function defaultStartStr(){
-  // Returns datetime-local string at 8am today in local time
   const d=new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T08:00`;
+  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T08:00`;
+}
+function localDTStr(isoStr){
+  const d=new Date(isoStr);
+  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
 
-// ---- Frequency helpers ----
-function dosesPerDay(r){
-  if(r.freqType==='days-of-week') return r.daysOfWeek&&r.daysOfWeek.length?1:0; // 1 dose on scheduled days
-  const h=r.freqHours||24;
-  if(h>=24) return 1;
-  return Math.round(24/h);
-}
-
+// ---- Frequency ----
 function freqLabel(r){
-  if(r.freqType==='days-of-week'){
-    const days=(r.daysOfWeek||[]).map(d=>DAYS[d]).join(', ');
-    return days||'No days set';
-  }
+  if(r.freqType==='days-of-week'){const days=(r.daysOfWeek||[]).map(d=>DAYS[d]).join(', ');return days||'No days set';}
   const h=r.freqHours||24;
-  if(h<1) return`Every ${Math.round(h*60)}min`;
-  if(h===2) return'Every 2 hours';
-  if(h===8) return'3x daily';
-  if(h===12) return'2x daily';
-  if(h===24) return'Once daily';
-  if(h===48) return'Every 2 days';
-  if(h===168) return'Weekly';
-  if(h===720) return'Monthly';
-  return h<24?`Every ${h}h`:`Every ${Math.round(h/24)}d`;
+  if(h===2)return'Every 2 hours';
+  if(h===6)return'Every 6 hours';
+  if(h===8)return'3x daily';
+  if(h===12)return'2x daily';
+  if(h===24)return'Once daily';
+  if(h===48)return'Every 2 days';
+  if(h===168)return'Weekly';
+  if(h===720)return'Monthly';
+  if(h<24)return`Every ${h}h`;
+  return`Every ${Math.round(h/24)}d`;
 }
 
-// ---- Is remedy due today? ----
-function isDueToday(r){
-  if(r.stopped) return false;
-  if(!r.startTime) return false;
-
-  // Parse start as local date
-  const startLocal=new Date(r.startTime);
-  const startKey=localDateStr(startLocal);
-  const tKey=todayKey();
-  if(tKey<startKey) return false; // hasn't started yet
-
+function isDueOnDate(r,dateStr){
+  if(r.stopped)return false;
+  if(!r.startTime)return false;
+  const startStr=localDateStr(new Date(r.startTime));
+  if(dateStr<startStr)return false;
   if(r.freqType==='days-of-week'){
-    const todayDow=new Date().getDay();
-    return (r.daysOfWeek||[]).includes(todayDow);
+    const dow=new Date(dateStr+'T12:00:00').getDay();
+    return(r.daysOfWeek||[]).includes(dow);
   }
-
   const h=r.freqHours||24;
-  if(h<24) return true; // intraday: always show
-
-  // For >= daily: check if today falls on an interval day from start
-  const start=new Date(startKey+'T00:00:00');
-  const today=new Date(tKey+'T00:00:00');
-  const daysDiff=Math.round((today-start)/86400000);
+  if(h<24)return true;
+  const start=new Date(startStr+'T00:00:00');
+  const target=new Date(dateStr+'T00:00:00');
+  const daysDiff=Math.round((target-start)/86400000);
   const intervalDays=Math.round(h/24);
-  return daysDiff%intervalDays===0;
+  return daysDiff>=0&&daysDiff%intervalDays===0;
 }
 
-function getDosesNeededToday(r){
-  if(!isDueToday(r)) return 0;
-  if(r.freqType==='days-of-week') return 1;
+function getDosesNeeded(r,dateStr){
+  if(!isDueOnDate(r,dateStr))return 0;
+  if(r.freqType==='days-of-week')return 1;
   const h=r.freqHours||24;
-  if(h>=24) return 1;
+  if(h>=24)return 1;
   return Math.round(24/h);
 }
 
-// ---- Daily log ----
-function getTodayRec(r){
+function getDateRec(r,dateStr){
   if(!r.dailyLog)r.dailyLog={};
-  const k=todayKey();
-  if(!r.dailyLog[k])r.dailyLog[k]={taken:0,missed:0};
-  return r.dailyLog[k];
+  if(!r.dailyLog[dateStr])r.dailyLog[dateStr]={taken:0,missed:0};
+  return r.dailyLog[dateStr];
 }
 
-function todayStatus(r){
-  const needed=getDosesNeededToday(r);
-  if(needed===0) return'not-today';
-  const rec=getTodayRec(r);
-  const done=rec.taken+rec.missed;
-  if(rec.taken>=needed) return'all-done';
-  if(done>=needed) return'all-missed';
+function dateStatus(r,dateStr){
+  const needed=getDosesNeeded(r,dateStr);
+  if(needed===0)return'not-today';
+  const rec=getDateRec(r,dateStr);
+  if(rec.taken>=needed)return'all-done';
+  if(rec.taken+rec.missed>=needed)return'all-missed';
   return'pending';
 }
 
@@ -346,8 +347,7 @@ function renderBanners(){
     if(m.closed)return;
     (m.issues||[]).forEach(iss=>{
       if(iss.closed||!iss.reassessDate)return;
-      const d=iss.reassessDate; // yyyy-mm-dd
-      if(d===today) rdue.push(`<strong>${m.name}</strong> — ${iss.condition}`);
+      if(iss.reassessDate===today) rdue.push(`<strong>${m.name}</strong> — ${iss.condition}`);
     });
   });
   const rb=document.getElementById('reassess-banner');
@@ -365,12 +365,27 @@ function switchView(v){
   render();
 }
 
-// ---- Today view ----
+// ---- Today / past days view ----
 function renderToday(){
   const el=document.getElementById('today-view');
-  const d=new Date();
-  const dateStr=d.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  let html=`<div class="today-date-header"><i class="ti ti-calendar-day" style="color:#2e7d50"></i>${dateStr}</div>`;
+  const viewDate=new Date();viewDate.setDate(viewDate.getDate()+dayOffset);
+  const dateKey=localDateStr(viewDate);
+  const isToday=dayOffset===0;
+
+  const dateLabel=isToday?'Today — '+viewDate.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long'})
+    :viewDate.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  let html=`<div class="day-nav">
+    <button class="day-nav-btn" onclick="changeDay(-1)" ${dayOffset<=-7?'disabled':''}><i class="ti ti-chevron-left"></i> Back</button>
+    <div class="day-nav-label">${dateLabel}</div>
+    <button class="day-nav-btn" onclick="changeDay(1)" ${isToday?'disabled':''}><i class="ti ti-chevron-right"></i> Forward</button>
+  </div>`;
+
+  if(!isToday){
+    html+=`<div style="background:#fff8e7;border:0.5px solid #f0c040;border-radius:8px;padding:8px 12px;margin-bottom:1rem;font-size:12px;color:#7a5a00">
+      <i class="ti ti-clock-edit"></i> Viewing past day — you can still update doses below
+    </div>`;
+  }
 
   const active=members.filter(m=>!m.closed);
   if(!members.length){el.innerHTML=html+`<div class="today-empty"><i class="ti ti-leaf" style="font-size:28px;display:block;margin-bottom:8px;color:#ccc"></i>Add a family member to get started</div>`;return;}
@@ -381,12 +396,12 @@ function renderToday(){
     const items=[];
     (m.issues||[]).filter(i=>!i.closed).forEach(iss=>{
       (iss.remedies||[]).filter(r=>!r.stopped).forEach(r=>{
-        const st=todayStatus(r);
-        if(st==='not-today') return;
+        const st=dateStatus(r,dateKey);
+        if(st==='not-today')return;
         items.push({iss,r,st});
       });
     });
-    if(!items.length) return;
+    if(!items.length)return;
     anyItems=true;
 
     const order={pending:0,'all-done':1,'all-missed':2};
@@ -399,33 +414,33 @@ function renderToday(){
       </div>`;
 
     items.forEach(({iss,r,st})=>{
-      const needed=getDosesNeededToday(r);
-      const rec=getTodayRec(r);
+      const needed=getDosesNeeded(r,dateKey);
+      const rec=getDateRec(r,dateKey);
       const taken=rec.taken||0,missed=rec.missed||0;
       let cardClass='today-card';
-      if(st==='all-done') cardClass+=' all-done';
-      else if(st==='all-missed') cardClass+=' all-missed';
+      if(st==='all-done')cardClass+=' all-done';
+      else if(st==='all-missed')cardClass+=' all-missed';
 
       let pipsHtml='';
       if(needed>1){
         for(let i=0;i<needed;i++){
-          if(i<taken) pipsHtml+=`<span class="counter-pip done"><i class="ti ti-check" style="font-size:8px"></i></span>`;
-          else if(i<taken+missed) pipsHtml+=`<span class="counter-pip missed-pip">✕</span>`;
+          if(i<taken)pipsHtml+=`<span class="counter-pip done"><i class="ti ti-check" style="font-size:8px"></i></span>`;
+          else if(i<taken+missed)pipsHtml+=`<span class="counter-pip missed-pip">✕</span>`;
           else pipsHtml+=`<span class="counter-pip"></span>`;
         }
       }
 
       let statusText='';
-      if(st==='all-done') statusText=`<span style="color:#2e7d32;font-size:11px">✓ All done for today</span>`;
-      else if(st==='all-missed') statusText=`<span style="color:#c62828;font-size:11px">✕ Marked missed</span>`;
-      else if(needed>1) statusText=`<span style="color:#555;font-size:11px">${taken}/${needed} taken today</span>`;
+      if(st==='all-done')statusText=`<span style="color:#2e7d32;font-size:11px">✓ All done</span>`;
+      else if(st==='all-missed')statusText=`<span style="color:#c62828;font-size:11px">✕ Missed</span>`;
+      else if(needed>1)statusText=`<span style="color:#555;font-size:11px">${taken}/${needed} taken</span>`;
 
       let btns='';
       if(st==='pending'){
-        btns=`<button class="today-btn tick" onclick="todayTaken('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-check"></i> Taken</button>
-              <button class="today-btn miss" onclick="todayMissed('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-x"></i> Missed</button>`;
+        btns=`<button class="today-btn tick" onclick="dateTaken('${m.id}','${iss.id}','${r.id}','${dateKey}')"><i class="ti ti-check"></i> Taken</button>
+              <button class="today-btn miss" onclick="dateMissed('${m.id}','${iss.id}','${r.id}','${dateKey}')"><i class="ti ti-x"></i> Missed</button>`;
       } else {
-        btns=`<button class="today-btn undo" onclick="todayUndo('${m.id}','${iss.id}','${r.id}')"><i class="ti ti-rotate-left"></i> Undo</button>`;
+        btns=`<button class="today-btn undo" onclick="dateUndo('${m.id}','${iss.id}','${r.id}','${dateKey}')"><i class="ti ti-rotate-left"></i> Undo</button>`;
       }
 
       html+=`<div class="${cardClass}">
@@ -440,47 +455,70 @@ function renderToday(){
     html+='</div>';
   });
 
-  if(!anyItems) html+=`<div class="today-empty"><i class="ti ti-circle-check" style="font-size:28px;display:block;margin-bottom:8px;color:#a5d6a7"></i>No remedies scheduled for today.</div>`;
+  if(!anyItems)html+=`<div class="today-empty"><i class="ti ti-circle-check" style="font-size:28px;display:block;margin-bottom:8px;color:#a5d6a7"></i>No remedies scheduled for this day.</div>`;
   el.innerHTML=html;
 }
 
-// Dose actions
-function todayTaken(mid,iid,rid){
+function changeDay(delta){
+  const newOffset=dayOffset+delta;
+  if(newOffset>0||newOffset<-7)return;
+  dayOffset=newOffset;
+  render();
+}
+
+// Dose actions — all take explicit dateKey so they work on past days too
+function dateTaken(mid,iid,rid,dateKey){
   const r=getR(mid,iid,rid);if(!r)return;
-  const needed=getDosesNeededToday(r),rec=getTodayRec(r);
-  if(rec.taken+rec.missed<needed){rec.taken++;logDose(r,'taken');}
+  const needed=getDosesNeeded(r,dateKey),rec=getDateRec(r,dateKey);
+  if(rec.taken+rec.missed<needed){rec.taken++;logDose(r,'taken',dateKey);}
   save();render();
 }
-function todayMissed(mid,iid,rid){
+function dateMissed(mid,iid,rid,dateKey){
   const r=getR(mid,iid,rid);if(!r)return;
-  const needed=getDosesNeededToday(r),rec=getTodayRec(r);
-  if(rec.taken+rec.missed<needed){rec.missed++;logDose(r,'missed');}
+  const needed=getDosesNeeded(r,dateKey),rec=getDateRec(r,dateKey);
+  if(rec.taken+rec.missed<needed){rec.missed++;logDose(r,'missed',dateKey);}
   save();render();
 }
-function todayUndo(mid,iid,rid){
-  const r=getR(mid,iid,rid);if(!r||!r.dailyLog)return;
-  const k=todayKey(),rec=r.dailyLog[k];if(!rec)return;
+function dateUndo(mid,iid,rid,dateKey){
+  const r=getR(mid,iid,rid);if(!r||!r.dailyLog||!r.dailyLog[dateKey])return;
+  const rec=r.dailyLog[dateKey];
   if(rec.missed>0)rec.missed--;else if(rec.taken>0)rec.taken--;
-  if(r.doseLog&&r.doseLog.length){const last=r.doseLog[r.doseLog.length-1];if(last&&last.date===k)r.doseLog.pop();}
+  // remove last log entry for this date
+  if(r.doseLog&&r.doseLog.length){
+    for(let i=r.doseLog.length-1;i>=0;i--){
+      if(r.doseLog[i].date===dateKey){r.doseLog.splice(i,1);break;}
+    }
+  }
   save();render();
 }
-function logDose(r,type){if(!r.doseLog)r.doseLog=[];r.doseLog.push({date:todayKey(),type,ts:new Date().toISOString()});}
+function logDose(r,type,dateKey){
+  if(!r.doseLog)r.doseLog=[];
+  r.doseLog.push({date:dateKey||todayKey(),type,ts:new Date().toISOString()});
+}
 function getR(mid,iid,rid){
   const m=members.find(x=>x.id===mid);
   const iss=(m&&m.issues||[]).find(i=>i.id===iid);
   return(iss&&iss.remedies||[]).find(r=>r.id===rid)||null;
 }
 
-// ---- Stop / restart remedy ----
+// ---- Stop/restart remedy ----
 function stopRemedy(mid,iid,rid){
   const r=getR(mid,iid,rid);if(!r)return;
-  r.stopped=true;r.stoppedDate=localDateStr();
-  save();render();
+  r.stopped=true;r.stoppedDate=localDateStr();save();render();
 }
 function restartRemedy(mid,iid,rid){
   const r=getR(mid,iid,rid);if(!r)return;
-  r.stopped=false;delete r.stoppedDate;
-  save();render();
+  r.stopped=false;delete r.stoppedDate;save();render();
+}
+
+// ---- Toggle issue expanded ----
+function toggleIssue(memberId,issueId){
+  const key=`${memberId}__${issueId}`;
+  expandedIssues[key]=!expandedIssues[key];
+  render();
+}
+function toggleArchived(memberId){
+  archivedOpen[memberId]=!archivedOpen[memberId];render();
 }
 
 // ---- All records view ----
@@ -488,44 +526,67 @@ function renderAll(){
   const el=document.getElementById('members-list');
   if(!members.length){document.getElementById('empty-state').style.display='block';el.innerHTML='';return;}
   document.getElementById('empty-state').style.display='none';
+  const today=todayKey();
 
   const ordered=[...members.filter(m=>!m.closed),...members.filter(m=>m.closed)];
   el.innerHTML=ordered.map((m,mi)=>{
     const ci=mi%COLORS.length;
-    const openIssues=(m.issues||[]).filter(i=>!i.closed);
-    const pendingCount=openIssues.reduce((a,i)=>a+(i.remedies||[]).filter(r=>!r.stopped&&todayStatus(r)==='pending').length,0);
+    const activeIssues=(m.issues||[]).filter(i=>!i.closed);
+    const archivedIssues=(m.issues||[]).filter(i=>i.closed);
+    const pendingCount=activeIssues.reduce((a,i)=>a+(i.remedies||[]).filter(r=>!r.stopped&&dateStatus(r,today)==='pending').length,0);
     const tags=[
-      openIssues.length?`<span class="tag tag-blue">${openIssues.length} issue${openIssues.length!==1?'s':''}</span>`:'',
+      activeIssues.length?`<span class="tag tag-blue">${activeIssues.length} issue${activeIssues.length!==1?'s':''}</span>`:'',
       pendingCount?`<span class="tag tag-red">${pendingCount} due today</span>`:'',
       m.closed?`<span class="tag tag-grey">Closed</span>`:''
     ].filter(Boolean).join('');
 
-    const issuesHtml=(m.issues||[]).map(iss=>{
+    // Active issues — collapsed by default, one at a time
+    let issuesHtml=activeIssues.map(iss=>{
+      const key=`${m.id}__${iss.id}`;
+      const isOpen=!!expandedIssues[key];
       const rdStatus=reassessStatusFull(iss.reassessDate);
-      const rdRow=iss.reassessDate?`<div class="reassess-date-row${rdStatus==='overdue'?' overdue':''}">
-        <i class="ti ti-calendar-event"></i> Reassess: ${new Date(iss.reassessDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}
-        ${rdStatus==='overdue'?' — overdue':rdStatus==='soon'?' — coming up':''}
-      </div>`:'';
+      const issueHasDue=(iss.remedies||[]).some(r=>!r.stopped&&dateStatus(r,today)==='pending');
+      const issueHasReassess=iss.reassessDate&&iss.reassessDate===today;
 
+      if(!isOpen){
+        return`<div class="issue-row" onclick="toggleIssue('${m.id}','${iss.id}')">
+          <div class="issue-row-left">
+            <i class="ti ti-chevron-right" style="color:#aaa;font-size:14px;flex-shrink:0"></i>
+            <span class="issue-row-name">${iss.condition}</span>
+            <div class="issue-row-tags">
+              ${issueHasDue?'<span class="tag tag-red" style="font-size:10px">due</span>':''}
+              ${issueHasReassess?'<span class="tag" style="background:#f0eaff;color:#6a1b9a;font-size:10px">reassess</span>':''}
+              ${rdStatus==='overdue'?'<span class="tag tag-red" style="font-size:10px">reassess overdue</span>':''}
+            </div>
+          </div>
+          <div class="issue-row-actions" onclick="event.stopPropagation()">
+            <button class="icon-btn" onclick="openNotes('${m.id}','${iss.id}')" title="Notes"><i class="ti ti-notes"></i></button>
+            <button class="icon-btn" onclick="openEditIssue('${m.id}','${iss.id}')" title="Edit"><i class="ti ti-edit"></i></button>
+            <button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive issue"><i class="ti ti-archive"></i></button>
+            <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete issue"><i class="ti ti-trash"></i></button>
+          </div>
+        </div>`;
+      }
+
+      // Expanded
       const remediesHtml=(iss.remedies||[]).map(r=>{
-        const st=todayStatus(r);
-        const rec=getTodayRec(r);
-        const needed=getDosesNeededToday(r);
+        const st=dateStatus(r,today);
+        const rec=getDateRec(r,today);
+        const needed=getDosesNeeded(r,today);
         let statusRow='';
         if(!r.stopped&&needed>0){
-          if(st==='all-done') statusRow=`<div class="taken-label"><i class="ti ti-circle-check"></i> All done today${needed>1?` (${rec.taken}/${needed})`:''}</div>`;
-          else if(st==='all-missed') statusRow=`<div class="missed-label"><i class="ti ti-alert-circle"></i> Missed today</div>`;
-          else if(st==='pending') statusRow=`<div style="font-size:11px;color:#b8860b;margin-top:4px"><i class="ti ti-clock"></i> ${needed>1?`${rec.taken}/${needed} taken today`:'Due today'}</div>`;
+          if(st==='all-done')statusRow=`<div class="taken-label"><i class="ti ti-circle-check"></i> All done today${needed>1?` (${rec.taken}/${needed})`:''}</div>`;
+          else if(st==='all-missed')statusRow=`<div class="missed-label"><i class="ti ti-alert-circle"></i> Missed today</div>`;
+          else if(st==='pending')statusRow=`<div style="font-size:11px;color:#b8860b;margin-top:4px"><i class="ti ti-clock"></i> ${needed>1?`${rec.taken}/${needed} taken today`:'Due today'}</div>`;
         }
         const stoppedRow=r.stopped?`<div style="font-size:11px;color:#999;margin-top:4px"><i class="ti ti-player-stop"></i> Stopped${r.stoppedDate?' '+new Date(r.stoppedDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short'}):''}</div>`:'';
         return`<div class="remedy-block${r.stopped?' stopped':''}">
           <div class="remedy-block-header">
             <span class="remedy-name-badge${r.stopped?' stopped':''}"><i class="ti ti-pill"></i> ${r.name||'Remedy'}${r.stopped?'<span class="stopped-badge">Stopped</span>':''}</span>
             <div style="display:flex;gap:4px">
-              ${!iss.closed?(!r.stopped
-                ?`<button class="icon-btn" onclick="stopRemedy('${m.id}','${iss.id}','${r.id}')" title="Stop this remedy"><i class="ti ti-player-stop"></i></button>`
-                :`<button class="icon-btn" onclick="restartRemedy('${m.id}','${iss.id}','${r.id}')" title="Restart remedy"><i class="ti ti-player-play"></i></button>`):''}
-              ${!iss.closed?`<button class="icon-btn danger" onclick="deleteRemedy('${m.id}','${iss.id}','${r.id}')" title="Delete remedy"><i class="ti ti-trash"></i></button>`:''}
+              ${!r.stopped?`<button class="icon-btn" onclick="stopRemedy('${m.id}','${iss.id}','${r.id}')" title="Stop remedy"><i class="ti ti-player-stop"></i></button>`
+                :`<button class="icon-btn" onclick="restartRemedy('${m.id}','${iss.id}','${r.id}')" title="Restart remedy"><i class="ti ti-player-play"></i></button>`}
+              <button class="icon-btn danger" onclick="deleteRemedy('${m.id}','${iss.id}','${r.id}')" title="Delete remedy"><i class="ti ti-trash"></i></button>
             </div>
           </div>
           <div class="remedy-grid">
@@ -538,30 +599,55 @@ function renderAll(){
         </div>`;
       }).join('');
 
-      return`<div class="issue-card${iss.closed?' closed-case':''}">
-        <div class="issue-top">
-          <span class="issue-condition">${iss.condition}${iss.closed?'<span class="closed-badge">Closed</span>':''}</span>
-          <div class="issue-actions">
+      const rdRow=iss.reassessDate?`<div class="reassess-date-row${rdStatus==='overdue'?' overdue':''}">
+        <i class="ti ti-calendar-event"></i> Reassess: ${new Date(iss.reassessDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}
+        ${rdStatus==='overdue'?' — overdue':rdStatus==='soon'?' — coming up':''}
+      </div>`:'';
+
+      return`<div class="issue-expanded">
+        <div class="issue-expanded-header" onclick="toggleIssue('${m.id}','${iss.id}')">
+          <span class="issue-expanded-title"><i class="ti ti-chevron-down" style="font-size:13px;margin-right:4px"></i>${iss.condition}</span>
+          <div onclick="event.stopPropagation()" style="display:flex;gap:4px">
             <button class="icon-btn" onclick="openNotes('${m.id}','${iss.id}')" title="Notes"><i class="ti ti-notes"></i></button>
             <button class="icon-btn" onclick="openEditIssue('${m.id}','${iss.id}')" title="Edit"><i class="ti ti-edit"></i></button>
-            ${!iss.closed
-              ?`<button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive issue"><i class="ti ti-archive"></i></button>`
-              :`<button class="icon-btn" onclick="reopenCase('${m.id}','${iss.id}')" title="Reopen"><i class="ti ti-archive-off"></i></button>`}
+            <button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive issue"><i class="ti ti-archive"></i></button>
             <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete issue"><i class="ti ti-trash"></i></button>
           </div>
         </div>
-        <div class="remedies-list">${remediesHtml}</div>
-        ${rdRow}
-        ${iss.progress||iss.reassessNotes?`<div class="issue-notes-section">
-          ${iss.progress?`<div class="notes-label" style="margin-top:8px">Progress notes</div><div class="notes-text">${iss.progress}</div>`:''}
-          ${iss.reassessNotes?`<div class="notes-label" style="margin-top:6px">Reassessment notes</div><div class="notes-text">${iss.reassessNotes}</div>`:''}
-        </div>`:''}
+        <div class="issue-expanded-body">
+          <div class="remedies-list">${remediesHtml}</div>
+          <button class="add-remedy-btn" onclick="openAddRemedyToIssue('${m.id}','${iss.id}')"><i class="ti ti-plus"></i> Add remedy</button>
+          ${rdRow}
+          ${iss.progress?`<div style="margin-top:8px"><div style="font-size:11px;color:#888;margin-bottom:4px">Progress notes</div><div class="notes-text">${iss.progress}</div></div>`:''}
+          ${iss.reassessNotes?`<div style="margin-top:6px"><div style="font-size:11px;color:#888;margin-bottom:4px">Reassessment notes</div><div class="notes-text">${iss.reassessNotes}</div></div>`:''}
+        </div>
       </div>`;
     }).join('');
 
+    // Archived issues section
+    let archivedHtml='';
+    if(archivedIssues.length){
+      const isOpen=!!archivedOpen[m.id];
+      archivedHtml=`<div class="archived-toggle" onclick="toggleArchived('${m.id}')">
+        <i class="ti ti-${isOpen?'chevron-down':'chevron-right'}" style="font-size:13px"></i>
+        <i class="ti ti-archive" style="font-size:13px"></i>
+        Archived issues (${archivedIssues.length})
+      </div>`;
+      if(isOpen){
+        archivedHtml+=`<div class="archived-section">${archivedIssues.map(iss=>`
+          <div class="archived-issue-row">
+            <span>${iss.condition}</span>
+            <div style="display:flex;gap:4px">
+              <button class="icon-btn" onclick="reopenCase('${m.id}','${iss.id}')" title="Reopen"><i class="ti ti-archive-off"></i></button>
+              <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete"><i class="ti ti-trash"></i></button>
+            </div>
+          </div>`).join('')}</div>`;
+      }
+    }
+
     return`<div class="member-card${m.closed?' closed':''}" id="card-${m.id}">
       <div class="member-header" onclick="toggleMember('${m.id}')">
-        <div class="avatar" style="background:${COLORS[mi%COLORS.length]};color:${TEXT_COLORS[mi%TEXT_COLORS.length]}">${initials(m.name)}</div>
+        <div class="avatar" style="background:${COLORS[ci]};color:${TEXT_COLORS[ci]}">${initials(m.name)}</div>
         <div class="member-meta">
           <div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
           <div class="member-tags">${tags}</div>
@@ -570,8 +656,9 @@ function renderAll(){
         <i class="ti ti-chevron-down chevron ${m.open?'open':''}"></i>
       </div>
       ${m.open?`<div class="member-body">
-        <div class="section-label">Health issues & remedies</div>
+        <div class="section-label">Health issues</div>
         ${issuesHtml}
+        ${archivedHtml}
         ${!m.closed?`<button class="add-issue-btn" onclick="openAddIssue('${m.id}')"><i class="ti ti-plus"></i> Add health issue</button>`:''}
       </div>`:''}
     </div>`;
@@ -582,7 +669,7 @@ function reassessStatusFull(dateStr){
   if(!dateStr)return null;
   const today=todayKey();
   if(dateStr<today)return'overdue';
-  const d=new Date(dateStr+'T12:00:00'),diff=d-Date.now();
+  const diff=new Date(dateStr+'T12:00:00')-Date.now();
   if(diff<86400000*3)return'soon';
   return'ok';
 }
@@ -591,61 +678,60 @@ function reassessStatusFull(dateStr){
 function renderReport(){
   const el=document.getElementById('report-view');
   if(!members.length){el.innerHTML=`<div class="today-empty">No family members yet.</div>`;return;}
-
   const mOpts=members.map(m=>`<option value="${m.id}" ${m.id===reportMemberId?'selected':''}>${m.name}</option>`).join('');
-  let html=`<div class="report-member-select">
-    <select class="form-input" onchange="selectReportMember(this.value)">
-      <option value="">— select a family member —</option>${mOpts}
-    </select>
-  </div>`;
-
+  let html=`<div class="report-member-select"><select class="form-input" onchange="selectReportMember(this.value)">
+    <option value="">— select a family member —</option>${mOpts}</select></div>`;
   if(!reportMemberId){el.innerHTML=html;return;}
   const m=members.find(x=>x.id===reportMemberId);
   if(!m){el.innerHTML=html;return;}
-
   const issues=m.issues||[];
   if(!issues.length){el.innerHTML=html+`<div class="today-empty">No health issues recorded for ${m.name} yet.</div>`;return;}
-
-  // Issue selector
-  const iOpts=issues.map(i=>`<option value="${i.id}" ${i.id===reportIssueId?'selected':''}>${i.condition}${i.closed?' (closed)':''}</option>`).join('');
-  html+=`<div class="report-member-select">
-    <select class="form-input" onchange="selectReportIssue(this.value)">
-      <option value="">— select a health issue —</option>${iOpts}
-    </select>
-  </div>`;
-
+  const iOpts=issues.map(i=>`<option value="${i.id}" ${i.id===reportIssueId?'selected':''}>${i.condition}${i.closed?' (archived)':''}</option>`).join('');
+  html+=`<div class="report-member-select"><select class="form-input" onchange="selectReportIssue(this.value)">
+    <option value="">— select a health issue —</option>${iOpts}</select></div>`;
   if(!reportIssueId){el.innerHTML=html;return;}
   const iss=issues.find(x=>x.id===reportIssueId);
   if(!iss){el.innerHTML=html;return;}
 
   html+=`<div class="report-issue-card">
     <div class="report-issue-header">
-      <div class="report-issue-title">${iss.condition}${iss.closed?'<span class="closed-badge">Closed</span>':''}</div>
+      <div class="report-issue-title">${iss.condition}${iss.closed?'<span class="tag tag-grey" style="margin-left:8px;font-size:10px">Archived</span>':''}</div>
       ${iss.reassessDate?`<div class="report-issue-meta">Reassessment: ${new Date(iss.reassessDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}</div>`:''}
     </div>`;
 
+  // Per remedy stats — use dailyLog as source of truth for counts
   (iss.remedies||[]).forEach(r=>{
-    const log=r.doseLog||[];
-    const totalTaken=log.filter(e=>e.type==='taken').length;
-    const totalMissed=log.filter(e=>e.type==='missed').length;
+    // Count from dailyLog (accurate)
+    let totalTaken=0,totalMissed=0;
+    if(r.dailyLog){
+      Object.values(r.dailyLog).forEach(rec=>{
+        totalTaken+=(rec.taken||0);
+        totalMissed+=(rec.missed||0);
+      });
+    }
+    // fallback to doseLog if dailyLog empty
+    if(totalTaken===0&&totalMissed===0&&r.doseLog&&r.doseLog.length){
+      r.doseLog.forEach(e=>{if(e.type==='taken')totalTaken++;else totalMissed++;});
+    }
     const total=totalTaken+totalMissed;
     const pct=total>0?Math.round(totalTaken/total*100):null;
     const daysOn=r.startTime?Math.max(0,Math.round((Date.now()-new Date(r.startTime).getTime())/86400000)):null;
 
+    // Build dose history from dailyLog
     const byDate={};
-    log.forEach(e=>{if(!byDate[e.date])byDate[e.date]={taken:0,missed:0};byDate[e.date][e.type]++;});
+    if(r.dailyLog){Object.entries(r.dailyLog).forEach(([dk,rec])=>{if(rec.taken||rec.missed)byDate[dk]=rec;});}
     const sortedDates=Object.keys(byDate).sort().reverse().slice(0,60);
     const doseLogHtml=sortedDates.length?sortedDates.map(dk=>{
       const rec=byDate[dk];
       const dateStr=new Date(dk+'T12:00:00').toLocaleDateString([],{weekday:'short',day:'numeric',month:'short'});
       const parts=[];
-      if(rec.taken>0)parts.push(`<span class="dose-dot taken" style="display:inline-block;margin-right:2px"></span>${rec.taken} taken`);
-      if(rec.missed>0)parts.push(`<span class="dose-dot missed" style="display:inline-block;margin-right:2px"></span>${rec.missed} missed`);
+      if(rec.taken>0)parts.push(`<span class="dose-dot taken"></span> ${rec.taken} taken`);
+      if(rec.missed>0)parts.push(`<span class="dose-dot missed"></span> ${rec.missed} missed`);
       return`<div class="dose-log-item"><span style="min-width:100px;color:#555">${dateStr}</span>${parts.join('&nbsp;&nbsp;')}</div>`;
-    }).join(''):`<div class="report-empty">No doses recorded yet.</div>`;
+    }).join(''):`<div class="report-empty">No doses recorded yet — use Today view to log doses.</div>`;
 
     html+=`<div class="report-remedy-section">
-      <div class="report-remedy-title"><i class="ti ti-pill"></i>${r.name||'Remedy'}${r.stopped?' <span style="font-size:11px;color:#999">(stopped)</span>':''}
+      <div class="report-remedy-title"><i class="ti ti-pill"></i>${r.name||'Remedy'}${r.stopped?' <span style="font-size:10px;color:#999;background:#eee;padding:1px 6px;border-radius:8px">stopped</span>':''}
         <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r)}</span>
       </div>
       <div class="report-stats">
@@ -659,23 +745,23 @@ function renderReport(){
     </div>`;
   });
 
+  // Notes section
   html+=`<div class="report-notes-section">
-    <div style="font-size:12px;font-weight:500;color:#555;margin-bottom:8px">Progress & reassessment notes</div>`;
+    <div style="font-size:12px;font-weight:600;color:#555;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;font-size:11px">Notes & observations</div>`;
   if(iss.progress){
     html+=`<div class="report-note-entry">
-      <div class="report-note-date">Progress notes${iss.notesUpdated?' · Updated '+new Date(iss.notesUpdated).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'}):''}</div>
+      <div class="report-note-label">Progress notes${iss.notesUpdated?' <span style="font-weight:400;text-transform:none;letter-spacing:0">· Updated '+new Date(iss.notesUpdated).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})+'</span>':''}</div>
       <div class="report-note-text">${iss.progress}</div>
     </div>`;
   }
   if(iss.reassessNotes){
     html+=`<div class="report-note-entry">
-      <div class="report-note-date">Reassessment notes</div>
+      <div class="report-note-label">Reassessment notes</div>
       <div class="report-note-text">${iss.reassessNotes}</div>
     </div>`;
   }
-  if(!iss.progress&&!iss.reassessNotes) html+=`<div class="report-empty">No notes recorded yet.</div>`;
+  if(!iss.progress&&!iss.reassessNotes)html+=`<div class="report-empty">No notes yet. Tap the notes icon on a health issue in All Records to add observations.</div>`;
   html+=`</div></div>`;
-
   el.innerHTML=html;
 }
 
@@ -685,8 +771,8 @@ function selectReportIssue(id){reportIssueId=id;renderReport();}
 // ---- Render ----
 function render(){
   renderBanners();
-  if(currentView==='today') renderToday();
-  else if(currentView==='all') renderAll();
+  if(currentView==='today')renderToday();
+  else if(currentView==='all')renderAll();
   else renderReport();
 }
 
@@ -708,8 +794,7 @@ function saveMember(){
 }
 function deleteMember(id){if(!confirm('Remove this person and all their data?'))return;members=members.filter(m=>m.id!==id);save();render();}
 
-// ---- Remedy blocks ----
-// Track day selections per block
+// ---- Remedy blocks in modal ----
 const blockDays={};
 
 function buildRemedyBlockHTML(rb,idx){
@@ -717,15 +802,11 @@ function buildRemedyBlockHTML(rb,idx){
   const isDow=rb.freqType==='days-of-week';
   const isCustom=!isDow&&rb.freqHours&&!known.includes(rb.freqHours);
   const selVal=isDow?'days-of-week':String(rb.freqHours||24);
-  if(!blockDays[rb.id]) blockDays[rb.id]=rb.daysOfWeek||[];
-
+  if(!blockDays[rb.id])blockDays[rb.id]=rb.daysOfWeek||[];
   const dayChips=DAYS.map((d,i)=>`<span class="day-chip${(blockDays[rb.id]||[]).includes(i)?' selected':''}" onclick="toggleDay('${rb.id}',${i})">${d}</span>`).join('');
-
   return`<div class="remedy-modal-block" id="rb-${rb.id}">
-    <div class="remedy-modal-block-title">
-      <span>Remedy ${idx+1}</span>
-      <button class="icon-btn danger" onclick="removeRemedyBlock('${rb.id}')"><i class="ti ti-trash"></i></button>
-    </div>
+    <div class="remedy-modal-block-title"><span>Remedy ${idx+1}</span>
+      <button class="icon-btn danger" onclick="removeRemedyBlock('${rb.id}')"><i class="ti ti-trash"></i></button></div>
     <div class="form-group"><label class="form-label">Remedy name</label>
       <input class="form-input" id="rb-name-${rb.id}" placeholder="e.g. Belladonna 30C" value="${rb.name||''}"/></div>
     <div class="form-row">
@@ -737,14 +818,13 @@ function buildRemedyBlockHTML(rb,idx){
           <option value="6" ${selVal==='6'?'selected':''}>Every 6 hours</option>
           <option value="8" ${selVal==='8'?'selected':''}>3x daily</option>
           <option value="12" ${selVal==='12'?'selected':''}>2x daily</option>
-          <option value="24" ${selVal==='24'||(!rb.freqHours&&!isDow)?'selected':''}>Once daily</option>
+          <option value="24" ${!rb.freqHours&&!isDow||selVal==='24'?'selected':''}>Once daily</option>
           <option value="48" ${selVal==='48'?'selected':''}>Every 2 days</option>
           <option value="168" ${selVal==='168'?'selected':''}>Weekly</option>
           <option value="720" ${selVal==='720'?'selected':''}>Monthly</option>
           <option value="days-of-week" ${isDow?'selected':''}>Specific days of week…</option>
           <option value="custom" ${isCustom?'selected':''}>Custom interval…</option>
-        </select>
-      </div>
+        </select></div>
     </div>
     <div id="rb-dow-${rb.id}" style="display:${isDow?'block':'none'};margin-bottom:12px">
       <label class="form-label">Select days</label>
@@ -757,14 +837,8 @@ function buildRemedyBlockHTML(rb,idx){
     <div class="form-group"><label class="form-label">Start date & time</label>
       <input class="form-input" id="rb-start-${rb.id}" type="datetime-local" value="${rb.startTime?localDTStr(rb.startTime):defaultStartStr()}"/></div>
     <div class="form-group"><label class="form-label">Notes for this remedy</label>
-      <input class="form-input" id="rb-notes-${rb.id}" placeholder="e.g. take away from food…" value="${rb.notes||''}"/></div>
+      <textarea class="form-textarea" id="rb-notes-${rb.id}" placeholder="e.g. take away from food, store cool, observe for aggravation…">${rb.notes||''}</textarea></div>
   </div>`;
-}
-
-function localDTStr(isoStr){
-  // Convert ISO string to local datetime-local input value
-  const d=new Date(isoStr);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
 
 function onFreqChange(rbId){
@@ -772,56 +846,31 @@ function onFreqChange(rbId){
   document.getElementById(`rb-dow-${rbId}`).style.display=v==='days-of-week'?'block':'none';
   document.getElementById(`rb-custom-wrap-${rbId}`).style.display=v==='custom'?'block':'none';
 }
-
 function toggleDay(rbId,dayIdx){
   if(!blockDays[rbId])blockDays[rbId]=[];
-  const arr=blockDays[rbId];
-  const i=arr.indexOf(dayIdx);
+  const arr=blockDays[rbId],i=arr.indexOf(dayIdx);
   if(i>=0)arr.splice(i,1);else arr.push(dayIdx);
-  // re-render just the day chips
-  const container=document.querySelector(`#rb-dow-${rbId} .day-picker`);
-  if(container) container.innerHTML=DAYS.map((d,i)=>`<span class="day-chip${arr.includes(i)?' selected':''}" onclick="toggleDay('${rbId}',${i})">${d}</span>`).join('');
+  const c=document.querySelector(`#rb-dow-${rbId} .day-picker`);
+  if(c)c.innerHTML=DAYS.map((d,i)=>`<span class="day-chip${arr.includes(i)?' selected':''}" onclick="toggleDay('${rbId}',${i})">${d}</span>`).join('');
 }
-
-function refreshRemedyBlocks(){
-  document.getElementById('remedy-blocks').innerHTML=remedyBlocks.map((rb,i)=>buildRemedyBlockHTML(rb,i)).join('');
-}
-function addRemedyBlock(){
-  const rb={id:uid(),name:'',dosage:'',freqHours:24,freqType:'interval',startTime:null,notes:'',dailyLog:{},doseLog:[]};
-  remedyBlocks.push(rb);blockDays[rb.id]=[];refreshRemedyBlocks();
-}
+function refreshRemedyBlocks(){document.getElementById('remedy-blocks').innerHTML=remedyBlocks.map((rb,i)=>buildRemedyBlockHTML(rb,i)).join('');}
+function addRemedyBlock(){const rb={id:uid(),name:'',dosage:'',freqHours:24,freqType:'interval',daysOfWeek:[],startTime:null,notes:'',dailyLog:{},doseLog:[]};remedyBlocks.push(rb);blockDays[rb.id]=[];refreshRemedyBlocks();}
 function removeRemedyBlock(id){remedyBlocks=remedyBlocks.filter(rb=>rb.id!==id);delete blockDays[id];refreshRemedyBlocks();}
-
 function collectRemedyBlocks(){
   return remedyBlocks.map(rb=>{
     const freqSel=document.getElementById(`rb-freq-${rb.id}`).value;
     const startVal=document.getElementById(`rb-start-${rb.id}`).value;
     const existing=members.flatMap(m=>m.issues||[]).flatMap(i=>i.remedies||[]).find(r=>r.id===rb.id);
     let freqType='interval',freqHours=24,daysOfWeek=[];
-    if(freqSel==='days-of-week'){
-      freqType='days-of-week';daysOfWeek=[...(blockDays[rb.id]||[])].sort((a,b)=>a-b);freqHours=0;
-    } else if(freqSel==='custom'){
-      freqHours=parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||24;
-    } else {
-      freqHours=parseFloat(freqSel)||24;
-    }
-    // startTime: parse as local time
+    if(freqSel==='days-of-week'){freqType='days-of-week';daysOfWeek=[...(blockDays[rb.id]||[])].sort((a,b)=>a-b);freqHours=0;}
+    else if(freqSel==='custom'){freqHours=parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||24;}
+    else freqHours=parseFloat(freqSel)||24;
     let startTime=null;
-    if(startVal){
-      const [datePart,timePart]=startVal.split('T');
-      const [y,mo,d]=datePart.split('-').map(Number);
-      const [h,min]=(timePart||'08:00').split(':').map(Number);
-      startTime=new Date(y,mo-1,d,h,min).toISOString();
-    }
-    return{
-      id:rb.id,
-      name:document.getElementById(`rb-name-${rb.id}`).value.trim(),
-      dosage:document.getElementById(`rb-dosage-${rb.id}`).value.trim(),
-      freqType,freqHours,daysOfWeek,startTime,
-      notes:document.getElementById(`rb-notes-${rb.id}`).value.trim(),
-      dailyLog:existing?existing.dailyLog||{}:{},
-      doseLog:existing?existing.doseLog||[]:[]
-    };
+    if(startVal){const[datePart,timePart]=startVal.split('T');const[y,mo,d]=datePart.split('-').map(Number);const[h,min]=(timePart||'08:00').split(':').map(Number);startTime=new Date(y,mo-1,d,h,min).toISOString();}
+    return{id:rb.id,name:document.getElementById(`rb-name-${rb.id}`).value.trim(),dosage:document.getElementById(`rb-dosage-${rb.id}`).value.trim(),
+      freqType,freqHours,daysOfWeek,startTime,notes:document.getElementById(`rb-notes-${rb.id}`).value.trim(),
+      stopped:existing?existing.stopped||false:false,stoppedDate:existing?existing.stoppedDate||null:null,
+      dailyLog:existing?existing.dailyLog||{}:{},doseLog:existing?existing.doseLog||[]:[]};
   });
 }
 
@@ -838,8 +887,7 @@ function openAddIssue(memberId){
   ['i-condition','i-reassess-date','i-progress','i-reassess-notes'].forEach(id=>document.getElementById(id).value='');
   remedyBlocks=[];
   const rb={id:uid(),name:'',dosage:'',freqHours:24,freqType:'interval',daysOfWeek:[],startTime:null,notes:'',dailyLog:{},doseLog:[]};
-  remedyBlocks.push(rb);blockDays[rb.id]=[];
-  refreshRemedyBlocks();
+  remedyBlocks.push(rb);blockDays[rb.id]=[];refreshRemedyBlocks();
   document.getElementById('issue-modal').classList.add('show');
 }
 function openEditIssue(memberId,issueId){
@@ -855,6 +903,27 @@ function openEditIssue(memberId,issueId){
   remedyBlocks=(iss.remedies||[]).map(r=>({...r}));
   remedyBlocks.forEach(rb=>{blockDays[rb.id]=rb.daysOfWeek||[];});
   refreshRemedyBlocks();
+  document.getElementById('issue-modal').classList.add('show');
+}
+// Open issue modal pre-filled to add a remedy to existing issue
+function openAddRemedyToIssue(memberId,issueId){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m.issues||[]).find(x=>x.id===issueId);if(!iss)return;
+  editIssueId=issueId;currentMemberId=memberId;
+  document.getElementById('issue-modal-title').textContent='Edit health issue';
+  populateMemberDropdown(memberId);
+  document.getElementById('i-condition').value=iss.condition||'';
+  document.getElementById('i-reassess-date').value=iss.reassessDate||'';
+  document.getElementById('i-progress').value=iss.progress||'';
+  document.getElementById('i-reassess-notes').value=iss.reassessNotes||'';
+  remedyBlocks=(iss.remedies||[]).map(r=>({...r}));
+  // Add a new blank remedy block
+  const rb={id:uid(),name:'',dosage:'',freqHours:24,freqType:'interval',daysOfWeek:[],startTime:null,notes:'',dailyLog:{},doseLog:[]};
+  remedyBlocks.push(rb);blockDays[rb.id]=[];
+  remedyBlocks.forEach(rb2=>{if(!blockDays[rb2.id])blockDays[rb2.id]=rb2.daysOfWeek||[];});
+  refreshRemedyBlocks();
+  // Scroll modal to bottom so new remedy is visible
+  setTimeout(()=>{const m=document.querySelector('#issue-modal .modal');if(m)m.scrollTop=m.scrollHeight;},100);
   document.getElementById('issue-modal').classList.add('show');
 }
 function saveIssue(){
@@ -876,12 +945,24 @@ function saveIssue(){
 }
 function deleteIssue(memberId,issueId){
   const m=members.find(x=>x.id===memberId);if(!m)return;
-  if(!confirm('Delete this health issue and all its remedies?'))return;
-  m.issues=(m.issues||[]).filter(i=>i.id!==issueId);save();render();
+  if(!confirm('Delete this health issue and all its remedies? This cannot be undone.'))return;
+  m.issues=(m.issues||[]).filter(i=>i.id!==issueId);
+  const key=`${memberId}__${issueId}`;delete expandedIssues[key];
+  save();render();
 }
-function closeCase(memberId,issueId){const m=members.find(x=>x.id===memberId);const i=(m&&m.issues||[]).find(x=>x.id===issueId);if(i)i.closed=true;save();render();}
-function reopenCase(memberId,issueId){const m=members.find(x=>x.id===memberId);const i=(m&&m.issues||[]).find(x=>x.id===issueId);if(i)i.closed=false;save();render();}
+function closeCase(memberId,issueId){
+  const m=members.find(x=>x.id===memberId);
+  const i=(m&&m.issues||[]).find(x=>x.id===issueId);
+  if(i){i.closed=true;delete expandedIssues[`${memberId}__${issueId}`];}
+  save();render();
+}
+function reopenCase(memberId,issueId){
+  const m=members.find(x=>x.id===memberId);
+  const i=(m&&m.issues||[]).find(x=>x.id===issueId);
+  if(i)i.closed=false;save();render();
+}
 function deleteRemedy(memberId,issueId,remedyId){
+  if(!confirm('Delete this remedy? This cannot be undone.'))return;
   const m=members.find(x=>x.id===memberId);
   const i=(m&&m.issues||[]).find(x=>x.id===issueId);
   if(i)i.remedies=(i.remedies||[]).filter(r=>r.id!==remedyId);save();render();
