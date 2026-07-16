@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Remedy Tracker</title>
+<title>Remedy Diary</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -21,8 +21,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .reassess-banner i{color:#6a1b9a;font-size:18px;margin-top:1px}
 .reassess-title{font-size:13px;font-weight:500;color:#4a148c;margin-bottom:4px}
 .reassess-list{font-size:12px;color:#4a148c;line-height:1.9}
-.view-toggle{display:flex;gap:6px;margin-bottom:1rem}
-.view-btn{flex:1;padding:7px;border:0.5px solid #ddd;border-radius:8px;background:#fff;font-size:13px;color:#666;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
+.view-toggle{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.view-btn{flex:1;min-width:0;padding:7px 4px;border:0.5px solid #ddd;border-radius:8px;background:#fff;font-size:12px;color:#666;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap}
 .view-btn.active{background:#2e7d50;color:#fff;border-color:#2e7d50}
 /* Day nav */
 .day-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:8px}
@@ -30,12 +30,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .day-nav-btn:hover{background:#f0f0ec}
 .day-nav-btn:disabled{opacity:0.35;cursor:default}
 .day-nav-label{font-size:14px;font-weight:500;flex:1;text-align:center}
-/* Today */
+/* Severity */
+.severity-row{display:flex;align-items:center;gap:6px;margin-top:5px}
+.severity-label{font-size:11px;color:#888;flex-shrink:0}
+.sev-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid #ddd;display:inline-flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;color:#aaa;font-weight:600;flex-shrink:0;background:#fff}
+.sev-dot.s1.active{background:#4caf50;border-color:#4caf50;color:#fff}
+.sev-dot.s2.active{background:#8bc34a;border-color:#8bc34a;color:#fff}
+.sev-dot.s3.active{background:#ff9800;border-color:#ff9800;color:#fff}
+.sev-dot.s4.active{background:#f44336;border-color:#f44336;color:#fff}
+.sev-dot.s5.active{background:#b71c1c;border-color:#b71c1c;color:#fff}
+/* Today cards */
 .today-member-section{margin-bottom:1.25rem}
 .today-member-name{font-size:13px;font-weight:600;color:#2e7d50;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.today-card{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:11px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.today-card{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:11px 14px;margin-bottom:6px}
 .today-card.all-done{border-color:#a5d6a7;background:#f1f8f1}
 .today-card.all-missed{border-color:#ef9a9a;background:#fff5f5}
+.today-card-top{display:flex;align-items:center;gap:12px}
 .today-card-info{flex:1;min-width:0}
 .today-remedy-name{font-size:13px;font-weight:500}
 .today-condition{font-size:11px;color:#888;margin-top:2px}
@@ -63,7 +73,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .chevron.open{transform:rotate(180deg)}
 .member-body{padding:0 16px 16px;border-top:0.5px solid #eee}
 .section-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin:14px 0 8px}
-/* Issue list — collapsed by default */
 .issue-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;background:#f8f8f6;margin-bottom:6px;cursor:pointer;user-select:none;gap:8px}
 .issue-row:hover{background:#f0f0ec}
 .issue-row-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
@@ -74,13 +83,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .issue-expanded-header{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;border-bottom:0.5px solid #eee;background:#f0ede8}
 .issue-expanded-title{font-size:13px;font-weight:500}
 .issue-expanded-body{padding:12px}
-/* Archived section */
 .archived-toggle{display:flex;align-items:center;gap:6px;font-size:12px;color:#888;cursor:pointer;padding:6px 0;margin-top:6px;user-select:none}
-.archived-toggle:hover{color:#555}
 .archived-section{margin-top:8px;padding:10px 12px;background:#f5f5f5;border-radius:8px;border:0.5px dashed #ccc}
 .archived-issue-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid #eee;font-size:13px;color:#888}
 .archived-issue-row:last-child{border-bottom:none}
-/* Remedy blocks in records */
 .remedies-list{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
 .remedy-block{background:#fff;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 12px}
 .remedy-block.stopped{opacity:0.45;border-style:dashed}
@@ -92,11 +98,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .remedy-field{font-size:11px;color:#888;line-height:1.5}
 .remedy-val{font-size:12px;color:#1a1a1a;font-weight:500}
 .remedy-notes{font-size:12px;color:#555;margin-top:6px;padding:6px 8px;background:#f8f8f6;border-radius:6px;line-height:1.5;white-space:pre-wrap}
-.taken-label{font-size:11px;color:#2e7d32;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#e8f5e9;border-radius:7px}
-.missed-label{font-size:11px;color:#c62828;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#fdecea;border-radius:7px}
+.taken-label{font-size:11px;color:#2e7d32;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#e8f5e9;border-radius:7px;margin-top:6px}
+.missed-label{font-size:11px;color:#c62828;display:flex;align-items:center;gap:4px;padding:4px 8px;background:#fdecea;border-radius:7px;margin-top:6px}
 .reassess-date-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding:6px 10px;background:#f0eaff;border-radius:7px;font-size:12px;color:#6a1b9a}
 .reassess-date-row.overdue{background:#fdecea;color:#c62828}
 .notes-text{font-size:12px;background:#fff;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;line-height:1.6;white-space:pre-wrap;max-height:120px;overflow-y:auto}
+/* Photo attachments */
+.photo-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.photo-thumb{width:64px;height:64px;border-radius:6px;object-fit:cover;cursor:pointer;border:0.5px solid #ddd}
+.photo-add-btn{width:64px;height:64px;border-radius:6px;border:1.5px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#f8f8f6;color:#aaa;font-size:22px}
+.photo-add-btn:hover{background:#f0f0ec;color:#888}
+/* Photo lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:90vw;max-height:75vh;border-radius:8px;object-fit:contain}
+.lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:24px;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-del{background:#c62828;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;cursor:pointer}
 .add-remedy-btn{background:none;border:0.5px dashed #b0d8be;border-radius:7px;padding:6px 10px;font-size:12px;color:#2e7d50;cursor:pointer;display:flex;align-items:center;gap:5px;margin-top:4px;width:100%}
 .add-remedy-btn:hover{background:#f0faf4}
 .add-issue-btn{background:none;border:0.5px dashed #bbb;border-radius:8px;padding:8px;width:100%;font-size:13px;color:#888;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
@@ -104,9 +121,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* Reports */
 .report-member-select{margin-bottom:0.75rem}
 .report-issue-card{background:#fff;border:0.5px solid #ddd;border-radius:12px;margin-bottom:1rem;overflow:hidden}
-.report-issue-header{padding:12px 16px;background:#f8f8f6;border-bottom:0.5px solid #eee}
+.report-issue-header{padding:12px 16px;background:#f8f8f6;border-bottom:0.5px solid #eee;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .report-issue-title{font-size:14px;font-weight:600}
 .report-issue-meta{font-size:12px;color:#888;margin-top:3px}
+.export-btn{background:#2e7d50;color:#fff;border:none;border-radius:8px;padding:7px 12px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;flex-shrink:0}
+.export-btn:hover{background:#1e5c39}
 .report-remedy-section{padding:12px 16px;border-bottom:0.5px solid #f0f0f0}
 .report-remedy-title{font-size:13px;font-weight:500;color:#2e7d50;margin-bottom:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .report-stats{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
@@ -120,12 +139,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .dose-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block}
 .dose-dot.taken{background:#2e7d32}
 .dose-dot.missed{background:#c62828}
+/* Severity chart in reports */
+.sev-chart{display:flex;align-items:flex-end;gap:3px;height:60px;margin:8px 0;padding:4px 0;border-bottom:0.5px solid #eee}
+.sev-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.sev-bar{width:100%;border-radius:3px 3px 0 0;min-height:3px;transition:height 0.2s}
+.sev-bar-label{font-size:8px;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;text-align:center}
 .report-notes-section{padding:12px 16px}
 .report-note-entry{margin-bottom:12px;padding-bottom:12px;border-bottom:0.5px solid #f0f0f0}
 .report-note-entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
 .report-note-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:5px}
-.report-note-text{font-size:13px;line-height:1.6;white-space:pre-wrap;color:#1a1a1a}
+.report-note-text{font-size:13px;line-height:1.6;white-space:pre-wrap}
 .report-empty{font-size:12px;color:#aaa;font-style:italic;padding:8px 0}
+/* Share modal */
+.share-options{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.share-option-btn{display:flex;align-items:center;gap:12px;padding:12px 14px;border:0.5px solid #ddd;border-radius:10px;background:#f8f8f6;cursor:pointer;font-size:13px;color:#1a1a1a;text-align:left;width:100%}
+.share-option-btn:hover{background:#f0f0ec}
+.share-option-btn i{font-size:20px;color:#2e7d50;flex-shrink:0}
+.share-option-desc{font-size:11px;color:#888;margin-top:2px}
 /* Modals */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;align-items:center;justify-content:center}
 .modal-backdrop.show{display:flex}
@@ -166,15 +196,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="logo-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6v6M9 9c0 0 1.5-2 3-2s3 2 3 2"/><path d="M8 14c1 2 2.5 3 4 3s3-1 4-3"/></svg>
       </div>
-      <div><div class="app-title">Remedy Tracker</div><div class="app-sub">Homeopathic care for your family</div></div>
+      <div><div class="app-title">Remedy Diary</div><div class="app-sub">Homeopathic care for your family</div></div>
     </div>
     <button class="add-btn" onclick="openAddMember()"><i class="ti ti-plus"></i> Add person</button>
   </div>
 
   <div class="view-toggle">
     <button class="view-btn active" id="btn-today" onclick="switchView('today')"><i class="ti ti-calendar-day"></i> Today</button>
-    <button class="view-btn" id="btn-all" onclick="switchView('all')"><i class="ti ti-users"></i> All records</button>
+    <button class="view-btn" id="btn-all" onclick="switchView('all')"><i class="ti ti-users"></i> Records</button>
     <button class="view-btn" id="btn-report" onclick="switchView('report')"><i class="ti ti-chart-line"></i> Reports</button>
+    <button class="view-btn" id="btn-share" onclick="openShareModal()"><i class="ti ti-share"></i> Share</button>
   </div>
 
   <div id="reassess-banner" class="reassess-banner" style="display:none">
@@ -186,8 +217,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div id="members-list" style="display:none"></div>
   <div id="report-view" style="display:none"></div>
   <div id="empty-state" class="empty-state" style="display:none">
-    <i class="ti ti-leaf" style="font-size:32px;display:block;margin-bottom:8px"></i>Add a family member to start tracking
+    <i class="ti ti-leaf" style="font-size:32px;display:block;margin-bottom:8px"></i>Add a family member to start
   </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="ti ti-x"></i></button>
+  <img id="lightbox-img" src="" alt=""/>
+  <button class="lightbox-del" onclick="deletePhoto(event)"><i class="ti ti-trash"></i> Delete photo</button>
 </div>
 
 <!-- Member modal -->
@@ -223,16 +261,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- Notes modal -->
+<!-- Notes + photos modal -->
 <div class="modal-backdrop" id="notes-modal">
   <div class="modal">
     <div class="modal-title" id="notes-modal-title">Notes</div>
     <div class="tabs">
       <div class="tab active" onclick="switchNotesTab('progress')">Progress</div>
       <div class="tab" onclick="switchNotesTab('reassess')">Reassessment</div>
+      <div class="tab" onclick="switchNotesTab('photos')">Photos</div>
     </div>
     <div id="notes-tab-progress"><textarea class="notes-edit" id="n-progress" style="min-height:160px" placeholder="Observations, improvements, side effects…"></textarea></div>
     <div id="notes-tab-reassess" style="display:none"><textarea class="notes-edit" id="n-reassess" style="min-height:160px" placeholder="Practitioner notes, remedy changes, follow-up plan…"></textarea></div>
+    <div id="notes-tab-photos" style="display:none">
+      <p style="font-size:12px;color:#888;margin-bottom:10px">Photos attach to this health issue's progress notes. Tap to view full size.</p>
+      <div class="photo-grid" id="modal-photo-grid"></div>
+      <input type="file" id="photo-file-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)"/>
+    </div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
       <span style="font-size:11px;color:#888">Last updated: <span id="notes-last-updated">—</span></span>
       <div style="display:flex;gap:8px">
@@ -243,59 +287,72 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- Share modal -->
+<div class="modal-backdrop" id="share-modal">
+  <div class="modal">
+    <div class="modal-title">Share & Export</div>
+    <div class="form-group">
+      <label class="form-label">Select family member</label>
+      <select class="form-input" id="share-member-select">
+        <option value="">— All family members —</option>
+      </select>
+    </div>
+    <div class="share-options">
+      <button class="share-option-btn" onclick="exportPDF()">
+        <i class="ti ti-file-text"></i>
+        <div><div>Export case summary as PDF</div><div class="share-option-desc">Formatted summary to share with your homeopath</div></div>
+      </button>
+      <button class="share-option-btn" onclick="shareAppLink()">
+        <i class="ti ti-link"></i>
+        <div><div>Share app link</div><div class="share-option-desc">Send the Remedy Diary link via messages or email</div></div>
+      </button>
+      <button class="share-option-btn" onclick="copyAppLink()">
+        <i class="ti ti-copy"></i>
+        <div><div>Copy app link</div><div class="share-option-desc">Copy the URL to share manually</div></div>
+      </button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('share-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const COLORS=['#d4edda','#d4e4f7','#fde8d8','#f3d4f7','#d4f0f7','#f7ead4'];
 const TEXT_COLORS=['#2e7d50','#1565c0','#b35000','#6a1b9a','#00697a','#8a6500'];
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const SEV_COLORS=['','#4caf50','#8bc34a','#ff9800','#f44336','#b71c1c'];
+const SEV_LABELS=['','None','Mild','Moderate','Severe','Very severe'];
 
 let members=JSON.parse(localStorage.getItem('rm_members')||'[]');
 let editMemberId=null,editIssueId=null,currentMemberId=null,notesMemberId=null,notesIssueId=null;
 let remedyBlocks=[];
 let currentView='today';
 let reportMemberId=null,reportIssueId=null;
-// Track which issues are expanded per member
 let expandedIssues={};
-// Track which archived sections are open
 let archivedOpen={};
-// Current date offset for Today view (0=today, -1=yesterday, etc.)
 let dayOffset=0;
+let lightboxMid=null,lightboxIid=null,lightboxPhotoIdx=null;
 
 function uid(){return Math.random().toString(36).slice(2,9)}
 function save(){localStorage.setItem('rm_members',JSON.stringify(members))}
 function initials(name){return name.trim().split(/\s+/).slice(0,2).map(w=>w[0].toUpperCase()).join('')}
 
 // ---- Date helpers ----
-function localDateStr(date){
-  const d=date||new Date();
-  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function viewDateStr(){
-  const d=new Date();d.setDate(d.getDate()+dayOffset);return localDateStr(d);
-}
+function localDateStr(date){const d=date||new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function viewDateStr(){const d=new Date();d.setDate(d.getDate()+dayOffset);return localDateStr(d);}
 function todayKey(){return localDateStr();}
-function defaultStartStr(){
-  const d=new Date();
-  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T08:00`;
-}
-function localDTStr(isoStr){
-  const d=new Date(isoStr);
-  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-}
+function defaultStartStr(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T08:00`;}
+function localDTStr(isoStr){const d=new Date(isoStr);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}T${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
 
 // ---- Frequency ----
 function freqLabel(r){
   if(r.freqType==='days-of-week'){const days=(r.daysOfWeek||[]).map(d=>DAYS[d]).join(', ');return days||'No days set';}
   const h=r.freqHours||24;
-  if(h===2)return'Every 2 hours';
-  if(h===6)return'Every 6 hours';
-  if(h===8)return'3x daily';
-  if(h===12)return'2x daily';
-  if(h===24)return'Once daily';
-  if(h===48)return'Every 2 days';
-  if(h===168)return'Weekly';
-  if(h===720)return'Monthly';
-  if(h<24)return`Every ${h}h`;
-  return`Every ${Math.round(h/24)}d`;
+  if(h===2)return'Every 2 hours';if(h===6)return'Every 6 hours';if(h===8)return'3x daily';
+  if(h===12)return'2x daily';if(h===24)return'Once daily';if(h===48)return'Every 2 days';
+  if(h===168)return'Weekly';if(h===720)return'Monthly';
+  if(h<24)return`Every ${h}h`;return`Every ${Math.round(h/24)}d`;
 }
 
 function isDueOnDate(r,dateStr){
@@ -303,53 +360,54 @@ function isDueOnDate(r,dateStr){
   if(!r.startTime)return false;
   const startStr=localDateStr(new Date(r.startTime));
   if(dateStr<startStr)return false;
-  if(r.freqType==='days-of-week'){
-    const dow=new Date(dateStr+'T12:00:00').getDay();
-    return(r.daysOfWeek||[]).includes(dow);
-  }
+  if(r.freqType==='days-of-week'){const dow=new Date(dateStr+'T12:00:00').getDay();return(r.daysOfWeek||[]).includes(dow);}
   const h=r.freqHours||24;
   if(h<24)return true;
-  const start=new Date(startStr+'T00:00:00');
-  const target=new Date(dateStr+'T00:00:00');
-  const daysDiff=Math.round((target-start)/86400000);
-  const intervalDays=Math.round(h/24);
+  const start=new Date(startStr+'T00:00:00'),target=new Date(dateStr+'T00:00:00');
+  const daysDiff=Math.round((target-start)/86400000),intervalDays=Math.round(h/24);
   return daysDiff>=0&&daysDiff%intervalDays===0;
 }
-
 function getDosesNeeded(r,dateStr){
   if(!isDueOnDate(r,dateStr))return 0;
   if(r.freqType==='days-of-week')return 1;
-  const h=r.freqHours||24;
-  if(h>=24)return 1;
-  return Math.round(24/h);
+  const h=r.freqHours||24;if(h>=24)return 1;return Math.round(24/h);
 }
-
 function getDateRec(r,dateStr){
   if(!r.dailyLog)r.dailyLog={};
   if(!r.dailyLog[dateStr])r.dailyLog[dateStr]={taken:0,missed:0};
   return r.dailyLog[dateStr];
 }
-
 function dateStatus(r,dateStr){
-  const needed=getDosesNeeded(r,dateStr);
-  if(needed===0)return'not-today';
+  const needed=getDosesNeeded(r,dateStr);if(needed===0)return'not-today';
   const rec=getDateRec(r,dateStr);
   if(rec.taken>=needed)return'all-done';
   if(rec.taken+rec.missed>=needed)return'all-missed';
   return'pending';
 }
 
-// ---- Reassessment banner (today only) ----
+// ---- Symptom severity ----
+function getSeverity(iss,dateStr){
+  if(!iss.severityLog)return 0;
+  return iss.severityLog[dateStr]||0;
+}
+function setSeverity(memberId,issueId,dateStr,val){
+  const m=members.find(x=>x.id===memberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);
+  if(!iss)return;
+  if(!iss.severityLog)iss.severityLog={};
+  // toggle off if same value
+  iss.severityLog[dateStr]=iss.severityLog[dateStr]===val?0:val;
+  save();render();
+}
+function severityDotsHTML(memberId,issueId,dateStr,currentVal){
+  return[1,2,3,4,5].map(v=>`<span class="sev-dot s${v}${currentVal>=v?' active':''}" onclick="setSeverity('${memberId}','${issueId}','${dateStr}',${v})" title="${SEV_LABELS[v]}">${v}</span>`).join('');
+}
+
+// ---- Banners ----
 function renderBanners(){
   const today=todayKey();
   const rdue=[];
-  members.forEach(m=>{
-    if(m.closed)return;
-    (m.issues||[]).forEach(iss=>{
-      if(iss.closed||!iss.reassessDate)return;
-      if(iss.reassessDate===today) rdue.push(`<strong>${m.name}</strong> — ${iss.condition}`);
-    });
-  });
+  members.forEach(m=>{if(m.closed)return;(m.issues||[]).forEach(iss=>{if(iss.closed||!iss.reassessDate)return;if(iss.reassessDate===today)rdue.push(`<strong>${m.name}</strong> — ${iss.condition}`);});});
   const rb=document.getElementById('reassess-banner');
   if(rdue.length){rb.style.display='flex';document.getElementById('reassess-list').innerHTML=rdue.map(x=>`• ${x}`).join('<br>');}
   else rb.style.display='none';
@@ -362,16 +420,16 @@ function switchView(v){
     document.getElementById(`btn-${n}`).classList.toggle('active',v===n);
     document.getElementById(n==='today'?'today-view':n==='all'?'members-list':'report-view').style.display=v===n?'':'none';
   });
+  document.getElementById('btn-share').classList.remove('active');
   render();
 }
 
-// ---- Today / past days view ----
+// ---- Today view ----
 function renderToday(){
   const el=document.getElementById('today-view');
   const viewDate=new Date();viewDate.setDate(viewDate.getDate()+dayOffset);
   const dateKey=localDateStr(viewDate);
   const isToday=dayOffset===0;
-
   const dateLabel=isToday?'Today — '+viewDate.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long'})
     :viewDate.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
@@ -383,15 +441,13 @@ function renderToday(){
 
   if(!isToday){
     html+=`<div style="background:#fff8e7;border:0.5px solid #f0c040;border-radius:8px;padding:8px 12px;margin-bottom:1rem;font-size:12px;color:#7a5a00">
-      <i class="ti ti-clock-edit"></i> Viewing past day — you can still update doses below
-    </div>`;
+      <i class="ti ti-clock-edit"></i> Viewing past day — tap Taken or Missed to update</div>`;
   }
 
-  const active=members.filter(m=>!m.closed);
   if(!members.length){el.innerHTML=html+`<div class="today-empty"><i class="ti ti-leaf" style="font-size:28px;display:block;margin-bottom:8px;color:#ccc"></i>Add a family member to get started</div>`;return;}
 
   let anyItems=false;
-  active.forEach((m,mi)=>{
+  members.filter(m=>!m.closed).forEach((m,mi)=>{
     const ci=mi%COLORS.length;
     const items=[];
     (m.issues||[]).filter(i=>!i.closed).forEach(iss=>{
@@ -401,7 +457,10 @@ function renderToday(){
         items.push({iss,r,st});
       });
     });
-    if(!items.length)return;
+
+    // Also collect open issues for severity logging
+    const openIssues=(m.issues||[]).filter(i=>!i.closed);
+    if(!items.length&&!openIssues.length)return;
     anyItems=true;
 
     const order={pending:0,'all-done':1,'all-missed':2};
@@ -422,13 +481,11 @@ function renderToday(){
       else if(st==='all-missed')cardClass+=' all-missed';
 
       let pipsHtml='';
-      if(needed>1){
-        for(let i=0;i<needed;i++){
-          if(i<taken)pipsHtml+=`<span class="counter-pip done"><i class="ti ti-check" style="font-size:8px"></i></span>`;
-          else if(i<taken+missed)pipsHtml+=`<span class="counter-pip missed-pip">✕</span>`;
-          else pipsHtml+=`<span class="counter-pip"></span>`;
-        }
-      }
+      if(needed>1){for(let i=0;i<needed;i++){
+        if(i<taken)pipsHtml+=`<span class="counter-pip done"><i class="ti ti-check" style="font-size:8px"></i></span>`;
+        else if(i<taken+missed)pipsHtml+=`<span class="counter-pip missed-pip">✕</span>`;
+        else pipsHtml+=`<span class="counter-pip"></span>`;
+      }}
 
       let statusText='';
       if(st==='all-done')statusText=`<span style="color:#2e7d32;font-size:11px">✓ All done</span>`;
@@ -443,15 +500,44 @@ function renderToday(){
         btns=`<button class="today-btn undo" onclick="dateUndo('${m.id}','${iss.id}','${r.id}','${dateKey}')"><i class="ti ti-rotate-left"></i> Undo</button>`;
       }
 
+      // Severity for this issue
+      const sevVal=getSeverity(iss,dateKey);
+      const sevHtml=`<div class="severity-row">
+        <span class="severity-label">Severity:</span>
+        ${severityDotsHTML(m.id,iss.id,dateKey,sevVal)}
+        ${sevVal>0?`<span style="font-size:10px;color:${SEV_COLORS[sevVal]};font-weight:500">${SEV_LABELS[sevVal]}</span>`:''}
+      </div>`;
+
       html+=`<div class="${cardClass}">
-        <div class="today-card-info">
-          <div class="today-remedy-name">${r.name||'Remedy'} <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r)}</span></div>
-          <div class="today-condition">${iss.condition}</div>
-          ${needed>1?`<div style="display:flex;align-items:center;gap:5px;margin-top:5px">${pipsHtml} ${statusText}</div>`:`<div style="margin-top:3px">${statusText}</div>`}
+        <div class="today-card-top">
+          <div class="today-card-info">
+            <div class="today-remedy-name">${r.name||'Remedy'} <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r)}</span></div>
+            <div class="today-condition">${iss.condition}</div>
+            ${needed>1?`<div style="display:flex;align-items:center;gap:5px;margin-top:5px">${pipsHtml} ${statusText}</div>`:`<div style="margin-top:3px">${statusText}</div>`}
+          </div>
+          <div class="today-dose-btns">${btns}</div>
         </div>
-        <div class="today-dose-btns">${btns}</div>
+        ${sevHtml}
       </div>`;
     });
+
+    // Show severity for issues that have no remedy due today
+    openIssues.forEach(iss=>{
+      const hasRemedy=items.some(x=>x.iss.id===iss.id);
+      if(hasRemedy)return;
+      const sevVal=getSeverity(iss,dateKey);
+      html+=`<div class="today-card" style="padding:9px 14px">
+        <div style="flex:1">
+          <div style="font-size:12px;font-weight:500;color:#888">${iss.condition} <span style="font-weight:400;font-size:11px">(no remedy today)</span></div>
+          <div class="severity-row" style="margin-top:4px">
+            <span class="severity-label">Severity:</span>
+            ${severityDotsHTML(m.id,iss.id,dateKey,sevVal)}
+            ${sevVal>0?`<span style="font-size:10px;color:${SEV_COLORS[sevVal]};font-weight:500">${SEV_LABELS[sevVal]}</span>`:''}
+          </div>
+        </div>
+      </div>`;
+    });
+
     html+='</div>';
   });
 
@@ -459,14 +545,8 @@ function renderToday(){
   el.innerHTML=html;
 }
 
-function changeDay(delta){
-  const newOffset=dayOffset+delta;
-  if(newOffset>0||newOffset<-7)return;
-  dayOffset=newOffset;
-  render();
-}
+function changeDay(delta){const n=dayOffset+delta;if(n>0||n<-7)return;dayOffset=n;render();}
 
-// Dose actions — all take explicit dateKey so they work on past days too
 function dateTaken(mid,iid,rid,dateKey){
   const r=getR(mid,iid,rid);if(!r)return;
   const needed=getDosesNeeded(r,dateKey),rec=getDateRec(r,dateKey);
@@ -483,53 +563,31 @@ function dateUndo(mid,iid,rid,dateKey){
   const r=getR(mid,iid,rid);if(!r||!r.dailyLog||!r.dailyLog[dateKey])return;
   const rec=r.dailyLog[dateKey];
   if(rec.missed>0)rec.missed--;else if(rec.taken>0)rec.taken--;
-  // remove last log entry for this date
-  if(r.doseLog&&r.doseLog.length){
-    for(let i=r.doseLog.length-1;i>=0;i--){
-      if(r.doseLog[i].date===dateKey){r.doseLog.splice(i,1);break;}
-    }
-  }
+  if(r.doseLog&&r.doseLog.length){for(let i=r.doseLog.length-1;i>=0;i--){if(r.doseLog[i].date===dateKey){r.doseLog.splice(i,1);break;}}}
   save();render();
 }
-function logDose(r,type,dateKey){
-  if(!r.doseLog)r.doseLog=[];
-  r.doseLog.push({date:dateKey||todayKey(),type,ts:new Date().toISOString()});
-}
+function logDose(r,type,dateKey){if(!r.doseLog)r.doseLog=[];r.doseLog.push({date:dateKey||todayKey(),type,ts:new Date().toISOString()});}
 function getR(mid,iid,rid){
   const m=members.find(x=>x.id===mid);
   const iss=(m&&m.issues||[]).find(i=>i.id===iid);
   return(iss&&iss.remedies||[]).find(r=>r.id===rid)||null;
 }
 
-// ---- Stop/restart remedy ----
-function stopRemedy(mid,iid,rid){
-  const r=getR(mid,iid,rid);if(!r)return;
-  r.stopped=true;r.stoppedDate=localDateStr();save();render();
-}
-function restartRemedy(mid,iid,rid){
-  const r=getR(mid,iid,rid);if(!r)return;
-  r.stopped=false;delete r.stoppedDate;save();render();
-}
+// ---- Stop/restart ----
+function stopRemedy(mid,iid,rid){const r=getR(mid,iid,rid);if(!r)return;r.stopped=true;r.stoppedDate=localDateStr();save();render();}
+function restartRemedy(mid,iid,rid){const r=getR(mid,iid,rid);if(!r)return;r.stopped=false;delete r.stoppedDate;save();render();}
 
-// ---- Toggle issue expanded ----
-function toggleIssue(memberId,issueId){
-  const key=`${memberId}__${issueId}`;
-  expandedIssues[key]=!expandedIssues[key];
-  render();
-}
-function toggleArchived(memberId){
-  archivedOpen[memberId]=!archivedOpen[memberId];render();
-}
+// ---- All records ----
+function toggleIssue(mid,iid){const key=`${mid}__${iid}`;expandedIssues[key]=!expandedIssues[key];render();}
+function toggleArchived(mid){archivedOpen[mid]=!archivedOpen[mid];render();}
 
-// ---- All records view ----
 function renderAll(){
   const el=document.getElementById('members-list');
   if(!members.length){document.getElementById('empty-state').style.display='block';el.innerHTML='';return;}
   document.getElementById('empty-state').style.display='none';
   const today=todayKey();
 
-  const ordered=[...members.filter(m=>!m.closed),...members.filter(m=>m.closed)];
-  el.innerHTML=ordered.map((m,mi)=>{
+  el.innerHTML=[...members.filter(m=>!m.closed),...members.filter(m=>m.closed)].map((m,mi)=>{
     const ci=mi%COLORS.length;
     const activeIssues=(m.issues||[]).filter(i=>!i.closed);
     const archivedIssues=(m.issues||[]).filter(i=>i.closed);
@@ -540,8 +598,7 @@ function renderAll(){
       m.closed?`<span class="tag tag-grey">Closed</span>`:''
     ].filter(Boolean).join('');
 
-    // Active issues — collapsed by default, one at a time
-    let issuesHtml=activeIssues.map(iss=>{
+    const issuesHtml=activeIssues.map(iss=>{
       const key=`${m.id}__${iss.id}`;
       const isOpen=!!expandedIssues[key];
       const rdStatus=reassessStatusFull(iss.reassessDate);
@@ -556,23 +613,20 @@ function renderAll(){
             <div class="issue-row-tags">
               ${issueHasDue?'<span class="tag tag-red" style="font-size:10px">due</span>':''}
               ${issueHasReassess?'<span class="tag" style="background:#f0eaff;color:#6a1b9a;font-size:10px">reassess</span>':''}
-              ${rdStatus==='overdue'?'<span class="tag tag-red" style="font-size:10px">reassess overdue</span>':''}
+              ${rdStatus==='overdue'?'<span class="tag tag-red" style="font-size:10px">overdue</span>':''}
             </div>
           </div>
           <div class="issue-row-actions" onclick="event.stopPropagation()">
             <button class="icon-btn" onclick="openNotes('${m.id}','${iss.id}')" title="Notes"><i class="ti ti-notes"></i></button>
             <button class="icon-btn" onclick="openEditIssue('${m.id}','${iss.id}')" title="Edit"><i class="ti ti-edit"></i></button>
-            <button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive issue"><i class="ti ti-archive"></i></button>
-            <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete issue"><i class="ti ti-trash"></i></button>
+            <button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive"><i class="ti ti-archive"></i></button>
+            <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete"><i class="ti ti-trash"></i></button>
           </div>
         </div>`;
       }
 
-      // Expanded
       const remediesHtml=(iss.remedies||[]).map(r=>{
-        const st=dateStatus(r,today);
-        const rec=getDateRec(r,today);
-        const needed=getDosesNeeded(r,today);
+        const st=dateStatus(r,today),rec=getDateRec(r,today),needed=getDosesNeeded(r,today);
         let statusRow='';
         if(!r.stopped&&needed>0){
           if(st==='all-done')statusRow=`<div class="taken-label"><i class="ti ti-circle-check"></i> All done today${needed>1?` (${rec.taken}/${needed})`:''}</div>`;
@@ -584,9 +638,9 @@ function renderAll(){
           <div class="remedy-block-header">
             <span class="remedy-name-badge${r.stopped?' stopped':''}"><i class="ti ti-pill"></i> ${r.name||'Remedy'}${r.stopped?'<span class="stopped-badge">Stopped</span>':''}</span>
             <div style="display:flex;gap:4px">
-              ${!r.stopped?`<button class="icon-btn" onclick="stopRemedy('${m.id}','${iss.id}','${r.id}')" title="Stop remedy"><i class="ti ti-player-stop"></i></button>`
-                :`<button class="icon-btn" onclick="restartRemedy('${m.id}','${iss.id}','${r.id}')" title="Restart remedy"><i class="ti ti-player-play"></i></button>`}
-              <button class="icon-btn danger" onclick="deleteRemedy('${m.id}','${iss.id}','${r.id}')" title="Delete remedy"><i class="ti ti-trash"></i></button>
+              ${!r.stopped?`<button class="icon-btn" onclick="stopRemedy('${m.id}','${iss.id}','${r.id}')" title="Stop"><i class="ti ti-player-stop"></i></button>`
+                :`<button class="icon-btn" onclick="restartRemedy('${m.id}','${iss.id}','${r.id}')" title="Restart"><i class="ti ti-player-play"></i></button>`}
+              <button class="icon-btn danger" onclick="deleteRemedy('${m.id}','${iss.id}','${r.id}')" title="Delete"><i class="ti ti-trash"></i></button>
             </div>
           </div>
           <div class="remedy-grid">
@@ -604,14 +658,18 @@ function renderAll(){
         ${rdStatus==='overdue'?' — overdue':rdStatus==='soon'?' — coming up':''}
       </div>`:'';
 
+      // Photos
+      const photos=iss.photos||[];
+      const photosHtml=photos.length?`<div class="photo-grid" style="margin-top:8px">${photos.map((p,pi)=>`<img class="photo-thumb" src="${p}" onclick="openLightbox('${m.id}','${iss.id}',${pi})" alt="Progress photo"/>`).join('')}</div>`:'';
+
       return`<div class="issue-expanded">
         <div class="issue-expanded-header" onclick="toggleIssue('${m.id}','${iss.id}')">
           <span class="issue-expanded-title"><i class="ti ti-chevron-down" style="font-size:13px;margin-right:4px"></i>${iss.condition}</span>
           <div onclick="event.stopPropagation()" style="display:flex;gap:4px">
-            <button class="icon-btn" onclick="openNotes('${m.id}','${iss.id}')" title="Notes"><i class="ti ti-notes"></i></button>
+            <button class="icon-btn" onclick="openNotes('${m.id}','${iss.id}')" title="Notes & photos"><i class="ti ti-notes"></i></button>
             <button class="icon-btn" onclick="openEditIssue('${m.id}','${iss.id}')" title="Edit"><i class="ti ti-edit"></i></button>
-            <button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive issue"><i class="ti ti-archive"></i></button>
-            <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete issue"><i class="ti ti-trash"></i></button>
+            <button class="icon-btn" onclick="closeCase('${m.id}','${iss.id}')" title="Archive"><i class="ti ti-archive"></i></button>
+            <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete"><i class="ti ti-trash"></i></button>
           </div>
         </div>
         <div class="issue-expanded-body">
@@ -620,58 +678,89 @@ function renderAll(){
           ${rdRow}
           ${iss.progress?`<div style="margin-top:8px"><div style="font-size:11px;color:#888;margin-bottom:4px">Progress notes</div><div class="notes-text">${iss.progress}</div></div>`:''}
           ${iss.reassessNotes?`<div style="margin-top:6px"><div style="font-size:11px;color:#888;margin-bottom:4px">Reassessment notes</div><div class="notes-text">${iss.reassessNotes}</div></div>`:''}
+          ${photosHtml}
         </div>
       </div>`;
     }).join('');
 
-    // Archived issues section
     let archivedHtml='';
     if(archivedIssues.length){
       const isOpen=!!archivedOpen[m.id];
       archivedHtml=`<div class="archived-toggle" onclick="toggleArchived('${m.id}')">
         <i class="ti ti-${isOpen?'chevron-down':'chevron-right'}" style="font-size:13px"></i>
         <i class="ti ti-archive" style="font-size:13px"></i>
-        Archived issues (${archivedIssues.length})
-      </div>`;
+        Archived issues (${archivedIssues.length})</div>`;
       if(isOpen){
         archivedHtml+=`<div class="archived-section">${archivedIssues.map(iss=>`
-          <div class="archived-issue-row">
-            <span>${iss.condition}</span>
+          <div class="archived-issue-row"><span>${iss.condition}</span>
             <div style="display:flex;gap:4px">
               <button class="icon-btn" onclick="reopenCase('${m.id}','${iss.id}')" title="Reopen"><i class="ti ti-archive-off"></i></button>
               <button class="icon-btn danger" onclick="deleteIssue('${m.id}','${iss.id}')" title="Delete"><i class="ti ti-trash"></i></button>
-            </div>
-          </div>`).join('')}</div>`;
+            </div></div>`).join('')}</div>`;
       }
     }
 
     return`<div class="member-card${m.closed?' closed':''}" id="card-${m.id}">
       <div class="member-header" onclick="toggleMember('${m.id}')">
         <div class="avatar" style="background:${COLORS[ci]};color:${TEXT_COLORS[ci]}">${initials(m.name)}</div>
-        <div class="member-meta">
-          <div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
-          <div class="member-tags">${tags}</div>
-        </div>
-        <button class="icon-btn danger" onclick="event.stopPropagation();deleteMember('${m.id}')" title="Remove" style="margin-right:4px"><i class="ti ti-trash"></i></button>
+        <div class="member-meta"><div class="member-name">${m.name}${m.relationship?` <span style="font-weight:400;color:#888;font-size:13px">· ${m.relationship}</span>`:''}</div>
+          <div class="member-tags">${tags}</div></div>
+        <button class="icon-btn danger" onclick="event.stopPropagation();deleteMember('${m.id}')" style="margin-right:4px"><i class="ti ti-trash"></i></button>
         <i class="ti ti-chevron-down chevron ${m.open?'open':''}"></i>
       </div>
       ${m.open?`<div class="member-body">
         <div class="section-label">Health issues</div>
-        ${issuesHtml}
-        ${archivedHtml}
+        ${issuesHtml}${archivedHtml}
         ${!m.closed?`<button class="add-issue-btn" onclick="openAddIssue('${m.id}')"><i class="ti ti-plus"></i> Add health issue</button>`:''}
       </div>`:''}
     </div>`;
   }).join('');
 }
 
-function reassessStatusFull(dateStr){
-  if(!dateStr)return null;
-  const today=todayKey();
-  if(dateStr<today)return'overdue';
-  const diff=new Date(dateStr+'T12:00:00')-Date.now();
-  if(diff<86400000*3)return'soon';
-  return'ok';
+function reassessStatusFull(d){
+  if(!d)return null;const today=todayKey();if(d<today)return'overdue';
+  if(new Date(d+'T12:00:00')-Date.now()<86400000*3)return'soon';return'ok';
+}
+
+// ---- Photo handling ----
+function openLightbox(mid,iid,idx){
+  const m=members.find(x=>x.id===mid);
+  const iss=(m&&m.issues||[]).find(i=>i.id===iid);
+  if(!iss||!iss.photos||!iss.photos[idx])return;
+  lightboxMid=mid;lightboxIid=iid;lightboxPhotoIdx=idx;
+  document.getElementById('lightbox-img').src=iss.photos[idx];
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('show');lightboxMid=lightboxIid=lightboxPhotoIdx=null;}
+function deletePhoto(e){
+  e.stopPropagation();
+  if(!confirm('Delete this photo?'))return;
+  const m=members.find(x=>x.id===lightboxMid);
+  const iss=(m&&m.issues||[]).find(i=>i.id===lightboxIid);
+  if(iss&&iss.photos)iss.photos.splice(lightboxPhotoIdx,1);
+  save();closeLightbox();renderModalPhotos();render();
+}
+function handlePhotoUpload(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const m=members.find(x=>x.id===notesMemberId);
+    const iss=(m&&m.issues||[]).find(i=>i.id===notesIssueId);
+    if(!iss)return;
+    if(!iss.photos)iss.photos=[];
+    iss.photos.push(ev.target.result);
+    save();renderModalPhotos();render();
+  };
+  reader.readAsDataURL(file);
+  e.target.value='';
+}
+function renderModalPhotos(){
+  const m=members.find(x=>x.id===notesMemberId);
+  const iss=(m&&m.issues||[]).find(i=>i.id===notesIssueId);
+  const photos=iss&&iss.photos||[];
+  const grid=document.getElementById('modal-photo-grid');if(!grid)return;
+  grid.innerHTML=photos.map((p,i)=>`<img class="photo-thumb" src="${p}" onclick="openLightbox('${notesMemberId}','${notesIssueId}',${i})" alt="Photo"/>`).join('')
+    +`<div class="photo-add-btn" onclick="document.getElementById('photo-file-input').click()"><i class="ti ti-plus"></i></div>`;
 }
 
 // ---- Reports ----
@@ -682,44 +771,53 @@ function renderReport(){
   let html=`<div class="report-member-select"><select class="form-input" onchange="selectReportMember(this.value)">
     <option value="">— select a family member —</option>${mOpts}</select></div>`;
   if(!reportMemberId){el.innerHTML=html;return;}
-  const m=members.find(x=>x.id===reportMemberId);
-  if(!m){el.innerHTML=html;return;}
+  const m=members.find(x=>x.id===reportMemberId);if(!m){el.innerHTML=html;return;}
   const issues=m.issues||[];
-  if(!issues.length){el.innerHTML=html+`<div class="today-empty">No health issues recorded for ${m.name} yet.</div>`;return;}
+  if(!issues.length){el.innerHTML=html+`<div class="today-empty">No health issues for ${m.name} yet.</div>`;return;}
   const iOpts=issues.map(i=>`<option value="${i.id}" ${i.id===reportIssueId?'selected':''}>${i.condition}${i.closed?' (archived)':''}</option>`).join('');
   html+=`<div class="report-member-select"><select class="form-input" onchange="selectReportIssue(this.value)">
     <option value="">— select a health issue —</option>${iOpts}</select></div>`;
   if(!reportIssueId){el.innerHTML=html;return;}
-  const iss=issues.find(x=>x.id===reportIssueId);
-  if(!iss){el.innerHTML=html;return;}
+  const iss=issues.find(x=>x.id===reportIssueId);if(!iss){el.innerHTML=html;return;}
 
   html+=`<div class="report-issue-card">
     <div class="report-issue-header">
-      <div class="report-issue-title">${iss.condition}${iss.closed?'<span class="tag tag-grey" style="margin-left:8px;font-size:10px">Archived</span>':''}</div>
-      ${iss.reassessDate?`<div class="report-issue-meta">Reassessment: ${new Date(iss.reassessDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}</div>`:''}
+      <div><div class="report-issue-title">${iss.condition}${iss.closed?'<span class="tag tag-grey" style="margin-left:8px">Archived</span>':''}</div>
+        ${iss.reassessDate?`<div class="report-issue-meta">Reassessment: ${new Date(iss.reassessDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})}</div>`:''}
+      </div>
+      <button class="export-btn" onclick="exportPDFForIssue('${m.id}','${iss.id}')"><i class="ti ti-file-text"></i> Export PDF</button>
     </div>`;
 
-  // Per remedy stats — use dailyLog as source of truth for counts
+  // Severity chart — last 14 days
+  const sevLog=iss.severityLog||{};
+  const sevDates=[];
+  for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);sevDates.push(localDateStr(d));}
+  const hasSev=sevDates.some(d=>sevLog[d]);
+  if(hasSev){
+    const bars=sevDates.map(d=>{
+      const v=sevLog[d]||0;
+      const pct=v?Math.round(v/5*100):0;
+      const col=v?SEV_COLORS[v]:'#eee';
+      const short=new Date(d+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'short'});
+      return`<div class="sev-bar-wrap"><div class="sev-bar" style="height:${pct||4}%;background:${col}" title="${short}${v?' — '+SEV_LABELS[v]:''}"></div><div class="sev-bar-label">${new Date(d+'T12:00:00').getDate()}</div></div>`;
+    }).join('');
+    html+=`<div style="padding:12px 16px;border-bottom:0.5px solid #f0f0f0">
+      <div style="font-size:11px;color:#888;margin-bottom:4px">Symptom severity — last 14 days (1=none, 5=very severe)</div>
+      <div class="sev-chart">${bars}</div>
+    </div>`;
+  }
+
+  // Per remedy stats — read from dailyLog (fixes missed count)
   (iss.remedies||[]).forEach(r=>{
-    // Count from dailyLog (accurate)
     let totalTaken=0,totalMissed=0;
-    if(r.dailyLog){
-      Object.values(r.dailyLog).forEach(rec=>{
-        totalTaken+=(rec.taken||0);
-        totalMissed+=(rec.missed||0);
-      });
-    }
-    // fallback to doseLog if dailyLog empty
-    if(totalTaken===0&&totalMissed===0&&r.doseLog&&r.doseLog.length){
-      r.doseLog.forEach(e=>{if(e.type==='taken')totalTaken++;else totalMissed++;});
-    }
+    if(r.dailyLog){Object.values(r.dailyLog).forEach(rec=>{totalTaken+=(rec.taken||0);totalMissed+=(rec.missed||0);});}
     const total=totalTaken+totalMissed;
     const pct=total>0?Math.round(totalTaken/total*100):null;
     const daysOn=r.startTime?Math.max(0,Math.round((Date.now()-new Date(r.startTime).getTime())/86400000)):null;
 
-    // Build dose history from dailyLog
+    // Build history from dailyLog
     const byDate={};
-    if(r.dailyLog){Object.entries(r.dailyLog).forEach(([dk,rec])=>{if(rec.taken||rec.missed)byDate[dk]=rec;});}
+    if(r.dailyLog){Object.entries(r.dailyLog).forEach(([dk,rec])=>{if((rec.taken||0)+(rec.missed||0)>0)byDate[dk]=rec;});}
     const sortedDates=Object.keys(byDate).sort().reverse().slice(0,60);
     const doseLogHtml=sortedDates.length?sortedDates.map(dk=>{
       const rec=byDate[dk];
@@ -728,12 +826,11 @@ function renderReport(){
       if(rec.taken>0)parts.push(`<span class="dose-dot taken"></span> ${rec.taken} taken`);
       if(rec.missed>0)parts.push(`<span class="dose-dot missed"></span> ${rec.missed} missed`);
       return`<div class="dose-log-item"><span style="min-width:100px;color:#555">${dateStr}</span>${parts.join('&nbsp;&nbsp;')}</div>`;
-    }).join(''):`<div class="report-empty">No doses recorded yet — use Today view to log doses.</div>`;
+    }).join(''):`<div class="report-empty">No doses logged yet. Use Today view to log doses.</div>`;
 
     html+=`<div class="report-remedy-section">
       <div class="report-remedy-title"><i class="ti ti-pill"></i>${r.name||'Remedy'}${r.stopped?' <span style="font-size:10px;color:#999;background:#eee;padding:1px 6px;border-radius:8px">stopped</span>':''}
-        <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r)}</span>
-      </div>
+        <span style="font-weight:400;font-size:11px;color:#888">· ${r.dosage||''} · ${freqLabel(r)}</span></div>
       <div class="report-stats">
         <div class="report-stat green"><div class="report-stat-num">${totalTaken}</div><div class="report-stat-label">Taken</div></div>
         <div class="report-stat red"><div class="report-stat-num">${totalMissed}</div><div class="report-stat-label">Missed</div></div>
@@ -745,28 +842,122 @@ function renderReport(){
     </div>`;
   });
 
-  // Notes section
+  // Notes
   html+=`<div class="report-notes-section">
-    <div style="font-size:12px;font-weight:600;color:#555;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;font-size:11px">Notes & observations</div>`;
-  if(iss.progress){
-    html+=`<div class="report-note-entry">
-      <div class="report-note-label">Progress notes${iss.notesUpdated?' <span style="font-weight:400;text-transform:none;letter-spacing:0">· Updated '+new Date(iss.notesUpdated).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})+'</span>':''}</div>
-      <div class="report-note-text">${iss.progress}</div>
-    </div>`;
-  }
-  if(iss.reassessNotes){
-    html+=`<div class="report-note-entry">
-      <div class="report-note-label">Reassessment notes</div>
-      <div class="report-note-text">${iss.reassessNotes}</div>
-    </div>`;
-  }
-  if(!iss.progress&&!iss.reassessNotes)html+=`<div class="report-empty">No notes yet. Tap the notes icon on a health issue in All Records to add observations.</div>`;
+    <div style="font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px">Notes & observations</div>`;
+  if(iss.progress)html+=`<div class="report-note-entry"><div class="report-note-label">Progress notes${iss.notesUpdated?' <span style="text-transform:none;font-weight:400">· '+new Date(iss.notesUpdated).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'})+'</span>':''}</div><div class="report-note-text">${iss.progress}</div></div>`;
+  if(iss.reassessNotes)html+=`<div class="report-note-entry"><div class="report-note-label">Reassessment notes</div><div class="report-note-text">${iss.reassessNotes}</div></div>`;
+  if(!iss.progress&&!iss.reassessNotes)html+=`<div class="report-empty">No notes yet.</div>`;
   html+=`</div></div>`;
   el.innerHTML=html;
 }
 
 function selectReportMember(id){reportMemberId=id;reportIssueId=null;renderReport();}
 function selectReportIssue(id){reportIssueId=id;renderReport();}
+
+// ---- PDF Export ----
+function buildPDFContent(memberId,issueId){
+  const m=memberId?members.find(x=>x.id===memberId):null;
+  const issues=m?(m.issues||[]).filter(i=>!issueId||i.id===issueId)
+    :members.flatMap(m2=>(m2.issues||[]).map(i=>({...i,_memberName:m2.name})));
+
+  let html=`<html><head><meta charset="UTF-8">
+  <style>
+    body{font-family:Arial,sans-serif;color:#1a1a1a;padding:32px;max-width:700px;margin:0 auto}
+    h1{font-size:22px;color:#2e7d50;margin-bottom:4px}
+    .sub{font-size:13px;color:#888;margin-bottom:24px}
+    h2{font-size:16px;color:#2e7d50;border-bottom:1px solid #eee;padding-bottom:6px;margin:20px 0 10px}
+    h3{font-size:14px;margin:12px 0 6px;color:#333}
+    .stat-row{display:flex;gap:16px;margin:8px 0;font-size:13px}
+    .stat{background:#f5f5f5;border-radius:6px;padding:6px 12px;text-align:center;min-width:70px}
+    .stat-num{font-size:18px;font-weight:bold;color:#2e7d50}
+    .stat-label{font-size:10px;color:#888}
+    .red .stat-num{color:#c62828}
+    table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+    td,th{border:1px solid #eee;padding:6px 10px;text-align:left}
+    th{background:#f5f5f5;font-weight:600}
+    p{font-size:13px;line-height:1.6;margin:6px 0}
+    .note-box{background:#f8f8f6;border-left:3px solid #2e7d50;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:13px;line-height:1.6;white-space:pre-wrap}
+    .footer{margin-top:40px;font-size:11px;color:#aaa;border-top:1px solid #eee;padding-top:12px}
+  </style></head><body>
+  <h1>Remedy Diary — Case Summary</h1>
+  <div class="sub">Generated ${new Date().toLocaleDateString([],{day:'numeric',month:'long',year:'numeric'})}${m?' · '+m.name:''}</div>`;
+
+  issues.forEach(iss=>{
+    const memberName=m?m.name:(iss._memberName||'');
+    html+=`<h2>${memberName?memberName+' — ':''}${iss.condition}</h2>`;
+    if(iss.reassessDate)html+=`<p><strong>Reassessment date:</strong> ${new Date(iss.reassessDate+'T12:00:00').toLocaleDateString([],{day:'numeric',month:'long',year:'numeric'})}</p>`;
+
+    (iss.remedies||[]).forEach(r=>{
+      let totalTaken=0,totalMissed=0;
+      if(r.dailyLog){Object.values(r.dailyLog).forEach(rec=>{totalTaken+=(rec.taken||0);totalMissed+=(rec.missed||0);});}
+      const total=totalTaken+totalMissed;
+      const pct=total>0?Math.round(totalTaken/total*100):null;
+      html+=`<h3>Remedy: ${r.name||'—'}</h3>
+      <p><strong>Dosage:</strong> ${r.dosage||'—'} &nbsp; <strong>Frequency:</strong> ${freqLabel(r)} &nbsp; <strong>Started:</strong> ${r.startTime?new Date(r.startTime).toLocaleDateString([],{day:'numeric',month:'short',year:'numeric'}):'—'}${r.stopped?' &nbsp; <strong>Status:</strong> Stopped':''}</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">${totalTaken}</div><div class="stat-label">Taken</div></div>
+        <div class="stat red"><div class="stat-num">${totalMissed}</div><div class="stat-label">Missed</div></div>
+        ${pct!==null?`<div class="stat"><div class="stat-num">${pct}%</div><div class="stat-label">Adherence</div></div>`:''}
+      </div>`;
+      if(r.notes)html+=`<p><em>${r.notes}</em></p>`;
+
+      // Dose log table
+      const byDate={};
+      if(r.dailyLog){Object.entries(r.dailyLog).forEach(([dk,rec])=>{if((rec.taken||0)+(rec.missed||0)>0)byDate[dk]=rec;});}
+      const sortedDates=Object.keys(byDate).sort().reverse().slice(0,30);
+      if(sortedDates.length){
+        html+=`<table><tr><th>Date</th><th>Taken</th><th>Missed</th></tr>`;
+        sortedDates.forEach(dk=>{
+          const rec=byDate[dk];
+          const ds=new Date(dk+'T12:00:00').toLocaleDateString([],{weekday:'short',day:'numeric',month:'short'});
+          html+=`<tr><td>${ds}</td><td>${rec.taken||0}</td><td>${rec.missed||0}</td></tr>`;
+        });
+        html+=`</table>`;
+      }
+    });
+
+    if(iss.progress)html+=`<h3>Progress notes</h3><div class="note-box">${iss.progress}</div>`;
+    if(iss.reassessNotes)html+=`<h3>Reassessment notes</h3><div class="note-box">${iss.reassessNotes}</div>`;
+  });
+
+  html+=`<div class="footer">Generated by Remedy Diary &nbsp;·&nbsp; ${window.location.href}</div></body></html>`;
+  return html;
+}
+
+function exportPDF(){
+  const mid=document.getElementById('share-member-select').value||null;
+  const content=buildPDFContent(mid,null);
+  const win=window.open('','_blank');
+  win.document.write(content);
+  win.document.close();
+  win.focus();
+  setTimeout(()=>win.print(),600);
+}
+function exportPDFForIssue(mid,iid){
+  const content=buildPDFContent(mid,iid);
+  const win=window.open('','_blank');
+  win.document.write(content);
+  win.document.close();
+  win.focus();
+  setTimeout(()=>win.print(),600);
+}
+
+// ---- Share ----
+function openShareModal(){
+  const sel=document.getElementById('share-member-select');
+  sel.innerHTML='<option value="">— All family members —</option>';
+  members.forEach(m=>sel.innerHTML+=`<option value="${m.id}">${m.name}</option>`);
+  document.getElementById('share-modal').classList.add('show');
+}
+function shareAppLink(){
+  const url=window.location.href;
+  if(navigator.share){navigator.share({title:'Remedy Diary',text:'Track homeopathic remedies for your family',url}).catch(()=>{});}
+  else copyAppLink();
+}
+function copyAppLink(){
+  navigator.clipboard.writeText(window.location.href).then(()=>alert('App link copied to clipboard!')).catch(()=>alert('URL: '+window.location.href));
+}
 
 // ---- Render ----
 function render(){
@@ -775,13 +966,11 @@ function render(){
   else if(currentView==='all')renderAll();
   else renderReport();
 }
-
 function toggleMember(id){const m=members.find(x=>x.id===id);if(m)m.open=!m.open;save();render();}
 
 // ---- Member ----
 function openAddMember(){
-  editMemberId=null;
-  document.getElementById('m-name').value='';document.getElementById('m-rel').value='';
+  editMemberId=null;document.getElementById('m-name').value='';document.getElementById('m-rel').value='';
   document.getElementById('member-modal-title').textContent='Add family member';
   document.getElementById('member-modal').classList.add('show');
 }
@@ -794,9 +983,8 @@ function saveMember(){
 }
 function deleteMember(id){if(!confirm('Remove this person and all their data?'))return;members=members.filter(m=>m.id!==id);save();render();}
 
-// ---- Remedy blocks in modal ----
+// ---- Remedy blocks ----
 const blockDays={};
-
 function buildRemedyBlockHTML(rb,idx){
   const known=[2,6,8,12,24,48,168,720];
   const isDow=rb.freqType==='days-of-week';
@@ -827,20 +1015,16 @@ function buildRemedyBlockHTML(rb,idx){
         </select></div>
     </div>
     <div id="rb-dow-${rb.id}" style="display:${isDow?'block':'none'};margin-bottom:12px">
-      <label class="form-label">Select days</label>
-      <div class="day-picker">${dayChips}</div>
-    </div>
+      <label class="form-label">Select days</label><div class="day-picker">${dayChips}</div></div>
     <div id="rb-custom-wrap-${rb.id}" style="display:${isCustom?'block':'none'};margin-bottom:12px">
       <label class="form-label">Custom interval (hours)</label>
-      <input class="form-input" id="rb-custom-${rb.id}" type="number" min="0.5" step="0.5" placeholder="e.g. 2" value="${isCustom?rb.freqHours:''}"/>
-    </div>
+      <input class="form-input" id="rb-custom-${rb.id}" type="number" min="0.5" step="0.5" placeholder="e.g. 2" value="${isCustom?rb.freqHours:''}"/></div>
     <div class="form-group"><label class="form-label">Start date & time</label>
       <input class="form-input" id="rb-start-${rb.id}" type="datetime-local" value="${rb.startTime?localDTStr(rb.startTime):defaultStartStr()}"/></div>
     <div class="form-group"><label class="form-label">Notes for this remedy</label>
       <textarea class="form-textarea" id="rb-notes-${rb.id}" placeholder="e.g. take away from food, store cool, observe for aggravation…">${rb.notes||''}</textarea></div>
   </div>`;
 }
-
 function onFreqChange(rbId){
   const v=document.getElementById(`rb-freq-${rbId}`).value;
   document.getElementById(`rb-dow-${rbId}`).style.display=v==='days-of-week'?'block':'none';
@@ -863,21 +1047,21 @@ function collectRemedyBlocks(){
     const existing=members.flatMap(m=>m.issues||[]).flatMap(i=>i.remedies||[]).find(r=>r.id===rb.id);
     let freqType='interval',freqHours=24,daysOfWeek=[];
     if(freqSel==='days-of-week'){freqType='days-of-week';daysOfWeek=[...(blockDays[rb.id]||[])].sort((a,b)=>a-b);freqHours=0;}
-    else if(freqSel==='custom'){freqHours=parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||24;}
+    else if(freqSel==='custom')freqHours=parseFloat(document.getElementById(`rb-custom-${rb.id}`).value)||24;
     else freqHours=parseFloat(freqSel)||24;
     let startTime=null;
-    if(startVal){const[datePart,timePart]=startVal.split('T');const[y,mo,d]=datePart.split('-').map(Number);const[h,min]=(timePart||'08:00').split(':').map(Number);startTime=new Date(y,mo-1,d,h,min).toISOString();}
+    if(startVal){const[dp,tp]=startVal.split('T');const[y,mo,d]=dp.split('-').map(Number);const[h,min]=(tp||'08:00').split(':').map(Number);startTime=new Date(y,mo-1,d,h,min).toISOString();}
     return{id:rb.id,name:document.getElementById(`rb-name-${rb.id}`).value.trim(),dosage:document.getElementById(`rb-dosage-${rb.id}`).value.trim(),
       freqType,freqHours,daysOfWeek,startTime,notes:document.getElementById(`rb-notes-${rb.id}`).value.trim(),
       stopped:existing?existing.stopped||false:false,stoppedDate:existing?existing.stoppedDate||null:null,
-      dailyLog:existing?existing.dailyLog||{}:{},doseLog:existing?existing.doseLog||[]:[]};
+      dailyLog:existing?existing.dailyLog||{}:{},doseLog:existing?existing.doseLog||[]:[],
+      severityLog:existing?existing.severityLog||undefined:undefined};
   });
 }
 
 // ---- Issue ----
 function populateMemberDropdown(selectedId){
-  const sel=document.getElementById('i-member');
-  sel.innerHTML='<option value="">— select person —</option>';
+  const sel=document.getElementById('i-member');sel.innerHTML='<option value="">— select person —</option>';
   members.filter(m=>!m.closed).forEach(m=>sel.innerHTML+=`<option value="${m.id}" ${m.id===selectedId?'selected':''}>${m.name}</option>`);
 }
 function openAddIssue(memberId){
@@ -902,13 +1086,10 @@ function openEditIssue(memberId,issueId){
   document.getElementById('i-reassess-notes').value=iss.reassessNotes||'';
   remedyBlocks=(iss.remedies||[]).map(r=>({...r}));
   remedyBlocks.forEach(rb=>{blockDays[rb.id]=rb.daysOfWeek||[];});
-  refreshRemedyBlocks();
-  document.getElementById('issue-modal').classList.add('show');
+  refreshRemedyBlocks();document.getElementById('issue-modal').classList.add('show');
 }
-// Open issue modal pre-filled to add a remedy to existing issue
 function openAddRemedyToIssue(memberId,issueId){
-  const m=members.find(x=>x.id===memberId);
-  const iss=(m.issues||[]).find(x=>x.id===issueId);if(!iss)return;
+  const m=members.find(x=>x.id===memberId);const iss=(m.issues||[]).find(x=>x.id===issueId);if(!iss)return;
   editIssueId=issueId;currentMemberId=memberId;
   document.getElementById('issue-modal-title').textContent='Edit health issue';
   populateMemberDropdown(memberId);
@@ -917,20 +1098,17 @@ function openAddRemedyToIssue(memberId,issueId){
   document.getElementById('i-progress').value=iss.progress||'';
   document.getElementById('i-reassess-notes').value=iss.reassessNotes||'';
   remedyBlocks=(iss.remedies||[]).map(r=>({...r}));
-  // Add a new blank remedy block
   const rb={id:uid(),name:'',dosage:'',freqHours:24,freqType:'interval',daysOfWeek:[],startTime:null,notes:'',dailyLog:{},doseLog:[]};
-  remedyBlocks.push(rb);blockDays[rb.id]=[];
+  remedyBlocks.push(rb);
   remedyBlocks.forEach(rb2=>{if(!blockDays[rb2.id])blockDays[rb2.id]=rb2.daysOfWeek||[];});
   refreshRemedyBlocks();
-  // Scroll modal to bottom so new remedy is visible
   setTimeout(()=>{const m=document.querySelector('#issue-modal .modal');if(m)m.scrollTop=m.scrollHeight;},100);
   document.getElementById('issue-modal').classList.add('show');
 }
 function saveIssue(){
   const condition=document.getElementById('i-condition').value.trim();if(!condition)return;
   const selMemberId=document.getElementById('i-member').value||currentMemberId;
-  const m=members.find(x=>x.id===selMemberId);if(!m)return;
-  if(!m.issues)m.issues=[];
+  const m=members.find(x=>x.id===selMemberId);if(!m)return;if(!m.issues)m.issues=[];
   const reassessDate=document.getElementById('i-reassess-date').value||null;
   const progress=document.getElementById('i-progress').value.trim();
   const reassessNotes=document.getElementById('i-reassess-notes').value.trim();
@@ -939,55 +1117,44 @@ function saveIssue(){
     const iss=m.issues.find(x=>x.id===editIssueId);
     if(iss)Object.assign(iss,{condition,reassessDate,progress,reassessNotes,remedies,notesUpdated:new Date().toISOString()});
   } else {
-    m.issues.push({id:uid(),condition,reassessDate,progress,reassessNotes,remedies,closed:false,notesUpdated:null});
+    m.issues.push({id:uid(),condition,reassessDate,progress,reassessNotes,remedies,closed:false,notesUpdated:null,photos:[],severityLog:{}});
   }
   save();render();closeModal('issue-modal');
 }
 function deleteIssue(memberId,issueId){
   const m=members.find(x=>x.id===memberId);if(!m)return;
-  if(!confirm('Delete this health issue and all its remedies? This cannot be undone.'))return;
+  if(!confirm('Delete this health issue and all its data? This cannot be undone.'))return;
   m.issues=(m.issues||[]).filter(i=>i.id!==issueId);
-  const key=`${memberId}__${issueId}`;delete expandedIssues[key];
-  save();render();
+  delete expandedIssues[`${memberId}__${issueId}`];save();render();
 }
-function closeCase(memberId,issueId){
-  const m=members.find(x=>x.id===memberId);
-  const i=(m&&m.issues||[]).find(x=>x.id===issueId);
-  if(i){i.closed=true;delete expandedIssues[`${memberId}__${issueId}`];}
-  save();render();
-}
-function reopenCase(memberId,issueId){
-  const m=members.find(x=>x.id===memberId);
-  const i=(m&&m.issues||[]).find(x=>x.id===issueId);
-  if(i)i.closed=false;save();render();
-}
+function closeCase(memberId,issueId){const m=members.find(x=>x.id===memberId);const i=(m&&m.issues||[]).find(x=>x.id===issueId);if(i){i.closed=true;delete expandedIssues[`${memberId}__${issueId}`];}save();render();}
+function reopenCase(memberId,issueId){const m=members.find(x=>x.id===memberId);const i=(m&&m.issues||[]).find(x=>x.id===issueId);if(i)i.closed=false;save();render();}
 function deleteRemedy(memberId,issueId,remedyId){
   if(!confirm('Delete this remedy? This cannot be undone.'))return;
-  const m=members.find(x=>x.id===memberId);
-  const i=(m&&m.issues||[]).find(x=>x.id===issueId);
+  const m=members.find(x=>x.id===memberId);const i=(m&&m.issues||[]).find(x=>x.id===issueId);
   if(i)i.remedies=(i.remedies||[]).filter(r=>r.id!==remedyId);save();render();
 }
 
 // ---- Notes ----
 function openNotes(memberId,issueId){
   notesMemberId=memberId;notesIssueId=issueId;
-  const m=members.find(x=>x.id===memberId);
-  const iss=(m&&m.issues||[]).find(i=>i.id===issueId);if(!iss)return;
+  const m=members.find(x=>x.id===memberId);const iss=(m&&m.issues||[]).find(i=>i.id===issueId);if(!iss)return;
   document.getElementById('notes-modal-title').textContent=`Notes — ${iss.condition}`;
   document.getElementById('n-progress').value=iss.progress||'';
   document.getElementById('n-reassess').value=iss.reassessNotes||'';
   document.getElementById('notes-last-updated').textContent=iss.notesUpdated?new Date(iss.notesUpdated).toLocaleString():'Never';
-  switchNotesTab('progress');
+  switchNotesTab('progress');renderModalPhotos();
   document.getElementById('notes-modal').classList.add('show');
 }
 function switchNotesTab(tab){
-  document.querySelectorAll('.tabs .tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='progress'?0:1)));
+  document.querySelectorAll('.tabs .tab').forEach((t,i)=>t.classList.toggle('active',['progress','reassess','photos'].indexOf(tab)===i));
   document.getElementById('notes-tab-progress').style.display=tab==='progress'?'':'none';
   document.getElementById('notes-tab-reassess').style.display=tab==='reassess'?'':'none';
+  document.getElementById('notes-tab-photos').style.display=tab==='photos'?'':'none';
+  if(tab==='photos')renderModalPhotos();
 }
 function saveNotes(){
-  const m=members.find(x=>x.id===notesMemberId);
-  const iss=(m&&m.issues||[]).find(i=>i.id===notesIssueId);if(!iss)return;
+  const m=members.find(x=>x.id===notesMemberId);const iss=(m&&m.issues||[]).find(i=>i.id===notesIssueId);if(!iss)return;
   iss.progress=document.getElementById('n-progress').value.trim();
   iss.reassessNotes=document.getElementById('n-reassess').value.trim();
   iss.notesUpdated=new Date().toISOString();
